@@ -1,0 +1,7 @@
+*
+!indexer/requirements.txt
+!indexer/pipeline
+!eval/fixtures
+!corpus/raw
+**/__pycache__
+**/*.pyc
