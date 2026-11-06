@@ -64,7 +64,9 @@ Build and load images (minikube cannot see images built by your own Docker):
 
 ```powershell
 docker build -t rahbar-api:dev api
-docker build -t rahbar-indexer:dev indexer
+docker build -f indexer/Dockerfile -t rahbar-indexer:dev .
+# With the real corpus baked in (local only, never push this image):
+# docker build -f indexer/Dockerfile --build-arg CORPUS_SRC=corpus/raw -t rahbar-indexer:dev .
 docker build -t rahbar-ui:dev ui
 minikube image load rahbar-api:dev
 minikube image load rahbar-indexer:dev
