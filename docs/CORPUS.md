@@ -1,15 +1,23 @@
 # Corpus
 
-<!-- STARTER-TODO(2): fill every row, then delete this comment. -->
+Source: FAST-NUCES public website (nu.edu.pk), public pages only. Documents: 8 · Pages: 246 (PDFs) plus two HTML pages.
 
-Source: FAST-NUCES public website / our own documents (pick one) · Documents: ? · Pages: ?
+The documents are not committed. `corpus/sources.yaml` lists every URL and `corpus/MANIFEST.md`
+records each file's size and SHA-256; `python corpus/fetch.py` downloads them and
+`python corpus/fetch.py --verify` checks that the bytes match.
 
 | # | Required property | Document(s) that provide it | Evidence or notes |
 | --- | --- | --- | --- |
-| 1 | At least 6 documents, 40 pages | | |
-| 2 | Two versions of one policy | | Which supersedes which, and how your metadata records it |
-| 3 | Scanned, image-only PDF | | `pdffonts` output, or how you proved it has no text layer |
-| 4 | A table with real information | | |
-| 5 | Long definitions | | |
-| 6 | A deliberately absent topic | | What you left out, and why a user would plausibly ask about it |
-| 7 | Exact-term content | | Clause numbers, codes, thresholds, fees |
+| 1 | At least 6 documents, 40 pages | All 8 documents in `corpus/sources.yaml` | 246 PDF pages across 6 PDFs, plus the fee and grading HTML pages |
+| 2 | Two versions of one policy | Undergraduate Academic Rules (Aug 2023) and Academic Rules Handbook (Jun 2026) | The 2023 file is recorded with `doc_version: 2023-08` and `superseded: true`; the 2026 file with `2026-06` and `false`. The retriever filters on `superseded`. **The two versions use the same clause numbers; the version-sensitive difference is in substance, not numbering.** Clause 4.25: the 2023 rules allow withdrawal until the *last day of classes*; the 2026 handbook allows it until the *last day of the makeup week of every semester*. (2026 verified by pdfplumber text extraction on pp. 22–23; 2023 read by eye on the scanned pages — the 2023 file is 24/26 pages image-only, so this pair also exercises OCR in Phase 3.) Property 7 (exact clause numbers) is satisfied separately by clauses 1.21 and 5.4 in the 2026 handbook and by the fee amounts on the Fee Structure page. The Prospectus 2026 renumbers the same rules into a flat 1–17 list (attendance §1, academic warning §11, withdrawal §16); it is recorded as a third, current version and is not the version-sensitive pair. |
+| 3 | Scanned, image-only PDF | Faculty Entrepreneurship and Technical Start-ups Policy | `faculty-entrepreneurship-and-technical-start-ups-policy.pdf pages=8 no_text_pages=8`: every page has no text layer, so the indexer must OCR it. (The 2023 rules file is a second, partial OCR case: 24/26 pages have no text layer.) |
+| 4 | A table with real information | Fee Structure page, Grading page, Annual Report 2023-24 | Tuition per credit hour and refund timeline on the Fee Structure page; grade points on the Grading page; faculty and graduate counts in the Annual Report. All three are text-extractable (the two HTML pages show zero `no_text_pages` by construction; the Annual Report has `pages=85 no_text_pages=0`). |
+| 5 | Long definitions | Student Handbook (Jun 2026) | Long Generative AI policy with numbered sub-sections; the handbook is `pages=64 no_text_pages=4` (cover/blank pages only), so the policy text is text-extractable. |
+| 6 | A deliberately absent topic | Hostel and transport rules | The prospectus "Transport and Hostel Facilities" PDF is left out on purpose. A student would plausibly ask about hostel rules; the corpus contains only passing mentions, no rules. Search result: 6 hits, all passing mentions — Student Handbook 2026 pp. 44–45 ("In-Campus Hostel Facility is exclusively provided at Chiniot-Faisalabad and Peshawar Campuses"); Annual Report 2023-24 pp. 6, 10, 84, 85 (residential campus / hostel-for-boys / first-aid boxes). The fee and grading HTML pages contain zero mentions. Caveat: the 2023 rules file is 24/26 pages image-only, so this text search cannot see those pages; that is acceptable because the current rules (2026 handbook and Prospectus) and the fee page are text-extractable and contain no hostel rules. |
+| 7 | Exact-term content | Academic Rules Handbook (Jun 2026), Fee Structure page | Clause numbers verified in the 2026 handbook: attendance **1.21** (p10–11), academic warning **5.4** (p24–25, "Minimum CGPA required to avoid academic warning is 2.00"), graduation CGPA **1.25** (2.00). Fee amounts are on the Fee Structure page (text-extractable HTML). |
+
+## Known traps in this corpus
+
+- The 2023 and 2026 rules use the **same** clause numbers (1.21 attendance, 4.25 withdrawal, 5.4 academic warning) but the **rule text differs** at clause 4.25 (withdrawal deadline: "last day of classes" in 2023 vs "last day of the makeup week" in 2026). A retriever that matches clause numbers alone will return the wrong year's answer.
+- The 2023 rules PDF is 24 of 26 pages image-only; OCR is required before the 2023 side of the version-sensitive pair can be retrieved. The 2026 handbook and the Prospectus are text-extractable.
+- The Prospectus 2026 repeats the rules with different clause numbers (§1, §11, §16 vs 1.21, 5.4, 4.25); the indexer treats it as current.
