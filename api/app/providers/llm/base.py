@@ -7,9 +7,17 @@ from typing import Protocol
 from ...schemas import Answer, Passage
 
 
+class ProviderError(Exception):
+    """The model's reply did not have the shape the provider expected."""
+
+
 class LLMProvider(Protocol):
     name: str
 
     def generate(self, question: str, passages: list[Passage]) -> Answer:
-        """Answer the question from the passages, as an `Answer`."""
+        """Answer the question from the passages, as an `Answer`.
+
+        Raises pydantic.ValidationError when the model's JSON breaks the schema,
+        ProviderError for an unexpected reply, and httpx.HTTPError when the call fails.
+        """
         ...
