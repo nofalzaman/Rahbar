@@ -21,6 +21,8 @@ from .logjson import configure_logging, request_id_var
 from .providers.llm import get_provider
 from .retrieval import get_retriever
 from .routes import ask, health, metrics
+from .services.cache import get_cache
+from .services.readiness import check_readiness
 
 log = logging.getLogger("rahbar.api")
 
@@ -32,14 +34,21 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     app.state.settings = settings
     app.state.retriever = get_retriever(settings)
     app.state.provider = get_provider(settings)
-    # STARTER-TODO(4.4): compare the collection's embedding-model metadata with
-    # settings.embed_model here, and make /readyz fail on a mismatch.
+    app.state.cache = get_cache(settings)
     # This process only reads the index. The indexer Job writes it.
     log.info(
         "api started",
         extra={"retriever": settings.retriever, "llm_provider": settings.llm_provider,
-               "embed_model": settings.embed_model, "top_k": settings.top_k},
+               "embed_model": settings.embed_model, "top_k": settings.top_k,
+               "cache": app.state.cache.enabled},
     )
+    # Section 4.4: compare the index's embedding model with ours now, and say what conflicts.
+    # /readyz repeats the check, so a mismatch keeps this pod out of the Service.
+    startup = check_readiness(settings, app.state.retriever, app.state.cache)
+    app.state.last_readiness = (startup.ready, startup.failed)
+    if not startup.ready:
+        log.error("not ready at startup", extra={"failed": startup.failed,
+                                                 "detail": startup.detail})
     yield
 
 
