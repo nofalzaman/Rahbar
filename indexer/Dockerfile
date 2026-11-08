@@ -10,13 +10,15 @@ RUN apt-get update \
 
 WORKDIR /app
 
-COPY indexer/requirements.txt .
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY indexer/pipeline ./pipeline
+COPY pipeline ./pipeline
 
-ARG CORPUS_SRC=eval/fixtures
-COPY ${CORPUS_SRC} /corpus
+# The documents come from a named build context supplied on the command line:
+#   --build-context corpus=./eval/fixtures   (CI and quick tests)
+#   --build-context corpus=./corpus/raw      (the real corpus, local images only)
+COPY --from=corpus . /corpus
 
 RUN useradd --system --uid 10001 --no-create-home rahbar
 USER 10001
