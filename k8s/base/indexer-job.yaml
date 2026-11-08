@@ -25,7 +25,6 @@ spec:
         - name: indexer
           image: rahbar-indexer:dev
           imagePullPolicy: IfNotPresent
-          args: ["--dummy"]
           envFrom:
             - configMapRef:
                 name: rahbar-config

@@ -9,7 +9,7 @@ data:
   LLM_MODEL: "llama3.2:3b"
   # The embedding pin. The api and the indexer both read this one key.
   # dummy-768 matches the week-1 dummy index; the real model is set in Phase 4.
-  EMBED_MODEL: "dummy-768"
+  EMBED_MODEL: "nomic-embed-text"
   CHROMA_HOST: "chroma"
   CHROMA_PORT: "8000"
   CHROMA_COLLECTION: "rahbar"
