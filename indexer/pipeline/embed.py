@@ -15,11 +15,13 @@ ATTEMPTS = 3
 
 def embed(texts: list[str], settings: IndexerSettings) -> list[list[float]]:
     """Embed with settings.embed_model and nothing else, in batches, through Ollama:
-    POST {ollama_url}/api/embed returns one vector per input text."""
+    POST {ollama_url}/api/embed returns one vector per input text. Each text gets the
+    document prefix first; the stored text does not, only the vector is affected."""
+    prefixed = [settings.embed_doc_prefix + text for text in texts]
     vectors: list[list[float]] = []
     with httpx.Client(base_url=settings.ollama_url, timeout=TIMEOUT_SECONDS) as client:
-        for start in range(0, len(texts), BATCH_SIZE):
-            vectors.extend(_embed_batch(client, texts[start:start + BATCH_SIZE],
+        for start in range(0, len(prefixed), BATCH_SIZE):
+            vectors.extend(_embed_batch(client, prefixed[start:start + BATCH_SIZE],
                                         settings.embed_model))
     return vectors
 
