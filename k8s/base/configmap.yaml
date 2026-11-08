@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rahbar-config
+  namespace: rahbar
+data:
+  RETRIEVER: "stub"
+  LLM_PROVIDER: "stub"
+  LLM_MODEL: "llama3.2:3b"
+  # The embedding pin. The api and the indexer both read this one key.
+  # dummy-768 matches the week-1 dummy index; the real model is set in Phase 4.
+  EMBED_MODEL: "dummy-768"
+  CHROMA_HOST: "chroma"
+  CHROMA_PORT: "8000"
+  CHROMA_COLLECTION: "rahbar"
+  OLLAMA_URL: "http://host.minikube.internal:11434"
+  CHUNK_SIZE: "400"
+  CHUNK_OVERLAP: "50"
+  TOP_K: "5"
+  # 0.2: the answer must be factual and valid JSON, and low randomness keeps both stable.
+  # Zero is not needed, and it would not fix a missing fact anyway.
+  TEMPERATURE: "0.2"
+  # Initial guesses, replaced by measured values in Phases 4 and 5.
+  RELEVANCE_FLOOR: "0.35"
+  CACHE_THRESHOLD: "0.92"
+  REDIS_URL: "redis://redis:6379/0"
