@@ -16,6 +16,8 @@ class IndexerSettings:
     chunk_size: int
     chunk_overlap: int
     ollama_url: str
+    # nomic-embed-text expects a task prefix on every text; the API adds the query one.
+    embed_doc_prefix: str = ""
 
 
 def get_settings() -> IndexerSettings:
@@ -28,4 +30,5 @@ def get_settings() -> IndexerSettings:
         chunk_size=int(os.environ.get("CHUNK_SIZE", 400)),
         chunk_overlap=int(os.environ.get("CHUNK_OVERLAP", 50)),
         ollama_url=os.environ.get("OLLAMA_URL", "http://host.minikube.internal:11434"),
+        embed_doc_prefix=os.environ.get("EMBED_DOC_PREFIX", "search_document: "),
     )

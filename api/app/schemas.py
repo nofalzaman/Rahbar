@@ -15,6 +15,10 @@ from pydantic import BaseModel, Field
 
 class AskRequest(BaseModel):
     question: str = Field(min_length=3, max_length=500)
+    follow_up: bool = Field(
+        default=False,
+        description="True when the question depends on an earlier turn. Never cached.",
+    )
 
 
 class Passage(BaseModel):
@@ -26,6 +30,8 @@ class Passage(BaseModel):
     section: str
     page: int | None = None
     score: float = Field(description="Similarity, higher is closer (1 - cosine distance).")
+    doc_version: str = ""
+    superseded: bool = False
 
 
 class Citation(BaseModel):
@@ -62,3 +68,4 @@ class AskResponse(BaseModel):
     confidence: Literal["high", "medium", "low"]
     retrieved: list[RetrievedRef]
     provider: str
+    cached: bool = False

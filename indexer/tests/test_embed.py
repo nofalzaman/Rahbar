@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from typing import Any
 
 import httpx
@@ -31,10 +32,25 @@ def test_texts_are_embedded_in_batches_with_the_pinned_model(monkeypatch: Any) -
 
     install(monkeypatch, handler)
     monkeypatch.setattr(embed_module, "BATCH_SIZE", 2)
-    vectors = embed(["a", "bb", "ccc", "dddd", "e"], get_settings())
+    settings = replace(get_settings(), embed_doc_prefix="")
+    vectors = embed(["a", "bb", "ccc", "dddd", "e"], settings)
     assert vectors == [[1.0], [2.0], [3.0], [4.0], [1.0]]
     assert [len(r["input"]) for r in requests] == [2, 2, 1]
-    assert {r["model"] for r in requests} == {get_settings().embed_model}
+    assert {r["model"] for r in requests} == {settings.embed_model}
+
+
+def test_every_text_is_sent_with_the_document_prefix(monkeypatch: Any) -> None:
+    seen: list[list[str]] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        texts = json.loads(request.content)["input"]
+        seen.append(texts)
+        return httpx.Response(200, json={"embeddings": [[0.0]] * len(texts)})
+
+    install(monkeypatch, handler)
+    settings = replace(get_settings(), embed_doc_prefix="search_document: ")
+    embed(["clause one", "clause two"], settings)
+    assert seen == [["search_document: clause one", "search_document: clause two"]]
 
 
 def test_a_failed_request_is_retried(monkeypatch: Any) -> None:
