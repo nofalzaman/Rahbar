@@ -143,9 +143,11 @@ class FakeCollection:
     def query(self, **kw: Any) -> dict[str, Any]:
         self.queries.append(kw)
         where = kw.get("where")
+        contains = (kw.get("where_document") or {}).get("$contains")
         rows = [r for r in self.rows
-                if not where or r[2].get("superseded") == where["superseded"]]
-        rows = rows[: kw["n_results"]]
+                if (not where or r[2].get("superseded") == where["superseded"])
+                and (contains is None or contains in r[1])]
+        rows = sorted(rows, key=lambda r: r[3])[: kw["n_results"]]
         return {"ids": [[r[0] for r in rows]], "documents": [[r[1] for r in rows]],
                 "metadatas": [[r[2] for r in rows]], "distances": [[r[3] for r in rows]]}
 

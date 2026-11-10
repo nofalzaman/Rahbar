@@ -42,6 +42,28 @@ def test_a_citation_the_retriever_never_returned_is_dropped() -> None:
     assert checked.citations[0].page == p.page           # the model's wrong page is corrected
 
 
+def test_a_truncated_section_label_still_points_at_the_retrieved_passage() -> None:
+    p = passage("1.21 Students are required to maintain 100% attendance in")
+    short = Citation(source=p.source, section="1.21 Students are required", page=None)
+    checked = check_citations(good_answer(p, citations=[short]), [p])
+    assert [(c.section, c.page) for c in checked.citations] == [(p.section, p.page)]
+
+
+def test_a_very_short_or_unrelated_section_does_not_match() -> None:
+    p = passage("1.21 Students are required to maintain 100% attendance in")
+    for section in ("1", "9.9 Something else"):
+        citation = Citation(source=p.source, section=section)
+        with pytest.raises(UngroundedAnswer):
+            check_citations(good_answer(p, citations=[citation]), [p])
+
+
+def test_a_citation_naming_another_source_never_matches() -> None:
+    p = passage("1.21 Students are required to maintain 100% attendance in")
+    citation = Citation(source="other.pdf", section=p.section)
+    with pytest.raises(UngroundedAnswer):
+        check_citations(good_answer(p, citations=[citation]), [p])
+
+
 def test_an_answer_with_only_fabricated_citations_is_rejected() -> None:
     p = passage()
     fake = good_answer(p, citations=[Citation(source="x.pdf", section="1", page=1)])

@@ -11,17 +11,26 @@ from ..schemas import Passage
 from .base import IndexInfo, RetrievalError
 from .embedding import embed_query
 
-# A question that names an older version, or a year before the current rules, may need
-# the superseded documents. Anything else is answered from the current ones only.
+# A question that names an older version, or a year before the current rules, is about the
+# superseded documents. Anything else is answered from the current ones only.
 _OLDER_VERSION = re.compile(
     r"\b(old|older|previous|previously|earlier|former|formerly|prior|superseded|repealed"
     r"|replaced|20(?:[01]\d|2[0-5]))\b",
     re.IGNORECASE,
 )
+# Embeddings blur exact terms, so a clause number such as 1.21 is also looked up as text.
+_CLAUSE_NUMBER = re.compile(r"\b\d+(?:\.\d+)+\b")
+EXACT_TERMS = 2          # at most this many clause numbers are looked up as text
+EXACT_HITS = 2           # and at most this many chunks are taken for each
+OVERFETCH = 2            # ask for k * OVERFETCH so that duplicates can be dropped
 
 
 def wants_older_versions(question: str) -> bool:
     return _OLDER_VERSION.search(question) is not None
+
+
+def clause_numbers(question: str) -> list[str]:
+    return list(dict.fromkeys(_CLAUSE_NUMBER.findall(question)))[:EXACT_TERMS]
 
 
 class ChromaRetriever:
@@ -50,11 +59,29 @@ class ChromaRetriever:
                          index_id=str(metadata.get("index_id", "")))
 
     def retrieve(self, question: str, k: int) -> list[Passage]:
+        """The closest chunks, best first. Chunks that contain a clause number named in the
+        question come first, then the nearest by meaning; duplicate texts are dropped."""
         collection = self._collection()
         vector = embed_query(self.settings, question)
-        where = None if wants_older_versions(question) else {"superseded": False}
+        where = {"superseded": wants_older_versions(question)}
+        exact: list[Passage] = []
+        for term in clause_numbers(question):
+            exact += self._query(collection, vector, EXACT_HITS, where,
+                                 where_document={"$contains": term})
+        nearest = self._query(collection, vector, k * OVERFETCH, where)
+        unique: list[Passage] = []
+        seen: set[str] = set()
+        for passage in exact + nearest:
+            if passage.text not in seen:
+                seen.add(passage.text)
+                unique.append(passage)
+        return unique[:k]
+
+    def _query(self, collection: Any, vector: list[float], n: int, where: dict[str, Any],
+               where_document: dict[str, Any] | None = None) -> list[Passage]:
         try:
-            result = collection.query(query_embeddings=[vector], n_results=k, where=where,
+            result = collection.query(query_embeddings=[vector], n_results=n, where=where,
+                                      where_document=where_document,
                                       include=["documents", "metadatas", "distances"])
         except Exception as exc:
             raise RetrievalError(f"vector search failed: {exc}") from exc

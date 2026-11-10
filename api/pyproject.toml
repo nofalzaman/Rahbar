@@ -1,7 +1,34 @@
+[project]
+name = "rahbar-api"
+version = "0.1.0"
+description = "Rahbar API"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "redis",
+    "chromadb",
+    "httpx",
+    "pydantic",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
 filterwarnings = ["ignore::DeprecationWarning:starlette.*"]
+addopts = "--cov=app --cov-fail-under=60"
 
 [tool.ruff]
 line-length = 100

@@ -36,12 +36,38 @@ def test_superseded_documents_are_filtered_out_by_default(
     assert collection.queries[0]["query_embeddings"] == [[0.1, 0.2]]
 
 
-def test_a_question_about_an_older_version_searches_everything(
+def test_a_question_about_an_older_version_searches_the_superseded_documents(
         retriever: tuple[ChromaRetriever, FakeCollection]) -> None:
     chroma, collection = retriever
     passages = chroma.retrieve("What did the 2023 rules say about attendance?", k=5)
-    assert {p.chunk_id for p in passages} == {"new-1", "old-1"}
-    assert collection.queries[0]["where"] is None
+    assert [p.chunk_id for p in passages] == ["old-1"]
+    assert collection.queries[0]["where"] == {"superseded": True}
+
+
+def test_a_clause_number_in_the_question_is_also_looked_up_as_text(
+        monkeypatch: Any) -> None:
+    monkeypatch.setattr(chroma_module, "embed_query", fixed_embedding([0.1, 0.2]))
+    meta = {"source": "rules.pdf", "section": "x", "page": 1, "doc_version": "2026",
+            "superseded": False}
+    rows = [("near", "attendance in general", meta, 0.10),
+            ("clause", "1.21 Students must keep full attendance", meta, 0.60),
+            ("other", "fees per credit hour", meta, 0.30)]
+    chroma = ChromaRetriever(Settings(), client=FakeChroma(FakeCollection(rows)))
+    passages = chroma.retrieve("What does clause 1.21 require?", k=3)
+    assert [p.chunk_id for p in passages] == ["clause", "near", "other"]
+    assert chroma_module.clause_numbers("Is 1.21 or 5.4 and 1.21 again, or 2.00?") == [
+        "1.21", "5.4"]
+
+
+def test_duplicate_texts_are_dropped_and_k_is_still_filled(monkeypatch: Any) -> None:
+    monkeypatch.setattr(chroma_module, "embed_query", fixed_embedding([0.1, 0.2]))
+    meta = {"source": "rules.pdf", "section": "2.6 CGPA", "page": 12, "doc_version": "2026",
+            "superseded": False}
+    rows = [("a", "same text", meta, 0.10), ("b", "same text", {**meta, "page": 13}, 0.11),
+            ("c", "second", meta, 0.20), ("d", "third", meta, 0.30)]
+    chroma = ChromaRetriever(Settings(), client=FakeChroma(FakeCollection(rows)))
+    passages = chroma.retrieve("What is the CGPA calculation?", k=3)
+    assert [p.chunk_id for p in passages] == ["a", "c", "d"]
 
 
 def test_distance_becomes_similarity_and_metadata_is_mapped(
