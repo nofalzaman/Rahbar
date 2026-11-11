@@ -17,7 +17,7 @@ env:
   EMBED_MODEL: nomic-embed-text
   # Replace :latest with ollama/ollama:<the version you run locally> after the first green run.
   OLLAMA_IMAGE: ollama/ollama:0.40.11
-  CI_RELEVANCE_FLOOR: "0.6286"
+  CI_RELEVANCE_FLOOR: "0.6399"
 
 jobs:
   test:

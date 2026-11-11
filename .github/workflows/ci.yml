@@ -22,7 +22,7 @@ env:
   OLLAMA_IMAGE: ollama/ollama:0.40.11
   # The stub model answers whenever it is given a passage, so on the tiny fixture corpus
   # this floor is what makes the must-abstain question abstain. Measured in docs/PIPELINE.md.
-  CI_RELEVANCE_FLOOR: "0.6286"
+  CI_RELEVANCE_FLOOR: "0.6399"
   KUBERNETES_VERSION: "1.31.0"
 
 jobs:

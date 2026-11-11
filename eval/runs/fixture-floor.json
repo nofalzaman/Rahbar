@@ -1,6 +1,6 @@
 {
-  "minimum_answerable": 0.698,
+  "minimum_answerable": 0.7205,
   "maximum_abstain": 0.5593,
-  "gap": 0.13869999999999993,
-  "floor": 0.6286
+  "gap": 0.1612,
+  "floor": 0.6399
 }
