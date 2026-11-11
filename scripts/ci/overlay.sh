@@ -41,6 +41,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../base
+  - ollama-networkpolicy.yaml
 patches:
   - path: config-patch.yaml
 images:
@@ -54,5 +55,29 @@ images:
     newName: ${INDEXER_IMAGE}
     newTag: ${IMAGE_TAG}
 KUSTOMIZATION
+
+# Recent kindnet versions enforce NetworkPolicy. The base allowlist names the
+# laptop's Ollama IP, so CI must allow the actual runner-side container address.
+cat > "$dir/ollama-networkpolicy.yaml" <<POLICY
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ci-ollama-egress
+  namespace: rahbar
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values: [api, indexer]
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - ipBlock:
+            cidr: ${OLLAMA_HOST_IP}/32
+      ports:
+        - protocol: TCP
+          port: 11434
+POLICY
 
 echo "overlay written to $dir (Ollama at ${OLLAMA_HOST_IP}:11434, floor ${RELEVANCE_FLOOR})"
