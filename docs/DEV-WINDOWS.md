@@ -37,7 +37,6 @@ py -3.12 -m venv .venv
 | Run the api with stubs (chat UI at http://localhost:8000) | `Set-Location api; $env:SERVE_UI_DIR="../ui"; $env:RETRIEVER="stub"; $env:LLM_PROVIDER="stub"; ..\.venv\Scripts\uvicorn app.main:app --reload --port 8000` |
 | Download the corpus | `.\.venv\Scripts\python corpus/fetch.py` |
 | Submission checker | `python scripts/check_submission.py` |
-| Find remaining starter tasks | `git grep -n "STARTER-TODO"` |
 
 ## Cluster (Nofal's machine)
 
