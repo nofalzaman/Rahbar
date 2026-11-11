@@ -1,0 +1,232 @@
+name: ci
+
+# Every change reaches main through a pull request, and this workflow is what a pull
+# request has to pass (section 6). It also runs after every push to dev.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [dev]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # The e2e job embeds with the same pinned model as everywhere else (section 4.4).
+  EMBED_MODEL: nomic-embed-text
+  # Replace :latest with ollama/ollama:<the version you run locally> after the first green run.
+  OLLAMA_IMAGE: ollama/ollama:0.40.11
+  # The stub model answers whenever it is given a passage, so on the tiny fixture corpus
+  # this floor is what makes the must-abstain question abstain. Measured in docs/PIPELINE.md.
+  CI_RELEVANCE_FLOOR: "0.6286"
+  KUBERNETES_VERSION: "1.31.0"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            api/requirements*.txt
+            indexer/requirements*.txt
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - run: ruff check api indexer eval corpus
+      - run: cd api && mypy app
+      - run: cd indexer && mypy pipeline
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            api/requirements*.txt
+            indexer/requirements*.txt
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      # Stub provider and fakes only: no network, no model, no cluster.
+      - run: cd api && pytest -q --cov=app --cov-fail-under=60
+      - run: cd indexer && pytest -q
+      - run: pytest -q eval/tests
+
+  manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install kustomize and kubeconform
+        run: |
+          curl -fsSL https://github.com/yannh/kubeconform/releases/download/v0.6.7/kubeconform-linux-amd64.tar.gz | tar -xz kubeconform
+          curl -fsSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz" | tar -xz kustomize
+          sudo mv kubeconform kustomize /usr/local/bin/
+      - name: Validate the prod overlay
+        run: kustomize build k8s/overlays/prod | kubeconform -strict -summary -kubernetes-version "$KUBERNETES_VERSION"
+      - name: Validate the dev overlay
+        run: kustomize build k8s/overlays/dev | kubeconform -strict -summary -kubernetes-version "$KUBERNETES_VERSION"
+      - name: Validate the Secret placeholder
+        run: kubeconform -strict -summary -kubernetes-version "$KUBERNETES_VERSION" k8s/base/secret.placeholder.yaml
+
+  build:
+    name: build (${{ matrix.image }})
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image: api
+            context: api
+            contexts: ""
+          - image: ui
+            context: ui
+            contexts: ""
+          - image: indexer
+            context: indexer
+            # CI images hold the fixture documents only. The real corpus is never baked
+            # into an image that could be published.
+            contexts: corpus=./eval/fixtures
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      # A pull request only builds. Nothing is pushed from this workflow.
+      - uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          build-contexts: ${{ matrix.contexts }}
+          pull: true
+          push: false
+          cache-from: type=gha,scope=${{ matrix.image }}
+          cache-to: type=gha,scope=${{ matrix.image }},mode=max
+
+  scan:
+    name: scan (${{ matrix.image }})
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image: api
+            context: api
+            contexts: ""
+          - image: ui
+            context: ui
+            contexts: ""
+          - image: indexer
+            context: indexer
+            contexts: corpus=./eval/fixtures
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          build-contexts: ${{ matrix.contexts }}
+          load: true
+          tags: rahbar-${{ matrix.image }}:scan
+          cache-from: type=gha,scope=${{ matrix.image }}
+      # Fail on HIGH or CRITICAL findings that have a fix available. Findings with no
+      # fix yet cannot be acted on, so they do not block the build.
+      - name: Scan the image with Trivy
+        run: |
+          mkdir -p "$HOME/.cache/trivy"
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "$HOME/.cache/trivy:/root/.cache/" \
+            aquasec/trivy:0.57.1 image \
+            --db-repository public.ecr.aws/aquasecurity/trivy-db:2 \
+            --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed --no-progress \
+            rahbar-${{ matrix.image }}:scan
+
+  e2e-eval:
+    needs: [test, manifests, build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install httpx==0.28.1 pyyaml==6.0.2
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: api
+          load: true
+          tags: rahbar-api:ci
+          cache-from: type=gha,scope=api
+      - uses: docker/build-push-action@v6
+        with:
+          context: ui
+          load: true
+          tags: rahbar-ui:ci
+          cache-from: type=gha,scope=ui
+      - uses: docker/build-push-action@v6
+        with:
+          context: indexer
+          build-contexts: corpus=./eval/fixtures
+          load: true
+          tags: rahbar-indexer:ci
+          cache-from: type=gha,scope=indexer
+      - uses: helm/kind-action@v1
+        with:
+          cluster_name: rahbar-ci
+      - uses: actions/cache@v4
+        with:
+          path: ~/.ollama
+          key: ollama-${{ env.EMBED_MODEL }}-v1
+      - name: Start Ollama for embeddings
+        run: bash scripts/ci/ollama.sh
+      - name: Load the images into the cluster
+        run: kind load docker-image rahbar-api:ci rahbar-ui:ci rahbar-indexer:ci --name rahbar-ci
+      - name: Write the CI overlay
+        env:
+          API_IMAGE: rahbar-api
+          UI_IMAGE: rahbar-ui
+          INDEXER_IMAGE: rahbar-indexer
+          IMAGE_TAG: ci
+          RELEVANCE_FLOOR: ${{ env.CI_RELEVANCE_FLOOR }}
+        run: bash scripts/ci/overlay.sh
+      - name: Deploy the system
+        run: kubectl apply -k k8s/overlays/ci
+      - name: Wait for the data stores and the indexer Job
+        run: |
+          kubectl -n rahbar rollout status statefulset/chroma --timeout=300s
+          kubectl -n rahbar rollout status deployment/redis --timeout=180s
+          kubectl -n rahbar wait --for=condition=complete job/indexer --timeout=600s
+      - name: Wait for the api rollout
+        run: kubectl -n rahbar rollout status deployment/api --timeout=300s
+      - name: Run the eval gate on the fixture corpus
+        run: |
+          kubectl -n rahbar port-forward svc/api 8000:8000 &
+          for _ in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8000/readyz >/dev/null 2>&1 && break
+            sleep 2
+          done
+          python eval/run_eval.py --api http://127.0.0.1:8000 \
+            --golden eval/fixtures/golden.fixture.yaml \
+            --baseline eval/fixtures/baseline.fixture.json \
+            --out "$RUNNER_TEMP/eval-results.json"
+      - name: Keep the eval results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: ${{ runner.temp }}/eval-results.json
+          if-no-files-found: ignore
+      - name: Show what went wrong
+        if: failure()
+        run: |
+          kubectl -n rahbar get pods -o wide
+          kubectl -n rahbar describe pods | tail -n 150
+          kubectl -n rahbar logs job/indexer --tail=80 || true
+          kubectl -n rahbar logs deployment/api --tail=80 || true
