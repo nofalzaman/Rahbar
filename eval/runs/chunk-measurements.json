@@ -1,0 +1,42 @@
+[
+  {
+    "size": 150,
+    "overlap": 25,
+    "chunks": 1012,
+    "original_words": 81296,
+    "stored_words": 95243,
+    "amplification": 1.1715582562487699,
+    "recall_at_3": 0.8,
+    "recall_at_5": 0.8
+  },
+  {
+    "size": 400,
+    "overlap": 50,
+    "chunks": 664,
+    "original_words": 81296,
+    "stored_words": 87714,
+    "amplification": 1.0789460736075576,
+    "recall_at_3": 0.6667,
+    "recall_at_5": 0.7333
+  },
+  {
+    "size": 700,
+    "overlap": 100,
+    "chunks": 594,
+    "original_words": 81296,
+    "stored_words": 86501,
+    "amplification": 1.0640252902971856,
+    "recall_at_3": 0.7333,
+    "recall_at_5": 0.8
+  },
+  {
+    "size": 100,
+    "overlap": 0,
+    "chunks": 1206,
+    "original_words": 81296,
+    "stored_words": 84587,
+    "amplification": 1.0404816965164339,
+    "recall_at_3": 0.8,
+    "recall_at_5": 0.8
+  }
+]

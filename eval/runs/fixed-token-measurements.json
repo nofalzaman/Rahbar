@@ -1,0 +1,13 @@
+{
+  "unit": "BERT WordPiece tokens using installed embedding vocabulary",
+  "fixed_size": 100,
+  "overlap": 0,
+  "chunks": 1019,
+  "original_tokens": 101326,
+  "stored_token_windows": 101326,
+  "retokenized_stored_tokens": 101326,
+  "amplification": 1.0,
+  "recall_at_3": 0.4,
+  "recall_at_5": 0.4667,
+  "metadata_rule": "Source/version preserved; section and page taken at first token of each fixed window, which may cross later section boundaries. Retokenizing a cut subword can change the stored-token count slightly."
+}

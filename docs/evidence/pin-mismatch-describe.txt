@@ -1,0 +1,69 @@
+﻿Name:             api-d86959565-g97kr
+Namespace:        rahbar
+Priority:         0
+Service Account:  api
+Node:             minikube/192.168.49.2
+Start Time:       Sun, 08 Nov 2026 23:20:26 +0500
+Labels:           app=api
+                  pod-template-hash=d86959565
+Annotations:      cni.projectcalico.org/containerID: a91a4c037aaefad9219b45fd6a70e6d381c7c57d309869228dca179e0b5d19d7
+                  cni.projectcalico.org/podIP: 10.244.120.89/32
+                  cni.projectcalico.org/podIPs: 10.244.120.89/32
+                  kubectl.kubernetes.io/restartedAt: 2026-11-08T23:20:26+05:00
+Status:           Running
+SeccompProfile:   RuntimeDefault
+IP:               10.244.120.89
+IPs:
+  IP:           10.244.120.89
+Controlled By:  ReplicaSet/api-d86959565
+Containers:
+  api:
+    Container ID:   containerd://0a809ea2894819ab881583ec7227f081226f42eabd945a155a2c2bc82aa92cc7
+    Image:          rahbar-api:dev
+    Image ID:       sha256:6314b12a3d856b277df32f315909810d23437b0462979483a7a57ee2c007b14d
+    Port:           8000/TCP (http)
+    Host Port:      0/TCP (http)
+    State:          Running
+      Started:      Sun, 08 Nov 2026 23:20:27 +0500
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  384Mi
+    Requests:
+      cpu:      100m
+      memory:   160Mi
+    Liveness:   http-get http://:8000/healthz delay=0s timeout=1s period=20s #success=1 #failure=3
+    Readiness:  http-get http://:8000/readyz delay=0s timeout=1s period=10s #success=1 #failure=3
+    Startup:    http-get http://:8000/healthz delay=0s timeout=1s period=2s #success=1 #failure=30
+    Environment Variables from:
+      rahbar-config  ConfigMap  Optional: false
+    Environment:
+      LLM_API_KEY:  <set to the key 'LLM_API_KEY' in secret 'rahbar-secret'>  Optional: true
+    Mounts:
+      /tmp from tmp (rw)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  tmp:
+    Type:        EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:   <unset>
+QoS Class:       Burstable
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  110s                 default-scheduler  Successfully assigned rahbar/api-d86959565-g97kr to minikube
+  Normal   Pulled     109s                 kubelet            spec.containers{api}: Container image "rahbar-api:dev" already present on machine and can be accessed by the pod
+  Normal   Created    109s                 kubelet            spec.containers{api}: Container created
+  Normal   Started    109s                 kubelet            spec.containers{api}: Container started
+  Warning  Unhealthy  106s (x2 over 108s)  kubelet            spec.containers{api}: Startup probe failed: Get "http://10.244.120.89:8000/healthz": dial tcp 10.244.120.89:8000: connect: connection refused
+  Warning  Unhealthy  2s (x13 over 104s)   kubelet            spec.containers{api}: Readiness probe failed: HTTP probe failed with statuscode: 503

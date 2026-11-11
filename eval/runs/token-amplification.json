@@ -1,0 +1,34 @@
+{
+  "method": "BERT WordPiece with the vocabulary read from the installed nomic-embed-text GGUF via Ollama /api/show (verbose); lowercase/standard BERT normalization; excludes special tokens and task prefixes; includes stored section headings. Counts retained text, not discarded extraction artifacts.",
+  "vocabulary_entries": 30522,
+  "trials": [
+    {
+      "size_words": 150,
+      "overlap_words": 25,
+      "original_tokens": 101326,
+      "stored_tokens": 118144,
+      "ratio": 1.1659791169097764
+    },
+    {
+      "size_words": 400,
+      "overlap_words": 50,
+      "original_tokens": 101326,
+      "stored_tokens": 108924,
+      "ratio": 1.0749856897538637
+    },
+    {
+      "size_words": 700,
+      "overlap_words": 100,
+      "original_tokens": 101326,
+      "stored_tokens": 107569,
+      "ratio": 1.0616130114679352
+    },
+    {
+      "size_words": 100,
+      "overlap_words": 0,
+      "original_tokens": 101326,
+      "stored_tokens": 105059,
+      "ratio": 1.0368414819493517
+    }
+  ]
+}

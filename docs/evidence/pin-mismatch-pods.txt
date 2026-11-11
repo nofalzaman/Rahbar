@@ -1,0 +1,10 @@
+﻿NAME                     READY   STATUS      RESTARTS   AGE
+api-69699b46b9-mqjt2     1/1     Running     0          10m
+api-69699b46b9-sl2b6     1/1     Running     0          10m
+api-69699b46b9-zlnvk     1/1     Running     0          10m
+api-d86959565-g97kr      0/1     Running     0          22s
+chroma-0                 1/1     Running     0          3h53m
+indexer-4zwpk            0/1     Completed   0          15m
+redis-5694859fd7-nxgtp   1/1     Running     0          4h17m
+ui-67c898c6c9-7s4r4      1/1     Running     0          4h17m
+ui-67c898c6c9-b5hrt      1/1     Running     0          4h17m

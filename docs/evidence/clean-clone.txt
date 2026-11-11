@@ -1,0 +1,52 @@
+Independent clone of feature implementation; fresh venv and fresh downloads; isolated rahbar-clean-check minikube profile and image tags protect the original cluster.
+7b4ceb12bce4f486764c8e80fed973aad1dc3e5c
+namespace/rahbar created
+serviceaccount/api created
+serviceaccount/chroma created
+serviceaccount/indexer created
+serviceaccount/redis created
+serviceaccount/ui created
+configmap/rahbar-config created
+service/api created
+service/chroma created
+service/redis created
+service/ui created
+persistentvolumeclaim/cache-data created
+deployment.apps/api created
+deployment.apps/redis created
+deployment.apps/ui created
+statefulset.apps/chroma created
+cronjob.batch/reindex created
+horizontalpodautoscaler.autoscaling/api created
+job.batch/indexer created
+ingress.networking.k8s.io/rahbar created
+networkpolicy.networking.k8s.io/allow-dns-egress created
+networkpolicy.networking.k8s.io/api-egress created
+networkpolicy.networking.k8s.io/api-from-ui-and-ingress created
+networkpolicy.networking.k8s.io/chroma-from-api-and-indexer created
+networkpolicy.networking.k8s.io/default-deny-all created
+networkpolicy.networking.k8s.io/indexer-egress created
+networkpolicy.networking.k8s.io/redis-from-api created
+networkpolicy.networking.k8s.io/ui-egress-to-api created
+networkpolicy.networking.k8s.io/ui-from-ingress created
+job.batch/indexer condition met
+Waiting for deployment "api" rollout to finish: 0 of 3 updated replicas are available...
+Waiting for deployment "api" rollout to finish: 1 of 3 updated replicas are available...
+Waiting for deployment "api" rollout to finish: 2 of 3 updated replicas are available...
+deployment "api" successfully rolled out
+deployment "ui" successfully rolled out
+deployment "ingress-nginx-controller" successfully rolled out
+NAME                     READY   STATUS      RESTARTS        AGE
+api-78bb9db8d4-gv6rj     1/1     Running     1 (3m11s ago)   4m44s
+api-78bb9db8d4-hs9nf     1/1     Running     1 (3m11s ago)   4m44s
+api-78bb9db8d4-pnx5d     1/1     Running     1 (3m11s ago)   4m44s
+chroma-0                 1/1     Running     0               4m43s
+indexer-fzrct            0/1     Completed   0               4m43s
+redis-5694859fd7-7l57j   1/1     Running     0               4m44s
+ui-7db64b4c76-vs5qz      1/1     Running     0               4m43s
+ui-7db64b4c76-xndxw      1/1     Running     0               4m43s
+{"ts": "2026-11-11T12:54:47Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "pages": 8, "ocr_pages": 8, "words": 1755, "chunks": 12}
+{"ts": "2026-11-11T12:54:47Z", "logger": "rahbar.indexer", "msg": "storage amplification", "original_words": 81296, "stored_words": 86501, "ratio": 1.06, "chunk_size": 700, "chunk_overlap": 100}
+{"ts": "2026-11-11T12:55:07Z", "logger": "rahbar.indexer", "msg": "indexer finished", "chunks": 594, "seconds": 262.2}
+Fresh corpus indexed and three API replicas ready in the independent cluster.
+Independent test profile stopped after successful Ingress smoke; original minikube context restored.

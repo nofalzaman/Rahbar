@@ -1,0 +1,11 @@
+{"ts": "2026-11-11T12:22:00Z", "logger": "rahbar.indexer", "msg": "indexer starting", "dummy": false, "embed_model": "nomic-embed-text", "collection": "rahbar", "chroma": "chroma:8000", "pod": "phase7-final-patched-8p4qr"}
+{"ts": "2026-11-11T12:24:04Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "undergraduate-academic-rules-aug-2023.pdf", "pages": 26, "ocr_pages": 24, "words": 4871, "chunks": 89}
+{"ts": "2026-11-11T12:24:18Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "academic-rules-handbook-jun-2026.pdf", "pages": 58, "ocr_pages": 5, "words": 15111, "chunks": 197}
+{"ts": "2026-11-11T12:24:20Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "prospectus-2026-academic-rules-and-regulations.pdf", "pages": 5, "ocr_pages": 0, "words": 3523, "chunks": 11}
+{"ts": "2026-11-11T12:24:34Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "student-handbook-jun-2026.pdf", "pages": 64, "ocr_pages": 4, "words": 22020, "chunks": 147}
+{"ts": "2026-11-11T12:24:48Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "annual-report-2023-24.pdf", "pages": 85, "ocr_pages": 0, "words": 32461, "chunks": 122}
+{"ts": "2026-11-11T12:24:48Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "fee-structure-page.html", "pages": 1, "ocr_pages": 0, "words": 631, "chunks": 9}
+{"ts": "2026-11-11T12:24:48Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "grading-page.html", "pages": 1, "ocr_pages": 0, "words": 924, "chunks": 7}
+{"ts": "2026-11-11T12:25:18Z", "logger": "rahbar.indexer", "msg": "chunked", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "pages": 8, "ocr_pages": 8, "words": 1755, "chunks": 12}
+{"ts": "2026-11-11T12:25:18Z", "logger": "rahbar.indexer", "msg": "storage amplification", "original_words": 81296, "stored_words": 86501, "ratio": 1.06, "chunk_size": 700, "chunk_overlap": 100}
+{"ts": "2026-11-11T12:25:33Z", "logger": "rahbar.indexer", "msg": "indexer finished", "chunks": 594, "seconds": 212.6}

@@ -1,0 +1,11 @@
+NAME                         READY   STATUS      RESTARTS   AGE
+api-6f88c975b7-49dml         1/1     Running     0          71s
+api-6f88c975b7-q2mz8         1/1     Running     0          58s
+api-6f88c975b7-rhq2f         1/1     Running     0          65s
+chroma-0                     1/1     Running     0          2d22h
+indexer-t8x6r                0/1     Completed   0          31h
+phase7-final-patched-8p4qr   0/1     Completed   0          8m5s
+phase7-verify-9jczw          0/1     Completed   0          22m
+redis-5694859fd7-nxgtp       1/1     Running     0          2d22h
+ui-645854bdf-rrp79           1/1     Running     0          71s
+ui-645854bdf-xn7sj           1/1     Running     0          68s

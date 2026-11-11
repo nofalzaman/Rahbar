@@ -23,3 +23,10 @@ venv/
 # Local scratch
 *.log
 .DS_Store
+corpus/_*.txt
+
+# Generated CI overlay and local reports
+k8s/overlays/ci/
+.coverage
+coverage.xml
+.pytest-tmp/

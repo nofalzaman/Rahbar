@@ -25,8 +25,9 @@ class Settings:
     retriever: str = "stub"          # RETRIEVER: stub | chroma
     llm_provider: str = "stub"       # LLM_PROVIDER: stub | ollama-host | ollama-incluster | hosted
 
-    # The embedding pin (section 4.4). The indexer reads the same ConfigMap key.
+    # The embedding pin (section 4.4). The indexer reads the same ConfigMap keys.
     embed_model: str = "nomic-embed-text"
+    embed_query_prefix: str = "search_query: "   # nomic-embed-text expects a task prefix
 
     # Vector store
     chroma_host: str = "chroma"
@@ -35,11 +36,19 @@ class Settings:
 
     # Retrieval and generation
     top_k: int = 5
+    relevance_floor: float = 0.35    # below this similarity a passage is not evidence
     temperature: float = 0.2
     llm_model: str = "llama3.2:3b"
+    llm_timeout_seconds: float = 60.0
     ollama_url: str = "http://host.minikube.internal:11434"
     hosted_base_url: str = ""        # e.g. an OpenAI-compatible endpoint
     llm_api_key: str = field(default="", repr=False)   # from the Secret; never log it
+
+    # Semantic cache. An empty redis_url turns the cache off.
+    redis_url: str = ""
+    cache_threshold: float = 0.92    # cosine similarity at or above which a question is a hit
+    cache_ttl_seconds: int = 86400
+    cache_max_entries: int = 200
 
     log_level: str = "INFO"
 
@@ -49,14 +58,21 @@ def get_settings() -> Settings:
         retriever=os.environ.get("RETRIEVER", "stub"),
         llm_provider=os.environ.get("LLM_PROVIDER", "stub"),
         embed_model=os.environ.get("EMBED_MODEL", "nomic-embed-text"),
+        embed_query_prefix=os.environ.get("EMBED_QUERY_PREFIX", "search_query: "),
         chroma_host=os.environ.get("CHROMA_HOST", "chroma"),
         chroma_port=_int("CHROMA_PORT", 8000),
         collection=os.environ.get("CHROMA_COLLECTION", "rahbar"),
         top_k=_int("TOP_K", 5),
+        relevance_floor=_float("RELEVANCE_FLOOR", 0.35),
         temperature=_float("TEMPERATURE", 0.2),
         llm_model=os.environ.get("LLM_MODEL", "llama3.2:3b"),
+        llm_timeout_seconds=_float("LLM_TIMEOUT_SECONDS", 60.0),
         ollama_url=os.environ.get("OLLAMA_URL", "http://host.minikube.internal:11434"),
         hosted_base_url=os.environ.get("HOSTED_BASE_URL", ""),
         llm_api_key=os.environ.get("LLM_API_KEY", ""),
+        redis_url=os.environ.get("REDIS_URL", ""),
+        cache_threshold=_float("CACHE_THRESHOLD", 0.92),
+        cache_ttl_seconds=_int("CACHE_TTL_SECONDS", 86400),
+        cache_max_entries=_int("CACHE_MAX_ENTRIES", 200),
         log_level=os.environ.get("LOG_LEVEL", "INFO"),
     )
