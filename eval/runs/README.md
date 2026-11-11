@@ -4,6 +4,9 @@ The `chunk-*` runs use real embeddings and a stub generator at floor zero to iso
 retrieval. Their absent-topic failures are expected and are not the shipped baseline.
 `chunk-measurements.json` records the size/overlap, counts and word amplification.
 The 100/0 run is the deliberate small-chunk break.
+`break-fixed-100-tokens.json` is the separate PDF-specific fixed-size experiment,
+crossing section boundaries with no overlap. Its counts and actual tokenizer-based
+amplification are in `fixed-token-measurements.json`.
 
 `generation-low-temperature.json` and `break-generation-high-temperature.json` use
 the real Ollama LLM against the separate calibration collection, with the cache off.

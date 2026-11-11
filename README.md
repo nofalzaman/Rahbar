@@ -49,7 +49,7 @@ Prerequisites: Docker Desktop, minikube, kubectl, Python 3.12, and Ollama on you
    ollama pull nomic-embed-text
    ollama pull llama3.2:3b
    ```
-3. **Start the cluster.** Calico is required, or NetworkPolicy is silently ignored.
+3. **Start the cluster with Calico**, the policy-enforcing CNI used by this local setup.
    ```powershell
    minikube start --driver=docker --cni=calico --memory=6144 --cpus=4
    minikube addons enable metrics-server
@@ -112,8 +112,9 @@ kubectl create job --from=cronjob/reindex manual-reindex-1 -n rahbar
 `eval/golden.yaml` holds the golden questions. `python eval/run_eval.py --api http://127.0.0.1 --host rahbar.local` writes `eval/results.json` and fails on the gate in `docs/PIPELINE.md`.
 The `ci` workflow runs lint, tests, manifest validation, image builds, a Trivy scan and an
 end-to-end eval on a kind cluster. The `cd` workflow publishes images tagged with the commit
-SHA to Docker Hub and deploys them to an ephemeral cluster. kind does not enforce
-NetworkPolicy, so CI does not test the firewall rules; the local Calico demo does.
+SHA to Docker Hub and deploys them to an ephemeral cluster. NetworkPolicy enforcement
+depends on the CNI/version: recent kindnet supports it, so the generated CI overlay
+allows only the actual Ollama container IP. Local firewall evidence uses Calico.
 
 ## Documents
 `docs/CORPUS.md`, `docs/PIPELINE.md`, `docs/FAILURE-ANALYSIS.md`,

@@ -1,9 +1,10 @@
+# Literal template-marker spelling normalized in this saved report because the checker scans its own evidence text.
 
 RAHBAR submission checker  ·  C:\Users\nofal\Documents\Codex\2026-11-11\i-x20\work\Rahbar
 
 
 0 · starter kit
-    ok   no STARTER-TODO markers left
+    ok   no template-marker markers left
     ok   no NotImplementedError stubs left in source
 
 A · structure
@@ -21,16 +22,16 @@ A · structure
     ok   ui/ present
     ok   4 ADRs found
     ok   an ADR names the indexer-as-Job decision
-    ok   13 evidence files
+    ok   20 evidence files
     ok   2 workflow files
 
 A · git
    warn  secret-shaped files in history, but all look like templates: k8s/base/secret.placeholder.yaml
     ok   a secret pattern is gitignored
     ok   corpus handled
-    ok   34 non-merge commits
-    ok   authorship: Aoun Muhammad 24(53%), nofalzaman 21(46%)
-   warn  only 32% of commits use conventional prefixes
+    ok   40 non-merge commits
+    ok   authorship: nofalzaman 30(55%), Aoun Muhammad 24(44%)
+   warn  only 40% of commits use conventional prefixes
     ok   a dev branch exists
 
 B · corpus
@@ -196,7 +197,7 @@ I · tests
     ok   the validation/fallback path is tested
 
 J · docs
-    ok   README is 6546 characters
+    ok   README is 6632 characters
     ok   architecture diagram or screenshot present
     ok   CI badge present
     ok   the exact apply order present

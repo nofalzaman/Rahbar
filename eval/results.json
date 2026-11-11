@@ -16,7 +16,7 @@
     "version": 0.5
   },
   "citation_validity": 1.0,
-  "citations_checked": 10,
+  "citations_checked": 11,
   "abstention_correctness": 1.0,
   "abstention_failures": [],
   "expected_text_found": 0.5,
@@ -96,7 +96,7 @@
       "citation_validity": 1.0,
       "expect_found": null,
       "top_score": 0.6765,
-      "answer": "A B+ carries 3.33 grade points.",
+      "answer": "3.33",
       "citations": [
         "grading-page.html | Letter Code Interpretation"
       ],
@@ -114,12 +114,14 @@
       "must_abstain": false,
       "recall_at_3": 1.0,
       "recall_at_5": 1.0,
-      "answered_from_context": false,
-      "citation_validity": null,
+      "answered_from_context": true,
+      "citation_validity": 1.0,
       "expect_found": null,
       "top_score": 0.7941,
       "answer": "The deadline to withdraw from a course is the last day of the makeup week of every semester.",
-      "citations": [],
+      "citations": [
+        "academic-rules-handbook-jun-2026.pdf | 4.24 Students are not allowed to withdraw from any course in the"
+      ],
       "retrieved": [
         "fee-structure-page.html | Fee Refund Policy | p.1 | 0.7941",
         "academic-rules-handbook-jun-2026.pdf | 4.20 Students are not allowed to drop any course in the first | p.22 | 0.7443",
@@ -138,7 +140,7 @@
       "citation_validity": 1.0,
       "expect_found": null,
       "top_score": 0.8105,
-      "answer": "The Student Handbook encourages students to submit the prompts they used in generative AI tools to understand the assignments.",
+      "answer": "Students should be encouraged to submit the prompts they used in generative AI tools to understand the assignments.",
       "citations": [
         "student-handbook-jun-2026.pdf | 5. Unacceptable Uses of Generative AI Tools"
       ],
@@ -160,7 +162,7 @@
       "citation_validity": null,
       "expect_found": null,
       "top_score": 0.7324,
-      "answer": "Not enough information is provided in the text to determine the number of applications received by the university in 2023-24 by discipline.",
+      "answer": "Not available",
       "citations": [],
       "retrieved": [
         "prospectus-2026-academic-rules-and-regulations.pdf | 220 Prospectus 2026 | p.5 | 0.7324",
@@ -333,7 +335,7 @@
       "citation_validity": null,
       "expect_found": null,
       "top_score": 0.6291,
-      "answer": "",
+      "answer": "The documents I have do not cover this question, so I cannot answer it.",
       "citations": [],
       "retrieved": [
         "student-handbook-jun-2026.pdf | 18. Any facility offered in the lab can be revoked/denied \u2022 FAST Videography Society | p.46 | 0.6291",
@@ -373,7 +375,7 @@
       "citation_validity": null,
       "expect_found": null,
       "top_score": 0.7426,
-      "answer": "",
+      "answer": "The documents I have do not cover this question, so I cannot answer it.",
       "citations": [],
       "retrieved": [
         "academic-rules-handbook-jun-2026.pdf | 1.21 Students are required to maintain 100% attendance in | p.10 | 0.7426",

@@ -43,9 +43,21 @@ We ship **700/100**: it ties the best recall@5 among the three candidates with f
 chunks and lower amplification. Its 86,501 stored words /
 81,296 cleaned words = 1.0640x.
 This is a word-based storage-amplification proxy, not a measured model-token ratio.
+We also counted tokenizer pieces using BERT WordPiece and the installed embedding
+model's 30,522-entry GGUF vocabulary (standard lowercasing/normalization, excluding
+special tokens and task prefixes). The original text has **101,326 tokens** and the
+700/100 stored chunks have **107,569 tokens**, giving **1.061613x** token amplification.
+The 150/25, 400/50 and 100/0 token ratios are 1.165979x, 1.074986x and 1.036841x.
+This explicit tokenizer convention is separate from the chunker's word-size setting.
+See `eval/runs/token-amplification.json` for counts and methodology.
 The 100/0 row is the deliberate chunking break; recall did not worsen on this small
 set, but storage and fragmentation increased. It still uses the structure-aware splitter,
 so it is not an experiment with a completely fixed-size splitter.
+The PDF's stricter fixed-size experiment was also run separately: **1,019 fixed
+100-WordPiece-token windows, no overlap**, with first-token section/page metadata.
+Recall@3 fell to **0.4000** and recall@5 to **0.4667**; token amplification was 1.0000x.
+See `break-fixed-100-tokens.json` and `fixed-token-measurements.json`. Crossing section
+boundaries harms both context continuity and section-based recall matching.
 
 The cached extraction came from the real indexer image; each candidate was actually
 embedded into a separate Chroma calibration collection and queried through a running
@@ -122,8 +134,11 @@ validity=100%. The stub tests retrieval and gating, not resistance of a real LLM
 poisoned text. The fixture includes a poisoned paragraph for real-model testing too.
 The gate fails on recall@5 dropping more than 0.05, any answered must-abstain question,
 or citation validity below 0.95. These thresholds were not loosened.
-kind's default networking does not enforce NetworkPolicy. Calico/minikube is the
-separate firewall demonstration.
+Do not assume all kind versions ignore NetworkPolicy. Recent kindnet embeds enforcement
+([upstream documentation](https://kube-network-policies.sigs.k8s.io/docs/concepts/modularity/)).
+The CI overlay permits the actual Ollama container IP, rather than the laptop's address.
+Calico/minikube remains a separate firewall demonstration. The supplied checklist's
+blanket statement about kind was corrected after the fresh-cluster startup failure.
 
 The fixture injection question originally contained “earlier instructions”, which the
 old-version detector mistook for an older-policy request. A regression fix excludes

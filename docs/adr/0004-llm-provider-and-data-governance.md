@@ -29,8 +29,9 @@ In-cluster Ollama needs at least 8 GB and slow weight loading; we did not have t
 ## Consequences
 The API request/response and passage contracts gained additive fields (`follow_up`, `cached`, and the passage
 `doc_version`/`superseded`). CI runs the stub model with real embeddings, so it tests
-retrieval and abstention, not answer quality. kind does not enforce NetworkPolicy, so the
-firewall rules are tested only on the Calico minikube cluster.
+retrieval and abstention, not answer quality. Older kind configurations did not enforce
+NetworkPolicy; recent kindnet does. CI therefore supplies a narrow egress rule for its
+Ollama container. The separately recorded local firewall test uses Calico.
 
 The published indexer contains fictional CI fixtures, not the FAST corpus. Model weights
 are downloaded externally; CI disables Chroma telemetry and sends generation to a stub.

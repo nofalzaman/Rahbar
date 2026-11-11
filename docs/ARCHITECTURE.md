@@ -57,8 +57,9 @@ Non-secret settings are in `k8s/base/configmap.yaml`. The LLM key is a Secret cr
 ## CI and CD
 `ci.yml` (lint, test, manifests, build, scan, e2e eval on kind) gates every pull request to
 `main`; `cd.yml` publishes images tagged with the commit SHA and deploys them to an
-ephemeral kind cluster. kind does not enforce NetworkPolicy, so CI does not test the
-firewall rules; the Calico minikube demo does.
+ephemeral kind cluster. NetworkPolicy support depends on the CNI/version. Recent kindnet
+supports enforcement; CI explicitly allows its Ollama container IP, while the local
+firewall demonstration uses Calico. Do not infer enforcement from the name "kind" alone.
 
 ## Limits
 The delete/rename collection swap is not atomic. Readiness withholds empty or incompatible

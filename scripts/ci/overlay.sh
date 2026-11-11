@@ -3,8 +3,7 @@
 # the embedding host, and the images to run. It is generated on every run and never
 # committed, so the committed overlays stay exactly what a person would deploy.
 #
-# Needs a kind cluster to exist (the runner is reachable from its nodes at the gateway
-# of the `kind` Docker network), unless OLLAMA_HOST_IP is set.
+# Needs Ollama on the existing `kind` Docker network, unless OLLAMA_HOST_IP is set.
 set -euo pipefail
 
 : "${API_IMAGE:?set API_IMAGE}"

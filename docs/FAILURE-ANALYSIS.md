@@ -7,13 +7,17 @@ Every API process was stopped after its run; the shipped cluster retains top-k=5
 temperature=0.2, floor=0.35 and the normal source filter.
 
 ## Stage B · Chunking
-- **What we broke:** 100-word chunks with zero overlap instead of 700/100. We retained
-  the existing section-aware algorithm; this is the phase checklist's small-chunk break,
-  not a full fixed-size replacement.
-- **Symptom:** 1,206 chunks instead of 594; word amplification 1.0405x instead of 1.0640x.
-  Recall@5 stayed at 0.8000; recall@3 rose from 0.7333 to 0.8000. The predicted recall
-  collapse did **not** happen in this run. More chunks and less shared context were the
-  measured effect. See `eval/runs/chunk-100-0.json` and `chunk-measurements.json`.
+- **What we broke:** replaced structure-aware 700/100-word chunking with fixed
+  100-WordPiece-token windows and zero overlap, crossing section boundaries. Source,
+  version and superseded metadata were preserved; section/page refer to the first token.
+- **Symptom:** 1,019 windows instead of 594 structure-aware chunks. Token amplification
+  fell to 1.0000x, but recall@3 fell from 0.7333 to 0.4000 and recall@5 from 0.8000 to
+  0.4667 (33.33 percentage points). Definitions and clauses now cross windows, and a
+  window spanning multiple sections has only its starting section as metadata.
+  Evidence: `eval/runs/break-fixed-100-tokens.json` and `fixed-token-measurements.json`.
+  We also ran the phase checklist's less severe 100-word/zero-overlap setting while
+  retaining structure awareness: that produced 1,206 chunks and unchanged 0.8000 recall@5.
+  The two experiments are distinct; the structure-aware small-chunk run did not collapse.
 - **Diagnosis, as if we had not caused it:** inspect the stored chunk settings and the
   per-question retrieved sections, then compare counts and recall using the same labels.
   A small golden set can hide losses; unchanged aggregate recall is not evidence that

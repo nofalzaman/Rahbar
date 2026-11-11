@@ -49,8 +49,9 @@ minikube addons enable ingress
 kubectl get nodes
 ```
 
-Use `--memory=4096` if the machine has less than 16 GB of RAM. Calico is required: without it
-NetworkPolicy manifests are accepted and silently ignored.
+Use `--memory=4096` if the machine has less than 16 GB of RAM. This documented local setup
+uses Calico for policy enforcement; verify CNI/version capabilities rather than assuming
+that accepting a NetworkPolicy manifest means it is enforced.
 
 With the Docker driver on Windows the minikube IP is not reachable. Keep this running in a
 separate PowerShell window while testing the Ingress, and use `127.0.0.1` as the address:

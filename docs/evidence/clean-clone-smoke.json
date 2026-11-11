@@ -1,0 +1,126 @@
+{
+  "ui_responded": true,
+  "grounded": {
+    "request_id": "2ffe3f13d4f7e66385992c40603a67e8",
+    "answer": "Rs. 12,000",
+    "citations": [
+      {
+        "source": "fee-structure-page.html",
+        "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+        "page": 1
+      },
+      {
+        "source": "fee-structure-page.html",
+        "section": "Admission Fee",
+        "page": 1
+      }
+    ],
+    "answered_from_context": true,
+    "confidence": "high",
+    "retrieved": [
+      {
+        "chunk_id": "fee-structure-page.html-0004",
+        "source": "fee-structure-page.html",
+        "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+        "page": 1,
+        "score": 0.8076,
+        "doc_version": "2026-27",
+        "superseded": false
+      },
+      {
+        "chunk_id": "student-handbook-jun-2026.pdf-0027",
+        "source": "student-handbook-jun-2026.pdf",
+        "section": "18. It is generally recommended that students only take the",
+        "page": 10,
+        "score": 0.693,
+        "doc_version": "2026-06",
+        "superseded": false
+      },
+      {
+        "chunk_id": "fee-structure-page.html-0006",
+        "source": "fee-structure-page.html",
+        "section": "Miscellaneous Fees",
+        "page": 1,
+        "score": 0.682,
+        "doc_version": "2026-27",
+        "superseded": false
+      },
+      {
+        "chunk_id": "fee-structure-page.html-0002",
+        "source": "fee-structure-page.html",
+        "section": "Admission Fee",
+        "page": 1,
+        "score": 0.6703,
+        "doc_version": "2026-27",
+        "superseded": false
+      },
+      {
+        "chunk_id": "academic-rules-handbook-jun-2026.pdf-0029",
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "1.12 A 4-credit hour course, for example, having 3 credit",
+        "page": 8,
+        "score": 0.655,
+        "doc_version": "2026-06",
+        "superseded": false
+      }
+    ],
+    "provider": "ollama",
+    "cached": false
+  },
+  "absent_topic": {
+    "request_id": "85c1c27335a298d5b044fa7ca0ccb4e5",
+    "answer": "",
+    "citations": [],
+    "answered_from_context": false,
+    "confidence": "low",
+    "retrieved": [
+      {
+        "chunk_id": "student-handbook-jun-2026.pdf-0122",
+        "source": "student-handbook-jun-2026.pdf",
+        "section": "18. Any facility offered in the lab can be revoked/denied \u2022 FAST Videography Society",
+        "page": 46,
+        "score": 0.6291,
+        "doc_version": "2026-06",
+        "superseded": false
+      },
+      {
+        "chunk_id": "student-handbook-jun-2026.pdf-0083",
+        "source": "student-handbook-jun-2026.pdf",
+        "section": "7. Chairs and study tables should not be moved around",
+        "page": 31,
+        "score": 0.6217,
+        "doc_version": "2026-06",
+        "superseded": false
+      },
+      {
+        "chunk_id": "student-handbook-jun-2026.pdf-0079",
+        "source": "student-handbook-jun-2026.pdf",
+        "section": "7. Chairs and study tables should not be moved around",
+        "page": 30,
+        "score": 0.6,
+        "doc_version": "2026-06",
+        "superseded": false
+      },
+      {
+        "chunk_id": "student-handbook-jun-2026.pdf-0095",
+        "source": "student-handbook-jun-2026.pdf",
+        "section": "21. Members must notify the library of any change in their",
+        "page": 33,
+        "score": 0.5977,
+        "doc_version": "2026-06",
+        "superseded": false
+      },
+      {
+        "chunk_id": "student-handbook-jun-2026.pdf-0111",
+        "source": "student-handbook-jun-2026.pdf",
+        "section": "15. No students are allowed to enter and use the facility",
+        "page": 38,
+        "score": 0.5916,
+        "doc_version": "2026-06",
+        "superseded": false
+      }
+    ],
+    "provider": "ollama",
+    "cached": false
+  }
+}

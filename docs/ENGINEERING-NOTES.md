@@ -71,18 +71,31 @@ different dimensions may instead produce an explicit Chroma error. The guardrail
 prevents either case from silently joining the ready endpoints.
 
 ## 7. The failure and the evidence that corrected it
-We cannot substantiate the handout's required personal story of a failure costing more
-than one hour from the available project history, and do not invent one. During this
-completion session the most consequential mistaken assumption was that earlier local
-chunking measurements were valid. Reading `eval/runs/previous-chunk-400-50.json` showed
-`recall_at_5: 0.0`, while `git show origin/dev:eval/golden.yaml` showed `section: "?"`.
-Those runs were scoring unresolved labels. We verified labels against source pages,
-re-ran all candidates, and kept the remaining genuine misses. Further inspection found
-the CronJob's `args: ["--dummy"]` and a live 700/100 ConfigMap versus Git's 400/50.
-These were real defects, not model hallucinations. The subsequent first CI scan also
-failed on fixed vulnerabilities; package and OS updates were made rather than disabling
-the scan. This is an accurate session account, with no claim of an unrecorded one-hour
-incident. The team still needs to supply its own longer incident if the marker requires it.
+The clearest observed failure was fresh-cluster indexing in CI. The API pods stayed
+unready while the indexer reached extraction/chunking but never created the collection.
+The initial assumption, inherited from the phase checklist, was that kind ignored
+NetworkPolicy, so the laptop-specific Ollama rule would not matter. The logs disproved
+the idea that the index had simply been empty before startup: the run ended with
+`error: timed out waiting for the condition on jobs/indexer`, and the API repeatedly
+logged `Collection [rahbar] does not exists`. The indexer log had already reported
+`"msg": "storage amplification", "original_words": 427, "stored_words": 407`.
 
-CI's kind network does not enforce NetworkPolicy. The local Calico demonstration verifies
-UI-to-API success and UI-to-Chroma timeout; it is separate evidence from CI readiness.
+We first made Ollama a direct member of the kind Docker network. Checking upstream
+kindnet documentation then exposed the mistaken policy assumption. The base allowlist
+contained the laptop IP, while CI used a different address. A generated policy permitting
+only the actual embedding-container IP on TCP 11434 resolved the startup failure; run
+43022332761 passed the real fixture gate. About 35 minutes elapsed between the first
+recorded wait at 12:10:31 UTC and the successful gate around 12:45 UTC, including other
+work and repeated CI runs. We do not turn that into an invented >1-hour incident.
+
+Another real mistake was trusting recovered local calibration runs: they showed
+`recall_at_5: 0.0`, while `git show origin/dev:eval/golden.yaml` still had `section: "?"`.
+We verified source labels and reran all configurations. We also found and removed the
+CronJob's `args: ["--dummy"]`. The session's security-scan failures were corrected by
+updating vulnerable packages and OS libraries, without disabling the scan.
+
+The handoff's blanket claim that kind cannot enforce NetworkPolicy is outdated: recent
+kindnet embeds network-policy enforcement. Its first CI indexer stalled with the base
+laptop-only Ollama allowlist; the generated overlay now permits the actual CI container
+IP on port 11434. See the [upstream network-policy documentation](https://kube-network-policies.sigs.k8s.io/docs/concepts/modularity/).
+The local Calico demonstration separately verifies UI-to-API success and UI-to-Chroma timeout.
