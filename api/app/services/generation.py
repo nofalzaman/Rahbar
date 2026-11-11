@@ -69,7 +69,8 @@ def check_citations(answer: Answer, passages: list[Passage]) -> Answer:
     rejected: a citation the retriever never returned is fabricated.
     """
     if not answer.answered_from_context:
-        return answer.model_copy(update={"citations": []})
+        return answer.model_copy(update={"citations": [],
+                                         "answer": answer.answer.strip() or ABSTAIN_TEXT})
     valid: dict[tuple[str, str], Citation] = {}
     for citation in answer.citations:
         passage = find_passage(citation, passages)
