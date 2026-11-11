@@ -42,7 +42,12 @@ def chunk(doc: Document, size: int, overlap: int) -> list[Chunk]:
     limit = size - overlap  # a piece plus the overlap tail never exceeds `size`
     chunks: list[Chunk] = []
     for section, group in groupby(_paragraphs(doc), key=lambda p: p.section):
-        units = [piece for paragraph in group for piece in _split(paragraph, limit)]
+        paragraphs = list(group)
+        # A whole short rule can look like a heading and have no following body.
+        # Keep that rule instead of silently dropping it when the next heading starts.
+        if any(p.text for p in paragraphs):
+            paragraphs = [p for p in paragraphs if p.text]
+        units = [piece for paragraph in paragraphs for piece in _split(paragraph, limit)]
         for page, body in _pack(units, size, overlap):
             chunks.append(Chunk(id=f"{doc.source}-{len(chunks):04d}",
                                 text=f"{section}\n{body}", source=doc.source,
@@ -73,6 +78,8 @@ def _paragraphs(doc: Document) -> list[_Paragraph]:
                 parts = []
             if heading:
                 section = heading
+                if re.match(r"^\d+\.\d+", heading):
+                    paragraphs.append(_Paragraph(section, page.page, ""))
             elif line:
                 if not parts:
                     start_page = page.page

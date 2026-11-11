@@ -26,7 +26,14 @@ OVERFETCH = 2            # ask for k * OVERFETCH so that duplicates can be dropp
 
 
 def wants_older_versions(question: str) -> bool:
-    return _OLDER_VERSION.search(question) is not None
+    match = _OLDER_VERSION.search(question)
+    if match is None:
+        return False
+    if not match.group().startswith("20"):
+        return True
+    # A dated report or application statistic is not a request for a repealed policy.
+    return re.search(r"\b(rules?|polic(?:y|ies)|handbook|attendance|regulations?)\b",
+                     question, re.IGNORECASE) is not None
 
 
 def clause_numbers(question: str) -> list[str]:

@@ -87,6 +87,8 @@ def test_distance_becomes_similarity_and_metadata_is_mapped(
     ("What is the attendance requirement in 2026?", False),
     ("How many credit hours can I take?", False),
     ("Can I hold an exam retake?", False),
+    ("How many applications did the university receive in 2023-24?", False),
+    ("What does the annual report for 2023 say?", False),
 ])
 def test_older_version_detection(question: str, older: bool) -> None:
     assert wants_older_versions(question) is older
