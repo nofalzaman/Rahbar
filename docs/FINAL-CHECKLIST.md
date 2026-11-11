@@ -69,8 +69,11 @@ on dev; main contains the approved, successfully deployed release.
 
 Remaining manual actions: the exact signed-in blocked-merge/repaired-check screenshots
 could not be captured because computer control could not verify the browser URL.
-The failed/repaired runs and blocked-state JSON are preserved. Capture Docker Hub tag
-screenshots if image evidence is required, and submit the repository/CD/image links
+The failed/repaired runs and blocked-state JSON are preserved. The owner supplied Docker
+Hub screenshots, now saved as `docs/evidence/dockerhub-api-tags.png`,
+`docs/evidence/dockerhub-ui-tags.png`, and `docs/evidence/dockerhub-indexer-tags.png`.
+All three show release tag `cad1630b5d42f63cef00b4b229771b2d31c5fcb3`.
+Submit the repository/CD/image links
 and the committed `eval/results.json` / `eval/baseline.json` on Classroom. No Classroom
 submission is claimed. The owner chose the real session incident for engineering Q7;
 its measured duration is reported honestly.
