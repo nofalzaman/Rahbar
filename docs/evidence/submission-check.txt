@@ -1,0 +1,214 @@
+
+RAHBAR submission checker  ·  C:\Users\nofal\Documents\Codex\2026-11-11\i-x20\work\Rahbar
+
+
+0 · starter kit
+    ok   no STARTER-TODO markers left
+    ok   no NotImplementedError stubs left in source
+
+A · structure
+    ok   README.md present
+    ok   .gitignore present
+    ok   docs/CORPUS.md present
+    ok   docs/PIPELINE.md present
+    ok   docs/FAILURE-ANALYSIS.md present
+    ok   docs/ENGINEERING-NOTES.md present
+    ok   docs/AI-USAGE.md present
+    ok   api/ present
+    ok   indexer/ present
+    ok   k8s/ present
+    ok   eval/ present
+    ok   ui/ present
+    ok   4 ADRs found
+    ok   an ADR names the indexer-as-Job decision
+    ok   13 evidence files
+    ok   2 workflow files
+
+A · git
+   warn  secret-shaped files in history, but all look like templates: k8s/base/secret.placeholder.yaml
+    ok   a secret pattern is gitignored
+    ok   corpus handled
+    ok   34 non-merge commits
+    ok   authorship: Aoun Muhammad 24(53%), nofalzaman 21(46%)
+   warn  only 32% of commits use conventional prefixes
+    ok   a dev branch exists
+
+B · corpus
+    ok   8 corpus documents (0 committed, 8 listed in MANIFEST)
+    ok   MANIFEST carries SHA-256 checksums
+    ok   docs/CORPUS.md has substance
+    ok   CORPUS.md documents the scanned/OCR document
+    ok   CORPUS.md documents the table-bearing document
+    ok   CORPUS.md documents the two-version policy pair
+    ok   CORPUS.md documents the deliberately absent topic
+    ok   CORPUS.md documents exact-term content
+
+C · indexer
+    ok   a PDF extraction library is used
+    ok   an OCR path exists for the scanned document
+    ok   chunk overlap is implemented
+    ok   ChromaDB client used
+    ok   structure-aware chunking signals present
+    ok   metadata field `source` written
+    ok   metadata field `section` written
+    ok   metadata field `page` written
+    ok   metadata field `doc_version` written
+    ok   metadata field `superseded` written
+    ok   the indexer records the embedding model
+
+D · api & pin
+    ok   route /healthz referenced
+    ok   route /readyz referenced
+    ok   route /metrics referenced
+    ok   a question endpoint is present
+    ok   the liveness handler does not touch dependencies
+   warn  readiness does not look like it checks for a NON-EMPTY collection - required
+    ok   an embedding-model mismatch guardrail is present
+    ok   the API filters on `superseded`
+
+E · generation
+    ok   an Answer Pydantic schema is defined
+    ok   citations are modelled
+    ok   `answered_from_context` present
+    ok   model output is validated with Pydantic
+    ok   constrained decoding / JSON mode requested
+    ok   a retry path exists
+    ok   a safe fallback exists
+    ok   a timeout is set on the provider call
+    ok   request_id propagation present
+    ok   retrieval scores are handled/logged
+    ok   5 provider classes: ['HostedProvider', 'LLMProvider', 'OllamaProvider', 'ProviderError']
+    ok   a stub provider exists for offline tests
+
+F · cache
+    ok   a cache layer is present
+    ok   a similarity threshold is used
+    ok   cache invalidation logic present
+    ok   never-cache rules present
+
+G · kubernetes
+    ok   Namespace present
+    ok   Deployment present
+    ok   StatefulSet present
+    ok   Service present
+    ok   Ingress present
+    ok   ConfigMap present
+    ok   Secret present
+    ok   Job present
+    ok   CronJob present
+    ok   HorizontalPodAutoscaler present
+    ok   NetworkPolicy present
+    ok   the Chroma StatefulSet uses volumeClaimTemplates
+    ok   the indexer Job sets a batch restartPolicy
+    ok   backoffLimit set on the Job
+    ok   no manifest targets the default namespace
+    ok   manifests carry an explicit namespace
+    ok   startupProbe configured
+    ok   livenessProbe configured
+    ok   readinessProbe configured
+    ok   liveness -> /healthz and readiness -> /readyz wired correctly
+    ok   resource requests set
+    ok   resource limits set
+    ok   HPA uses autoscaling/v2
+    ok   HPA minReplicas >= 3
+    ok   replica counts found: [3, 1, 1, 2]
+    ok   rolling update configured for zero unavailability
+    ok   graceful shutdown configured
+    ok   runAsNonRoot: true set
+    ok   readOnlyRootFilesystem: true set
+    ok   capabilities dropped
+    ok   service-account token not auto-mounted where unneeded
+    ok   a deny-by-default NetworkPolicy is present
+    ok   Kustomize kustomization files present
+    ok   overlays/ present
+
+G · indexer-as-Job
+    ok   no indexing work detected in API startup
+    ok   writes to the collection live in the indexer
+
+H · evaluation
+    ok   17 golden questions
+    ok   must-abstain questions are marked in the golden set
+    ok   exact-term questions present
+    ok   an injection probe is in the golden set
+    ok   version-sensitive questions present
+    ok   eval/run_eval.py present
+    ok   recall@k is computed
+    ok   citation validity is measured
+    ok   abstention correctness is measured
+    ok   run_eval.py exits non-zero on failure
+    ok   eval/baseline.json committed
+    ok   baseline records a recall figure
+    ok   eval/results.json committed
+    ok   eval/fixtures/ present for CI
+    ok   docs/PIPELINE.md has substance
+    ok   PIPELINE.md contains a table (chunking configurations)
+    ok   storage amplification reported
+    ok   docs/FAILURE-ANALYSIS.md has substance
+    ok   4 of 6 failure stages discussed
+
+I · api image
+    ok   base pinned: python:3.12-slim
+    ok   non-root USER set
+    ok   exec-form CMD/ENTRYPOINT
+
+I · indexer image
+    ok   base pinned: python:3.12-slim
+    ok   non-root USER set
+    ok   exec-form CMD/ENTRYPOINT
+
+I · ui image
+    ok   base pinned: nginxinc/nginx-unprivileged:1.30-alpine
+    ok   non-root USER set
+    ok   exec-form CMD/ENTRYPOINT
+
+I · api/.dockerignore
+    ok   .git excluded
+    ok   __pycache__ excluded
+    ok   heavy directories excluded
+
+I · indexer/.dockerignore
+    ok   .git excluded
+    ok   __pycache__ excluded
+    ok   heavy directories excluded
+
+I · CI/CD
+    ok   pytest runs in CI
+    ok   a Python linter runs
+    ok   manifest validation runs
+    ok   image vulnerability scan runs
+    ok   an ephemeral cluster job exists
+    ok   the deploy waits on rollout status
+    ok   images tagged by commit SHA
+    ok   registry login configured
+    ok   the eval gate runs in CI
+    ok   CI runs the indexer Job
+    ok   jobs are gated with `needs:`
+    ok   the publishing job itself is gated by `needs:`
+    ok   explicit permissions block present
+    ok   credentials come from GitHub Secrets
+    ok   actions are version-pinned
+
+I · tests
+    ok   124 test functions
+    ok   a prompt-injection test exists
+    ok   abstention is tested
+    ok   the validation/fallback path is tested
+
+J · docs
+    ok   README is 6546 characters
+    ok   architecture diagram or screenshot present
+    ok   CI badge present
+    ok   the exact apply order present
+    ok   cluster start instructions present
+    ok   API table present
+    ok   how to run the indexer present
+    ok   engineering notes have substance
+    ok   notes discuss the HPA signal question
+    ok   kubectl top output referenced
+
+164 passed · 3 warnings · 0 failures
+No mechanical failures. This says nothing about your recall@k, your design, or your viva - go and re-read section 7.
+
+A lint, not the rubric. Passing it is necessary, not sufficient.
+

@@ -1,2 +1,2 @@
-﻿NAME   REFERENCE        TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
-api    Deployment/api   cpu: 3%/70%   3         8         3          52m
+NAME   REFERENCE        TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+api    Deployment/api   cpu: 4%/70%   3         8         3          2d22h

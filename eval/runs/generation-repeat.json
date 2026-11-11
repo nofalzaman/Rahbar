@@ -1,0 +1,286 @@
+{
+  "temperature": 1.2,
+  "responses": [
+    {
+      "request_id": "9f500e7019224f85ae60f49d4bfc86bb",
+      "answer": "I could not produce a reliable answer from the documents just now. Please try again, or ask the relevant office.",
+      "citations": [],
+      "answered_from_context": false,
+      "confidence": "low",
+      "retrieved": [
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0123",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.5 If at the end of a semester (including summer semester) CGPA",
+          "page": 24,
+          "score": 0.8235,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "grading-page.html-0004",
+          "source": "grading-page.html",
+          "section": "Warning/Probation",
+          "page": 1,
+          "score": 0.8055,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0089",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "3.28 If the CGPA of an undergraduate student fall below the",
+          "page": 17,
+          "score": 0.7742,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0122",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.2 The semester work will normally contribute 50% towards the",
+          "page": 24,
+          "score": 0.7643,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "prospectus-2026-academic-rules-and-regulations.pdf-0005",
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "13. Registration of Students under",
+          "page": 2,
+          "score": 0.7614,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ],
+      "provider": "ollama",
+      "cached": false
+    },
+    {
+      "request_id": "7e3654da5ca545109bcc4a1fae60ecdc",
+      "answer": "I could not produce a reliable answer from the documents just now. Please try again, or ask the relevant office.",
+      "citations": [],
+      "answered_from_context": false,
+      "confidence": "low",
+      "retrieved": [
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0123",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.5 If at the end of a semester (including summer semester) CGPA",
+          "page": 24,
+          "score": 0.8235,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "grading-page.html-0004",
+          "source": "grading-page.html",
+          "section": "Warning/Probation",
+          "page": 1,
+          "score": 0.8055,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0089",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "3.28 If the CGPA of an undergraduate student fall below the",
+          "page": 17,
+          "score": 0.7742,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0122",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.2 The semester work will normally contribute 50% towards the",
+          "page": 24,
+          "score": 0.7643,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "prospectus-2026-academic-rules-and-regulations.pdf-0005",
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "13. Registration of Students under",
+          "page": 2,
+          "score": 0.7614,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ],
+      "provider": "ollama",
+      "cached": false
+    },
+    {
+      "request_id": "9d9c76a6dc01448a912dcf444ace5b37",
+      "answer": "I could not produce a reliable answer from the documents just now. Please try again, or ask the relevant office.",
+      "citations": [],
+      "answered_from_context": false,
+      "confidence": "low",
+      "retrieved": [
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0123",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.5 If at the end of a semester (including summer semester) CGPA",
+          "page": 24,
+          "score": 0.8235,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "grading-page.html-0004",
+          "source": "grading-page.html",
+          "section": "Warning/Probation",
+          "page": 1,
+          "score": 0.8055,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0089",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "3.28 If the CGPA of an undergraduate student fall below the",
+          "page": 17,
+          "score": 0.7742,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0122",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.2 The semester work will normally contribute 50% towards the",
+          "page": 24,
+          "score": 0.7643,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "prospectus-2026-academic-rules-and-regulations.pdf-0005",
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "13. Registration of Students under",
+          "page": 2,
+          "score": 0.7614,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ],
+      "provider": "ollama",
+      "cached": false
+    },
+    {
+      "request_id": "770c33f439ef462db7c3c2b5c3735f6f",
+      "answer": "I could not produce a reliable answer from the documents just now. Please try again, or ask the relevant office.",
+      "citations": [],
+      "answered_from_context": false,
+      "confidence": "low",
+      "retrieved": [
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0123",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.5 If at the end of a semester (including summer semester) CGPA",
+          "page": 24,
+          "score": 0.8235,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "grading-page.html-0004",
+          "source": "grading-page.html",
+          "section": "Warning/Probation",
+          "page": 1,
+          "score": 0.8055,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0089",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "3.28 If the CGPA of an undergraduate student fall below the",
+          "page": 17,
+          "score": 0.7742,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0122",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.2 The semester work will normally contribute 50% towards the",
+          "page": 24,
+          "score": 0.7643,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "prospectus-2026-academic-rules-and-regulations.pdf-0005",
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "13. Registration of Students under",
+          "page": 2,
+          "score": 0.7614,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ],
+      "provider": "ollama",
+      "cached": false
+    },
+    {
+      "request_id": "4f83395543d640dca8984c5bbf17dcce",
+      "answer": "I could not produce a reliable answer from the documents just now. Please try again, or ask the relevant office.",
+      "citations": [],
+      "answered_from_context": false,
+      "confidence": "low",
+      "retrieved": [
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0123",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.5 If at the end of a semester (including summer semester) CGPA",
+          "page": 24,
+          "score": 0.8235,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "grading-page.html-0004",
+          "source": "grading-page.html",
+          "section": "Warning/Probation",
+          "page": 1,
+          "score": 0.8055,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0089",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "3.28 If the CGPA of an undergraduate student fall below the",
+          "page": 17,
+          "score": 0.7742,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "academic-rules-handbook-jun-2026.pdf-0122",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.2 The semester work will normally contribute 50% towards the",
+          "page": 24,
+          "score": 0.7643,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "chunk_id": "prospectus-2026-academic-rules-and-regulations.pdf-0005",
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "13. Registration of Students under",
+          "page": 2,
+          "score": 0.7614,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ],
+      "provider": "ollama",
+      "cached": false
+    }
+  ],
+  "distinct_answers": 1
+}
