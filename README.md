@@ -1,6 +1,6 @@
 # RAHBAR
 
-![ci](https://github.com/nofalzaman/Rahbar/actions/workflows/ci.yml/badge.svg)
+![ci](https://github.com/nofalzaman/Rahbar/actions/workflows/ci.yml/badge.svg?branch=dev)
 
 A student wants to know whether they can register for a course after failing its
 prerequisite. The answer exists in a university PDF, but a general language model will
@@ -136,3 +136,10 @@ Push-Location indexer; ..\.venv\Scripts\pytest -q; ..\.venv\Scripts\mypy pipelin
 .\.venv\Scripts\pytest -q eval/tests
 .\.venv\Scripts\python scripts/check_submission.py
 ```
+
+## Verified release
+[Successful CD run](https://github.com/nofalzaman/Rahbar/actions/runs/43026589471)
+published and deployed `cad1630b5d42f63cef00b4b229771b2d31c5fcb3`.
+Public SHA-tagged images: [API](https://hub.docker.com/r/nofalz/rahbar-api/tags),
+[UI](https://hub.docker.com/r/nofalz/rahbar-ui/tags),
+[indexer](https://hub.docker.com/r/nofalz/rahbar-indexer/tags).
