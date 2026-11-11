@@ -30,7 +30,7 @@ Checked against the 20-page Assignment 02 PDF and the supplied phase 5–7 check
 | 5.5 Four broken stages | Verified | B/C/E/F actual runs in `FAILURE-ANALYSIS.md`. Fixed 100-token chunks cut recall@5 to 46.67%; the separate structure-aware 100-word run did not. F produced withheld invalid citations and fallbacks. |
 | 6 CI lint, coverage, manifests, builds, scans, kind eval | Passed | All ten checks passed on the final feature head (43025296270), dev push (43025582220), and approved main PR (43025747419). |
 | 6 Protected main: PR, one review, required CI | Configured | Active ruleset, all ten checks, no bypass; JSON and screenshot in `docs/evidence/`. |
-| 6 Failed-gate and repaired-gate proof | Verified; screenshots manual | PR #11 failed on f05, then all checks passed after repair, and it was closed without merging. JSON statuses and both eval artifacts are committed. Signed-in screenshot capture stopped because the browser URL could not be verified; greyed-out merge-button and repaired-check screenshots remain manual. |
+| 6 Failed-gate and repaired-gate proof | Verified; blocked-merge screenshot manual | PR #11 failed on f05, then all checks passed after repair, and it was closed without merging. JSON statuses and both eval artifacts are committed. The owner's `docs/evidence/green-merge.png` shows PR #11, repair commit `8ab3538`, and all ten successful checks including e2e-eval. The exact greyed-out blocked-merge screenshot remains manual. |
 | 6 CD: test → SHA-tagged Docker Hub images → kind Ingress | Passed | PR #12 received independent approval and merged as `cad1630b5d42f63cef00b4b229771b2d31c5fcb3`. CD run 43026589471 tested, published all three images, deployed them and passed grounded-answer/refusal Ingress smoke tests. Docker Hub repositories are public and have only that SHA tag. |
 | 7 Seven engineering answers with file/line references | Written | `ENGINEERING-NOTES.md` uses the real session issues as requested by the owner, including the roughly 35-minute CI incident. No >1-hour duration was fabricated. |
 | 8 Honest AI attribution | Written | `AI-USAGE.md` distinguishes handoff attribution, Codex work and unrecorded human review. |
@@ -67,8 +67,10 @@ tests: **150 passing tests**. All app-image scans passed the fixable HIGH/CRITIC
 the CI/CD URL files are the release evidence. The final evidence update is retained
 on dev; main contains the approved, successfully deployed release.
 
-Remaining manual actions: the exact signed-in blocked-merge/repaired-check screenshots
-could not be captured because computer control could not verify the browser URL.
+Remaining manual actions: the exact signed-in blocked-merge screenshot could not be
+captured because computer control could not verify the browser URL. The owner supplied
+the repaired-check screenshot, saved as `docs/evidence/green-merge.png`; it shows the
+successful checks after repair, not an enabled merge button on the now-closed PR.
 The failed/repaired runs and blocked-state JSON are preserved. The owner supplied Docker
 Hub screenshots, now saved as `docs/evidence/dockerhub-api-tags.png`,
 `docs/evidence/dockerhub-ui-tags.png`, and `docs/evidence/dockerhub-indexer-tags.png`.
