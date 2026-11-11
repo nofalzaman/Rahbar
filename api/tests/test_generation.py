@@ -9,6 +9,7 @@ from pydantic import ValidationError
 from app.providers.llm.base import ProviderError
 from app.schemas import Citation
 from app.services.generation import (
+    ABSTAIN_TEXT,
     FALLBACK_TEXT,
     UngroundedAnswer,
     check_citations,
@@ -82,6 +83,14 @@ def test_an_honest_abstention_keeps_no_citations() -> None:
     abstained = good_answer(p, answered_from_context=False,
                             citations=[Citation(source="x", section="y")])
     assert check_citations(abstained, [p]).citations == []
+
+
+def test_an_empty_model_refusal_gets_a_readable_abstention() -> None:
+    p = passage()
+    declined = good_answer(p, answered_from_context=False, answer="  ")
+    checked = check_citations(declined, [p])
+    assert checked.answer == ABSTAIN_TEXT
+    assert checked.citations == []
 
 
 def test_one_bad_reply_is_retried_and_the_second_is_used() -> None:

@@ -1,0 +1,80 @@
+{
+  "pairs": [
+    {
+      "cached_question": "What CGPA puts an undergraduate on academic warning?",
+      "incoming_question": "Below what CGPA is a BS student given a warning?",
+      "same_answer": true,
+      "similarity": 0.8706208569223286
+    },
+    {
+      "cached_question": "What are the current attendance rules?",
+      "incoming_question": "What did the 2023 attendance rules require?",
+      "same_answer": false,
+      "similarity": 0.8387895832196436
+    },
+    {
+      "cached_question": "What is the BS tuition fee per credit hour?",
+      "incoming_question": "What is the fee refund timeline?",
+      "same_answer": false,
+      "similarity": 0.48497301757756706
+    },
+    {
+      "cached_question": "What is the admission fee?",
+      "incoming_question": "What is the security deposit?",
+      "same_answer": false,
+      "similarity": 0.5103267473381916
+    },
+    {
+      "cached_question": "When can I withdraw from a course under the 2023 rules?",
+      "incoming_question": "When can I withdraw from a course under the current rules?",
+      "same_answer": false,
+      "similarity": 0.9240464355541704
+    },
+    {
+      "cached_question": "How many grade points does B+ carry?",
+      "incoming_question": "What are the grade points for B plus?",
+      "same_answer": true,
+      "similarity": 0.8863799317434201
+    }
+  ],
+  "trials": [
+    {
+      "threshold": 0.75,
+      "false_hits": [
+        1,
+        4
+      ],
+      "true_hits": [
+        0,
+        5
+      ]
+    },
+    {
+      "threshold": 0.85,
+      "false_hits": [
+        4
+      ],
+      "true_hits": [
+        0,
+        5
+      ]
+    },
+    {
+      "threshold": 0.92,
+      "false_hits": [
+        4
+      ],
+      "true_hits": []
+    },
+    {
+      "threshold": 0.93,
+      "false_hits": [],
+      "true_hits": []
+    },
+    {
+      "threshold": 0.97,
+      "false_hits": [],
+      "true_hits": []
+    }
+  ]
+}

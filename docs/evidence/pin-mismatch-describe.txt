@@ -44,15 +44,15 @@ Containers:
       /tmp from tmp (rw)
 Conditions:
   Type                        Status
-  PodReadyToStartContainers   True 
-  Initialized                 True 
-  Ready                       False 
-  ContainersReady             False 
-  PodScheduled                True 
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
 Volumes:
   tmp:
     Type:        EmptyDir (a temporary directory that shares a pod's lifetime)
-    Medium:      
+    Medium:
     SizeLimit:   <unset>
 QoS Class:       Burstable
 Node-Selectors:  <none>

@@ -1,0 +1,161 @@
+name: cd
+
+# After a pull request is merged into main: test, publish images tagged with the commit,
+# then prove those exact images deploy and answer (section 6).
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cd
+  cancel-in-progress: false
+
+env:
+  EMBED_MODEL: nomic-embed-text
+  # Replace :latest with ollama/ollama:<the version you run locally> after the first green run.
+  OLLAMA_IMAGE: ollama/ollama:0.40.11
+  CI_RELEVANCE_FLOOR: "0.6399"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            api/requirements*.txt
+            indexer/requirements*.txt
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - run: ruff check api indexer eval corpus
+      - run: cd api && pytest -q --cov=app --cov-fail-under=60
+      - run: cd indexer && pytest -q
+      - run: pytest -q eval/tests
+
+  build-push:
+    name: build-push (${{ matrix.image }})
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - image: api
+            context: api
+            contexts: ""
+          - image: ui
+            context: ui
+            contexts: ""
+          - image: indexer
+            context: indexer
+            # The published indexer image holds the fixture documents only, never the
+            # FAST-NUCES files.
+            contexts: corpus=./eval/fixtures
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Tagged with the commit and nothing else: "what is running?" has a one-word answer
+      # you can paste into `git show`.
+      - uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          build-contexts: ${{ matrix.contexts }}
+          pull: true
+          push: true
+          provenance: false
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/rahbar-${{ matrix.image }}:${{ github.sha }}
+
+  deploy:
+    needs: build-push
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: helm/kind-action@v1
+        with:
+          cluster_name: rahbar-deploy
+          config: .github/kind-ingress.yaml
+      - name: Install the Ingress controller
+        run: |
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.1/deploy/static/provider/kind/deploy.yaml
+          kubectl -n ingress-nginx wait --for=condition=ready pod \
+            --selector=app.kubernetes.io/component=controller --timeout=240s
+      - uses: actions/cache@v4
+        with:
+          path: ~/.ollama
+          key: ollama-${{ env.EMBED_MODEL }}-v1
+      - name: Start Ollama for embeddings
+        run: bash scripts/ci/ollama.sh
+      - name: Write the overlay that runs the published images
+        env:
+          API_IMAGE: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rahbar-api
+          UI_IMAGE: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rahbar-ui
+          INDEXER_IMAGE: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rahbar-indexer
+          IMAGE_TAG: ${{ github.sha }}
+          RELEVANCE_FLOOR: ${{ env.CI_RELEVANCE_FLOOR }}
+        run: bash scripts/ci/overlay.sh
+      - name: Deploy the system
+        run: kubectl apply -k k8s/overlays/ci
+      - name: Wait for the rollout
+        run: |
+          kubectl -n rahbar rollout status statefulset/chroma --timeout=300s
+          kubectl -n rahbar rollout status deployment/redis --timeout=180s
+          kubectl -n rahbar wait --for=condition=complete job/indexer --timeout=600s
+          kubectl -n rahbar rollout status deployment/api --timeout=300s
+          kubectl -n rahbar rollout status deployment/ui --timeout=180s
+      - name: Show what is running
+        run: |
+          echo "commit: ${{ github.sha }}"
+          kubectl -n rahbar get deployment api ui -o jsonpath='{range .items[*]}{.metadata.name}{" -> "}{.spec.template.spec.containers[0].image}{"\n"}{end}'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml==6.0.2
+      - name: Smoke test through the Ingress
+        run: |
+          curl -fsS -H "Host: rahbar.local" http://127.0.0.1/ | grep -qi rahbar
+          python - <<'PY'
+          import json
+          import urllib.request
+
+          import yaml
+
+          questions = yaml.safe_load(open("eval/fixtures/golden.fixture.yaml"))["questions"]
+          grounded = next(q for q in questions if not q.get("must_abstain"))
+          declined = next(q for q in questions if q.get("must_abstain"))
+
+
+          def ask(question):
+              request = urllib.request.Request(
+                  "http://127.0.0.1/api/ask",
+                  data=json.dumps({"question": question}).encode(),
+                  headers={"Host": "rahbar.local", "Content-Type": "application/json"},
+              )
+              with urllib.request.urlopen(request, timeout=60) as response:
+                  return json.load(response)
+
+
+          answer = ask(grounded["question"])
+          print(answer)
+          assert answer["answered_from_context"] and answer["citations"], "no grounded answer"
+          refusal = ask(declined["question"])
+          print(refusal)
+          assert not refusal["answered_from_context"], "answered a question the corpus does not cover"
+          PY
+      - name: Show what went wrong
+        if: failure()
+        run: |
+          kubectl -n rahbar get pods -o wide
+          kubectl -n rahbar describe pods | tail -n 150
+          kubectl -n rahbar describe pods -l app=indexer
+          kubectl -n rahbar logs job/indexer --previous --tail=80 || true
+          kubectl -n rahbar logs job/indexer --tail=80 || true
+          kubectl -n rahbar logs deployment/api --tail=80 || true

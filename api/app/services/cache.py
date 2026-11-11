@@ -91,11 +91,11 @@ class RedisCache:
 
     def lookup(self, question: str, index_id: str) -> AskResponse | None:
         try:
-            vector = _unit(embed_query(self.settings, question))
             ids_key = self._ids_key(index_id)
             ids = self.client.zrange(ids_key, 0, -1)
             if not ids:
                 return None
+            vector = _unit(embed_query(self.settings, question))
             values = self.client.mget([self._entry_key(index_id, i) for i in ids])
             best: dict[str, Any] | None = None
             best_score = -1.0

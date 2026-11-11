@@ -97,6 +97,15 @@ def test_an_empty_document_gives_no_chunks() -> None:
     assert chunk(make_doc(""), 400, 50) == []
 
 
+def test_standalone_numbered_rules_are_not_lost_as_empty_headings() -> None:
+    doc = make_doc("4.25 Deadline to withdraw is the last day of classes\n"
+                   "4.26 Students on financial support cannot withdraw\n"
+                   "## Next section\nOther text.")
+    pieces = chunk(doc, 400, 50)
+    assert any("last day of classes" in p.text for p in pieces)
+    assert any("cannot withdraw" in p.text for p in pieces)
+
+
 @pytest.mark.parametrize(("size", "overlap"), [(0, 0), (50, 50), (50, -1), (10, 20)])
 def test_impossible_sizes_are_refused(size: int, overlap: int) -> None:
     with pytest.raises(ValueError, match="overlap"):

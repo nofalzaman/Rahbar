@@ -1,0 +1,121 @@
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 3563.0
+python_gc_objects_collected_total{generation="1"} 1065.0
+python_gc_objects_collected_total{generation="2"} 20.0
+# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 221.0
+python_gc_collections_total{generation="1"} 20.0
+python_gc_collections_total{generation="2"} 1.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="12",patchlevel="10",version="3.12.10"} 1.0
+# HELP rahbar_retrieval_seconds Question embedding plus vector search
+# TYPE rahbar_retrieval_seconds histogram
+rahbar_retrieval_seconds_bucket{le="0.01"} 0.0
+rahbar_retrieval_seconds_bucket{le="0.025"} 0.0
+rahbar_retrieval_seconds_bucket{le="0.05"} 4.0
+rahbar_retrieval_seconds_bucket{le="0.1"} 4.0
+rahbar_retrieval_seconds_bucket{le="0.25"} 4.0
+rahbar_retrieval_seconds_bucket{le="0.5"} 5.0
+rahbar_retrieval_seconds_bucket{le="1.0"} 5.0
+rahbar_retrieval_seconds_bucket{le="2.5"} 5.0
+rahbar_retrieval_seconds_bucket{le="5.0"} 5.0
+rahbar_retrieval_seconds_bucket{le="+Inf"} 5.0
+rahbar_retrieval_seconds_count 5.0
+rahbar_retrieval_seconds_sum 0.5252108001150191
+# HELP rahbar_retrieval_seconds_created Question embedding plus vector search
+# TYPE rahbar_retrieval_seconds_created gauge
+rahbar_retrieval_seconds_created 1.794399062750157e+09
+# HELP rahbar_generation_seconds LLM call, including the one retry
+# TYPE rahbar_generation_seconds histogram
+rahbar_generation_seconds_bucket{le="0.25"} 0.0
+rahbar_generation_seconds_bucket{le="0.5"} 0.0
+rahbar_generation_seconds_bucket{le="1.0"} 0.0
+rahbar_generation_seconds_bucket{le="2.0"} 0.0
+rahbar_generation_seconds_bucket{le="5.0"} 5.0
+rahbar_generation_seconds_bucket{le="10.0"} 5.0
+rahbar_generation_seconds_bucket{le="20.0"} 5.0
+rahbar_generation_seconds_bucket{le="40.0"} 5.0
+rahbar_generation_seconds_bucket{le="60.0"} 5.0
+rahbar_generation_seconds_bucket{le="120.0"} 5.0
+rahbar_generation_seconds_bucket{le="+Inf"} 5.0
+rahbar_generation_seconds_count 5.0
+rahbar_generation_seconds_sum 16.093620900064707
+# HELP rahbar_generation_seconds_created LLM call, including the one retry
+# TYPE rahbar_generation_seconds_created gauge
+rahbar_generation_seconds_created 1.7943990627507277e+09
+# HELP rahbar_cache_lookups_total Semantic cache lookups
+# TYPE rahbar_cache_lookups_total counter
+# HELP rahbar_abstentions_total Questions declined because the documents do not cover them
+# TYPE rahbar_abstentions_total counter
+rahbar_abstentions_total 0.0
+# HELP rahbar_abstentions_created Questions declined because the documents do not cover them
+# TYPE rahbar_abstentions_created gauge
+rahbar_abstentions_created 1.7943990627507277e+09
+# HELP rahbar_fallbacks_total Canned responses given after the model failed validation twice
+# TYPE rahbar_fallbacks_total counter
+rahbar_fallbacks_total 5.0
+# HELP rahbar_fallbacks_created Canned responses given after the model failed validation twice
+# TYPE rahbar_fallbacks_created gauge
+rahbar_fallbacks_created 1.7943990627507277e+09
+# HELP rahbar_invalid_citations_total Model citations dropped because no such passage was retrieved
+# TYPE rahbar_invalid_citations_total counter
+rahbar_invalid_citations_total 10.0
+# HELP rahbar_invalid_citations_created Model citations dropped because no such passage was retrieved
+# TYPE rahbar_invalid_citations_created gauge
+rahbar_invalid_citations_created 1.7943990627507277e+09
+# HELP rahbar_tokens_total LLM tokens used
+# TYPE rahbar_tokens_total counter
+rahbar_tokens_total{direction="in"} 17730.0
+rahbar_tokens_total{direction="out"} 824.0
+# HELP rahbar_tokens_created LLM tokens used
+# TYPE rahbar_tokens_created gauge
+rahbar_tokens_created{direction="in"} 1.7943990676127002e+09
+rahbar_tokens_created{direction="out"} 1.7943990676127002e+09
+# HELP rahbar_requests_total HTTP requests
+# TYPE rahbar_requests_total counter
+rahbar_requests_total{path="/readyz",status="200"} 1.0
+rahbar_requests_total{path="/api/ask",status="200"} 5.0
+# HELP rahbar_requests_created HTTP requests
+# TYPE rahbar_requests_created gauge
+rahbar_requests_created{path="/readyz",status="200"} 1.7943990654403467e+09
+rahbar_requests_created{path="/api/ask",status="200"} 1.7943990689924645e+09
+# HELP rahbar_request_seconds HTTP request latency
+# TYPE rahbar_request_seconds histogram
+rahbar_request_seconds_bucket{le="0.05",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="0.1",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="0.25",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="0.5",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="1.0",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="2.0",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="5.0",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="10.0",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="30.0",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="60.0",path="/readyz"} 1.0
+rahbar_request_seconds_bucket{le="+Inf",path="/readyz"} 1.0
+rahbar_request_seconds_count{path="/readyz"} 1.0
+rahbar_request_seconds_sum{path="/readyz"} 0.013183999806642532
+rahbar_request_seconds_bucket{le="0.05",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="0.1",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="0.25",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="0.5",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="1.0",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="2.0",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="5.0",path="/api/ask"} 5.0
+rahbar_request_seconds_bucket{le="10.0",path="/api/ask"} 5.0
+rahbar_request_seconds_bucket{le="30.0",path="/api/ask"} 5.0
+rahbar_request_seconds_bucket{le="60.0",path="/api/ask"} 5.0
+rahbar_request_seconds_bucket{le="+Inf",path="/api/ask"} 5.0
+rahbar_request_seconds_count{path="/api/ask"} 5.0
+rahbar_request_seconds_sum{path="/api/ask"} 16.62972449976951
+# HELP rahbar_request_seconds_created HTTP request latency
+# TYPE rahbar_request_seconds_created gauge
+rahbar_request_seconds_created{path="/readyz"} 1.7943990654403467e+09
+rahbar_request_seconds_created{path="/api/ask"} 1.7943990689924645e+09

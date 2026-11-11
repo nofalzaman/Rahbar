@@ -37,7 +37,6 @@ py -3.12 -m venv .venv
 | Run the api with stubs (chat UI at http://localhost:8000) | `Set-Location api; $env:SERVE_UI_DIR="../ui"; $env:RETRIEVER="stub"; $env:LLM_PROVIDER="stub"; ..\.venv\Scripts\uvicorn app.main:app --reload --port 8000` |
 | Download the corpus | `.\.venv\Scripts\python corpus/fetch.py` |
 | Submission checker | `python scripts/check_submission.py` |
-| Find remaining starter tasks | `git grep -n "STARTER-TODO"` |
 
 ## Cluster (Nofal's machine)
 
@@ -50,8 +49,9 @@ minikube addons enable ingress
 kubectl get nodes
 ```
 
-Use `--memory=4096` if the machine has less than 16 GB of RAM. Calico is required: without it
-NetworkPolicy manifests are accepted and silently ignored.
+Use `--memory=4096` if the machine has less than 16 GB of RAM. This documented local setup
+uses Calico for policy enforcement; verify CNI/version capabilities rather than assuming
+that accepting a NetworkPolicy manifest means it is enforced.
 
 With the Docker driver on Windows the minikube IP is not reachable. Keep this running in a
 separate PowerShell window while testing the Ingress, and use `127.0.0.1` as the address:

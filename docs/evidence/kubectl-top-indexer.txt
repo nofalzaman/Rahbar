@@ -1,0 +1,116 @@
+# Sampled during phase7-verify; samples are observed working-set memory, not a guaranteed instantaneous peak.
+2026-11-11T12:07:56.8938402Z
+error: metrics not available yet
+2026-11-11T12:08:02.2470923Z
+error: metrics not available yet
+2026-11-11T12:08:07.5953648Z
+error: metrics not available yet
+2026-11-11T12:08:12.9368883Z
+error: metrics not available yet
+2026-11-11T12:08:18.3152430Z
+error: metrics not available yet
+2026-11-11T12:08:23.7696902Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:08:29.0979749Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:08:34.4223719Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:08:39.7675526Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:08:45.1301006Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:08:50.4597158Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:08:55.7909557Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:09:01.1395104Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:09:06.5332381Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:09:11.8940328Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:09:17.2428221Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   963m         144Mi
+2026-11-11T12:09:22.5799267Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:09:27.9375546Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:09:33.2858603Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:09:38.6676282Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:09:44.0673888Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:09:49.4111185Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:09:54.8147441Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:10:00.1454212Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:10:05.4954571Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:10:10.8832710Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:10:16.2520953Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   995m         229Mi
+2026-11-11T12:10:21.5926532Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:10:26.9542027Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:10:32.3036591Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:10:37.6438728Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:10:42.9929417Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:10:48.3291702Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:10:53.6684401Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:10:58.9783752Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:11:04.3132575Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:11:09.6644884Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:11:15.0183988Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:11:20.3423573Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   996m         168Mi
+2026-11-11T12:11:25.7141353Z
+NAME                  CPU(cores)   MEMORY(bytes)
+phase7-verify-9jczw   997m         427Mi

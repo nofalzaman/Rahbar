@@ -66,6 +66,8 @@ class RetrievedRef(BaseModel):
     section: str
     page: int | None = None
     score: float
+    doc_version: str = ""
+    superseded: bool = False
 
 
 class AskResponse(BaseModel):
