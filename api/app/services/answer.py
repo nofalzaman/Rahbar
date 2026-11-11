@@ -50,6 +50,8 @@ def answer_question(
         if hit is not None:
             log.info("answered", extra={"cached": True, "top_k": settings.top_k,
                                         "answered_from_context": hit.answered_from_context,
+                                        "abstained": not hit.answered_from_context,
+                                        "scores": [r.score for r in hit.retrieved],
                                         "chunk_ids": [r.chunk_id for r in hit.retrieved]})
             return hit.model_copy(update={"request_id": request_id_var.get()})
 
@@ -71,7 +73,8 @@ def answer_question(
         request_id=request_id_var.get(), answer=answer.answer, citations=answer.citations,
         answered_from_context=answer.answered_from_context, confidence=answer.confidence,
         retrieved=[RetrievedRef(chunk_id=p.chunk_id, source=p.source, section=p.section,
-                                page=p.page, score=p.score) for p in passages],
+                                page=p.page, score=p.score, doc_version=p.doc_version,
+                                superseded=p.superseded) for p in passages],
         provider=provider.name)
     if index_id is not None and not never_cache(response, fallback=fallback, follow_up=follow_up):
         cache.store(question, index_id, response)

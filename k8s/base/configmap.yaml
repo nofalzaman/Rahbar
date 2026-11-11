@@ -18,13 +18,13 @@ data:
   CHROMA_COLLECTION: "rahbar"
   OLLAMA_URL: "http://host.minikube.internal:11434"
   HOSTED_BASE_URL: ""
-  CHUNK_SIZE: "400"
-  CHUNK_OVERLAP: "50"
+  CHUNK_SIZE: "700"
+  CHUNK_OVERLAP: "100"
   TOP_K: "5"
   # 0.2: the answer must be factual and valid JSON, and low randomness keeps both stable.
   # Zero is not needed, and it would not fix a missing fact anyway.
   TEMPERATURE: "0.2"
-  # Initial guesses, replaced by measured values in Phase 5.
+  # Measured on the real corpus; see docs/PIPELINE.md.
   RELEVANCE_FLOOR: "0.35"
-  CACHE_THRESHOLD: "0.92"
+  CACHE_THRESHOLD: "0.93"
   REDIS_URL: "redis://redis:6379/0"

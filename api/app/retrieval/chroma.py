@@ -26,7 +26,10 @@ OVERFETCH = 2            # ask for k * OVERFETCH so that duplicates can be dropp
 
 
 def wants_older_versions(question: str) -> bool:
-    match = _OLDER_VERSION.search(question)
+    version_text = re.sub(
+        r"\b(?:old|older|previous|earlier|prior)\s+(?:instructions?|prompts?|messages?)\b",
+        "", question, flags=re.IGNORECASE)
+    match = _OLDER_VERSION.search(version_text)
     if match is None:
         return False
     if not match.group().startswith("20"):

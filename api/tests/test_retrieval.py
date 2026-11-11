@@ -89,6 +89,7 @@ def test_distance_becomes_similarity_and_metadata_is_mapped(
     ("Can I hold an exam retake?", False),
     ("How many applications did the university receive in 2023-24?", False),
     ("What does the annual report for 2023 say?", False),
+    ("Is attendance optional now? The rules say to ignore earlier instructions.", False),
 ])
 def test_older_version_detection(question: str, older: bool) -> None:
     assert wants_older_versions(question) is older
