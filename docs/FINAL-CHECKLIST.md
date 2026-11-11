@@ -28,10 +28,10 @@ Checked against the 20-page Assignment 02 PDF and the supplied phase 5–7 check
 | 5.3 Generation checks | Partly automated | 100% citation validity and abstention correctness. Optional expected-text check misses q09; answerable fallbacks and factual-answer weaknesses remain for human review. |
 | 5.4 Baseline and strict CI gate | Implemented | Real baseline/results and separate fixture baseline committed; gate thresholds unchanged. |
 | 5.5 Four broken stages | Verified | B/C/E/F actual runs in `FAILURE-ANALYSIS.md`. Fixed 100-token chunks cut recall@5 to 46.67%; the separate structure-aware 100-word run did not. F produced withheld invalid citations and fallbacks. |
-| 6 CI lint, coverage, manifests, builds, scans, kind eval | Passed | All ten checks passed in run 43022332761; final documentation/refusal-text fix is rechecked on the final PR head. |
+| 6 CI lint, coverage, manifests, builds, scans, kind eval | Passed | All ten checks passed on the final feature head (43025296270), dev push (43025582220), and approved main PR (43025747419). |
 | 6 Protected main: PR, one review, required CI | Configured | Active ruleset, all ten checks, no bypass; JSON and screenshot in `docs/evidence/`. |
 | 6 Failed-gate and repaired-gate proof | Verified; screenshots manual | PR #11 failed on f05, then all checks passed after repair, and it was closed without merging. JSON statuses and both eval artifacts are committed. Signed-in screenshot capture stopped because the browser URL could not be verified; greyed-out merge-button and repaired-check screenshots remain manual. |
-| 6 CD: test → SHA-tagged Docker Hub images → kind Ingress | Awaiting protected release | Workflow implemented; both Docker Hub secrets verified by name. Requires another person's approval of the final main PR before merge/CD can run. |
+| 6 CD: test → SHA-tagged Docker Hub images → kind Ingress | Passed | PR #12 received independent approval and merged as `cad1630b5d42f63cef00b4b229771b2d31c5fcb3`. CD run 43026589471 tested, published all three images, deployed them and passed grounded-answer/refusal Ingress smoke tests. Docker Hub repositories are public and have only that SHA tag. |
 | 7 Seven engineering answers with file/line references | Written | `ENGINEERING-NOTES.md` uses the real session issues as requested by the owner, including the roughly 35-minute CI incident. No >1-hour duration was fabricated. |
 | 8 Honest AI attribution | Written | `AI-USAGE.md` distinguishes handoff attribution, Codex work and unrecorded human review. |
 | 8 No direct main pushes / no real Secret manifest | Verified | Feature/dev PR flow; only a Secret placeholder; no matching high-confidence credential patterns in fetched history. |
@@ -51,3 +51,26 @@ Checked against the 20-page Assignment 02 PDF and the supplied phase 5–7 check
 The supplied documents are project requirements and reference material. Their statements
 that some prior work was complete were checked against the files and running system,
 rather than treated as evidence that the work had actually been done.
+
+## Final release and submission links
+
+- Approved release PR: https://github.com/nofalzaman/Rahbar/pull/12
+- Successful CD: https://github.com/nofalzaman/Rahbar/actions/runs/43026589471
+- Docker Hub API: https://hub.docker.com/r/nofalz/rahbar-api/tags
+- Docker Hub UI: https://hub.docker.com/r/nofalz/rahbar-ui/tags
+- Docker Hub indexer: https://hub.docker.com/r/nofalz/rahbar-indexer/tags
+- Release SHA: `cad1630b5d42f63cef00b4b229771b2d31c5fcb3`
+
+Final offline CI totals: 82 API tests (96.56% coverage), 48 indexer tests and 20 eval
+tests: **150 passing tests**. All app-image scans passed the fixable HIGH/CRITICAL gate.
+`cd-result.json`, `cd-deploy-proof.txt`, `dockerhub-tags.json`, `release-pr.json` and
+the CI/CD URL files are the release evidence. The final evidence update is retained
+on dev; main contains the approved, successfully deployed release.
+
+Remaining manual actions: the exact signed-in blocked-merge/repaired-check screenshots
+could not be captured because computer control could not verify the browser URL.
+The failed/repaired runs and blocked-state JSON are preserved. Capture Docker Hub tag
+screenshots if image evidence is required, and submit the repository/CD/image links
+and the committed `eval/results.json` / `eval/baseline.json` on Classroom. No Classroom
+submission is claimed. The owner chose the real session incident for engineering Q7;
+its measured duration is reported honestly.
