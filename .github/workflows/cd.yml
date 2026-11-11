@@ -155,5 +155,7 @@ jobs:
         run: |
           kubectl -n rahbar get pods -o wide
           kubectl -n rahbar describe pods | tail -n 150
+          kubectl -n rahbar describe pods -l app=indexer
+          kubectl -n rahbar logs job/indexer --previous --tail=80 || true
           kubectl -n rahbar logs job/indexer --tail=80 || true
           kubectl -n rahbar logs deployment/api --tail=80 || true

@@ -15,11 +15,10 @@ set -euo pipefail
 : "${RELEVANCE_FLOOR:?set RELEVANCE_FLOOR}"
 
 if [ -z "${OLLAMA_HOST_IP:-}" ]; then
-  OLLAMA_HOST_IP="$(docker network inspect kind \
-    -f '{{range .IPAM.Config}}{{.Gateway}} {{end}}' \
-    | tr ' ' '\n' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)"
+  OLLAMA_HOST_IP="$(docker inspect ollama \
+    -f '{{with index .NetworkSettings.Networks "kind"}}{{.IPAddress}}{{end}}')"
 fi
-: "${OLLAMA_HOST_IP:?could not find the kind network gateway}"
+: "${OLLAMA_HOST_IP:?Ollama must be attached to the kind network}"
 
 dir="${OVERLAY_DIR:-k8s/overlays/ci}"
 mkdir -p "$dir"
