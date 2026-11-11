@@ -4,7 +4,7 @@ name: ci
 # request has to pass (section 6). It also runs after every push to dev.
 on:
   pull_request:
-    branches: [main]
+    branches: [main, dev]
   push:
     branches: [dev]
 
