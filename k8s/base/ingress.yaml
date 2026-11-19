@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   name: rahbar
   namespace: rahbar
+  annotations:
+    # Local model generation may exceed nginx's default 60-second response wait.
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "180"
 spec:
   ingressClassName: nginx
   rules:
