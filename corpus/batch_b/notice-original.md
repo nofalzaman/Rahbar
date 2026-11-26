@@ -1,0 +1,2 @@
+# Student robotics workshop
+The synthetic robotics workshop registration closes on 15 December. Students must register with the engineering office. The workshop covers sensors, motors and safety. Bring a student card and a notebook.

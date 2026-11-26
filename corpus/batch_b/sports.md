@@ -1,0 +1,2 @@
+# Synthetic sports desk
+The demonstration sports office lends badminton rackets on Wednesdays. Borrowers return equipment before closing time and show a student card. This notice is synthetic test data.

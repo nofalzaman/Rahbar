@@ -20,3 +20,4 @@ commit authorship does not mean the human typed the AI-written content. Results 
 actual tool outputs, not invented measurements. We do not invent a >1-hour incident,
 an external PR approval, a green deployment, or a Classroom submission. Final status
 and any remaining human actions are recorded in `docs/FINAL-CHECKLIST.md`.
+`n| Codex, Assignment 03 | Verified incremental ingestion, archives, Batch B, evaluation, gate, coverage tools and synthetic questions in the authorized Aoun checkout | Offline tests recorded in PR; human question authorship and review remain pending. |
