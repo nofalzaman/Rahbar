@@ -21,6 +21,7 @@ Storage: `ragops-data` PVC holds `/data/corpus`, `/data/lake/{active,archive,qua
 ## A - verification and incremental update
 
 ```powershell
+./scripts/demo_ragops_data.ps1
 ./scripts/run_ragops.ps1 -Kind ingest -Name ragops-repeat
 kubectl logs -n rahbar -f job/ragops-repeat
 ```
@@ -44,7 +45,7 @@ Baseline top-k is 5; candidate is 3 in a separate Deployment, Service and collec
 
 ```powershell
 python -m ragops.gate --baseline eval/results/baseline.json --candidate eval/results/candidate.json --thresholds eval/thresholds.json
-python -m scripts.release_ragops --baseline eval/results/baseline.json --candidate eval/results/candidate.json --thresholds eval/thresholds.json --collection rahbar-a3-candidate --top-k 3
+python -m scripts.release_ragops --baseline eval/results/drift.json --candidate eval/results/final-verification.json --thresholds eval/thresholds.json --collection rahbar-a3-candidate --top-k 3
 kubectl rollout status deployment/api -n rahbar
 kubectl rollout undo deployment/api -n rahbar
 ```
@@ -67,6 +68,8 @@ python -m ragops.traces traces/cluster.jsonl --since 2026-11-26T00:00:00+00:00
 ## E - drift and coverage
 
 ```powershell
+./scripts/stage_ragops_drift.ps1 -Name ragops-new-drift -Collection rahbar-a3-candidate
+./scripts/run_ragops.ps1 -Kind eval -Name ragops-new-drift-eval -Label drift -Baseline /data/results/candidate.json
 kubectl apply -f k8s/runs/coverage-before.yaml
 kubectl logs -n rahbar job/ragops-coverage-before
 kubectl apply -f k8s/runs/coverage-after.yaml
@@ -74,6 +77,19 @@ kubectl logs -n rahbar job/ragops-coverage-after
 ```
 
 Coverage uses cosine >= .85 and a target share >= .85. Before/after use exactly the same 40 live queries. Expanded questions are six new abstention cases: better test coverage does not add missing housing/food/transport facts to the corpus. Golden origin/review metadata remains pending until actual human authorship/review.
+
+### Unseen-batch live demo
+
+Keep the existing manifest as the base; an unseen-only authoritative manifest would remove the existing corpus. Put the new files and their actual metadata (`file`, `title`, `doc_version`, `page_count`) in a local `unseen/` folder with `_index.json`, then run:
+
+```powershell
+./scripts/stage_ragops_drift.ps1 -Name ragops-unseen-demo -BatchDir ./unseen -BaseCorpus /data/corpus/with-b -Destination /data/corpus/unseen-demo -Collection rahbar-a3-candidate
+kubectl logs -n rahbar job/ragops-unseen-demo
+# If retaining the new batch for scheduled ingestion:
+kubectl set env cronjob/ragops-reindex CORPUS_DIR=/data/corpus/unseen-demo -n rahbar
+```
+
+The helper merges existing/new entries by file name, with incoming metadata replacing the same file's older entry. It never makes up missing metadata; invalid documents are quarantined by the Job. Use a new Job name for every run. On a fresh setup before Batch B, use `/data/corpus/active` as the base instead.
 
 ## F - cluster inspection, resources and export
 

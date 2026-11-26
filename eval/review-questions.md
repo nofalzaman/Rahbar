@@ -1,5 +1,7 @@
 # Human review required
 
+Page labels use 1-based physical PDF page positions, which may differ from printed footer page numbers. The active set is now `golden.jsonl` (31 cases); `golden.initial.jsonl` preserves the original 25-case controlled experiment. Review the six additional cases too.
+
 All generated questions are labelled synthetic. Review at least eight and fill reviewed_by with the actual reviewer. Write eight original questions with origin=human; do not relabel generated text as human-written. Expanded questions represent uncovered topics whose correct answer remains abstention.
 
 - q01: What CGPA does an undergraduate need to stay off academic warning?

@@ -69,9 +69,13 @@ def main() -> None:
     pages = PdfReader('docs/report/RAHBAR_Assignment03_Report.pdf').pages
     main_pages = next((i for i, p in enumerate(pages) if 'Appendix /' in p.extract_text()), len(pages))
     check('G report main-page limit', main_pages <= 8, f'{main_pages} main pages; {len(pages)} total including appendix')
-    screenshots = list(Path('docs/report/screenshots').glob('*.png'))
-    check('G manual screenshot appendix', len(screenshots) >= 17, f'{len(screenshots)} supplied PNGs; follow SCREENSHOTS.md', True)
-    check('G actual student review/demo', False, 'FILL: students must review the work and attend the live demo', True)
+    screenshots = [p for p in Path('docs/report/screenshots').glob('*') if p.suffix.lower() in ('.png', '.jpg', '.jpeg')]
+    check('G manual screenshot appendix', len(screenshots) >= 17, f'{len(screenshots)} supplied images; follow SCREENSHOTS.md', True)
+    human = read('docs/report/HUMAN-REVIEW.json')
+    owners = {'nofalzaman', 'itsmeaounmuhammad-boop'}
+    human_complete = (owners <= set(human['reviewed_by']) and bool(human['reviewed_at'])
+                      and owners <= set(human['demo_attended_by']) and bool(human['demo_at']))
+    check('G actual student review/demo', human_complete, 'FILL: record actual review/demo in HUMAN-REVIEW.json', True)
     result = {'technical_failures': sum(c['status'] == 'FAIL' for c in checks),
               'needs_human': [c for c in checks if c['status'] == 'NEEDS HUMAN'], 'checks': checks}
     Path('eval/results/assignment03-audit.json').write_text(json.dumps(result, indent=2))

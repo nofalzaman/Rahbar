@@ -1,0 +1,5 @@
+deployment.apps/api env updated
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+error: timed out waiting for the condition
+deployment.apps/api rolled back
+deployment "api" successfully rolled out

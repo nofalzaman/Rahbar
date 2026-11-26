@@ -1,0 +1,82 @@
+{
+  "trace_id": "f7a76ac4ee1ec5bf381d1fa5ed8350b1",
+  "user_query": "What CGPA does an undergraduate need to stay off academic warning?",
+  "collection": "rahbar-a3-baseline",
+  "index_version": "457bad5f62eb44199c9bf480e547f6db",
+  "filters": {
+    "superseded": false
+  },
+  "guardrail_actions": [
+    {
+      "action": "generation_retry",
+      "attempt": 1,
+      "reason": "UngroundedAnswer"
+    },
+    {
+      "action": "generation_retry",
+      "attempt": 2,
+      "reason": "UngroundedAnswer"
+    }
+  ],
+  "response": "I could not produce a reliable answer from the documents just now. Please try again, or ask the relevant office."
+}
+[
+  {
+    "chunk_id": "academic-rules-handbook-jun-2026.pdf-0123",
+    "source": "academic-rules-handbook-jun-2026.pdf",
+    "page": 24,
+    "score": 0.8235
+  },
+  {
+    "chunk_id": "grading-page.html-0004",
+    "source": "grading-page.html",
+    "page": 1,
+    "score": 0.8054
+  },
+  {
+    "chunk_id": "academic-rules-handbook-jun-2026.pdf-0089",
+    "source": "academic-rules-handbook-jun-2026.pdf",
+    "page": 17,
+    "score": 0.774
+  },
+  {
+    "chunk_id": "academic-rules-handbook-jun-2026.pdf-0122",
+    "source": "academic-rules-handbook-jun-2026.pdf",
+    "page": 24,
+    "score": 0.7643
+  },
+  {
+    "chunk_id": "prospectus-2026-academic-rules-and-regulations.pdf-0005",
+    "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+    "page": 2,
+    "score": 0.7616
+  }
+]
+[
+  {
+    "reasoning": "The evidence states that the minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs.",
+    "answered_from_context": true,
+    "answer": "2.00",
+    "citations": [
+      {
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "5.4",
+        "page": null
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "reasoning": "The evidence states that the minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs.",
+    "answered_from_context": true,
+    "answer": "2.00",
+    "citations": [
+      {
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "5.4",
+        "page": null
+      }
+    ],
+    "confidence": "high"
+  }
+]

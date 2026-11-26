@@ -1,0 +1,8 @@
+persistentvolumeclaim/ragops-data created
+configmap/ragops-thresholds created
+deployment.apps/data-shell created
+deployment.apps/api configured
+deployment.apps/api-candidate created
+service/api-candidate created
+networkpolicy.networking.k8s.io/ragops-internal created
+networkpolicy.networking.k8s.io/ragops-store-ingress created

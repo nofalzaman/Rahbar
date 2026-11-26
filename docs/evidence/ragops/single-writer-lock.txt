@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/app/pipeline/ragops.py", line 201, in <module>
+    main()
+  File "/app/pipeline/ragops.py", line 189, in main
+    fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: '/data/lake/ingestion.lock'

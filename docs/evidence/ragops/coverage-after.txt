@@ -1,0 +1,6 @@
+{
+  "coverage": 0.875,
+  "similarity_threshold": 0.85,
+  "minimum_coverage": 0.85,
+  "pass": true,
+  "queries": [

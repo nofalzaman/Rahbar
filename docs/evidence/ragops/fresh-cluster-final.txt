@@ -1,0 +1,55 @@
+NAME                                READY   STATUS      RESTARTS   AGE
+pod/api-585cf9fcb4-hz29t            1/1     Running     0          6m29s
+pod/api-candidate-6479d7558-tb5f6   1/1     Running     0          6m29s
+pod/chroma-0                        1/1     Running     0          6m31s
+pod/data-shell-6f466969fb-vwv82     1/1     Running     0          6m30s
+pod/ragops-candidate-index-5pf9z    0/1     Completed   0          2m29s
+pod/ragops-eval-wt69x               0/1     Completed   0          2m29s
+pod/ragops-ingest-jt472             0/1     Completed   0          6m25s
+pod/redis-5694859fd7-swkmd          1/1     Running     0          6m31s
+pod/ui-8498ddc5c6-gprpb             1/1     Running     0          6m29s
+pod/ui-8498ddc5c6-jdz7f             1/1     Running     0          6m23s
+
+NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/api             ClusterIP   10.106.68.98     <none>        8000/TCP   6m31s
+service/api-candidate   ClusterIP   10.98.139.55     <none>        8000/TCP   6m29s
+service/chroma          ClusterIP   10.104.240.174   <none>        8000/TCP   6m31s
+service/redis           ClusterIP   10.109.32.88     <none>        6379/TCP   6m31s
+service/ui              ClusterIP   10.98.168.195    <none>        8080/TCP   6m31s
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api             1/1     1            1           6m31s
+deployment.apps/api-candidate   1/1     1            1           6m30s
+deployment.apps/data-shell      1/1     1            1           6m30s
+deployment.apps/redis           1/1     1            1           6m31s
+deployment.apps/ui              2/2     2            2           6m30s
+
+NAME                                      DESIRED   CURRENT   READY   AGE
+replicaset.apps/api-585cf9fcb4            1         1         1       6m29s
+replicaset.apps/api-85998d5855            0         0         0       6m31s
+replicaset.apps/api-candidate-6479d7558   1         1         1       6m29s
+replicaset.apps/data-shell-6f466969fb     1         1         1       6m30s
+replicaset.apps/redis-5694859fd7          1         1         1       6m31s
+replicaset.apps/ui-67c898c6c9             0         0         0       6m30s
+replicaset.apps/ui-8498ddc5c6             2         2         2       6m29s
+
+NAME                      READY   AGE
+statefulset.apps/chroma   1/1     6m32s
+
+NAME                           SCHEDULE    TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/ragops-reindex   0 3 * * 0   <none>     False     0        <none>          6m25s
+
+NAME                               STATUS     COMPLETIONS   DURATION   AGE
+job.batch/ragops-candidate-index   Complete   1/1           78s        2m29s
+job.batch/ragops-eval              Complete   1/1           2m1s       2m29s
+job.batch/ragops-ingest            Complete   1/1           2m40s      6m25s
+
+NAME                                         STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/cache-data             Bound    pvc-72a972b4-3463-4bd7-a682-2130d1af8cfb   1Gi        RWO            standard       <unset>                 6m31s
+persistentvolumeclaim/chroma-data-chroma-0   Bound    pvc-26f24c27-f961-4df1-b0a5-8229e42dd831   2Gi        RWO            standard       <unset>                 6m32s
+persistentvolumeclaim/ragops-data            Bound    pvc-9de2ef80-1f4c-4f31-9e59-81fe75dd2e23   4Gi        RWO            standard       <unset>                 6m30s
+
+NAME                          DATA   AGE
+configmap/kube-root-ca.crt    1      6m32s
+configmap/ragops-thresholds   1      6m30s
+configmap/rahbar-config       19     6m32s
