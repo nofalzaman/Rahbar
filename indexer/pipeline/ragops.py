@@ -65,6 +65,10 @@ def ingest(settings: IndexerSettings, lake: Path, client: Any = None) -> dict[st
         newer = [e for e in entries if e.get('family', e['file']) == family
                  and str(e.get('doc_version', '')) > version]
         digest = hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else ''
+        staged = lake / 'staging' / run_id / source
+        if path.is_file():
+            staged.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(path, staged)
         checks: dict[str, dict[str, Any]] = {}
         checks['recency'] = {'pass': not newer, 'reason':
                              'newer family version exists; archive old version' if newer else 'current version'}
@@ -113,8 +117,8 @@ def ingest(settings: IndexerSettings, lake: Path, client: Any = None) -> dict[st
         if not accepted:
             destination = lake / ('archive' if newer else 'quarantine') / run_id / source
             destination.parent.mkdir(parents=True, exist_ok=True)
-            if path.exists():
-                shutil.copy2(path, destination)
+            if staged.exists():
+                shutil.move(str(staged), destination)
             continue
         if unchanged:
             row = previous
@@ -135,7 +139,7 @@ def ingest(settings: IndexerSettings, lake: Path, client: Any = None) -> dict[st
         dump(lake / 'archive' / settings.collection / source / f'{digest}.json', row)
         target = lake / 'active' / settings.collection / source
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(path, target)
+        shutil.move(str(staged), target)
     wanted = {i for row in new.values() for i in row['ids']}
     actual = collection.get(include=[])['ids']
     stale = [i for i in actual if i not in wanted]

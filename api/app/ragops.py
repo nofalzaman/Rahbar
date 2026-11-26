@@ -70,7 +70,10 @@ def begin(trace_id: str) -> dict[str, Any]:
             'timestamp': datetime.now(timezone.utc).isoformat(), 'user_query': '',
             'rewritten_query': None, 'retrieved': [], 'context': [], 'filters': {},
             'reranked_order': [], 'generation_attempts': [], 'prompt_hash': None,
-            'guardrail_actions': [], 'latency_ms': {}, 'cache': 'miss'}
+            'guardrail_actions': [], 'latency_ms': {}, 'cache': 'miss',
+            'embedding_model': None, 'embedding_version': None, 'collection': None,
+            'model': None, 'parameters': {}, 'response': None, 'citations': [],
+            'answered_from_context': False}
 
 
 def emit(record: dict[str, Any]) -> None:

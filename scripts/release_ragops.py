@@ -16,7 +16,7 @@ def main() -> None:
     p.add_argument('--collection', required=True)
     p.add_argument('--model', default='nomic-embed-text')
     p.add_argument('--top-k', type=int, default=3)
-    p.add_argument('--image', default='rahbar-api:a3-r2')
+    p.add_argument('--image', help='defaults to the image recorded by the evaluated candidate')
     args = p.parse_args()
     baseline, candidate, thresholds = [json.loads(getattr(args, k).read_text())
                                       for k in ('baseline', 'candidate', 'thresholds')]
@@ -26,6 +26,7 @@ def main() -> None:
         raise SystemExit(1)
     # A results file must identify the actual evaluated collection, model and top-k.
     identity = candidate['deployment']
+    args.image = args.image or identity['image']
     if identity != {'collection': args.collection, 'model': args.model, 'top_k': args.top_k, 'image': args.image}:
         raise SystemExit('candidate identity differs from requested release')
     patch = {'spec': {'template': {'spec': {'containers': [{'name': 'api', 'image': args.image, 'env': [

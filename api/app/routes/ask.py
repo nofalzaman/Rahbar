@@ -34,6 +34,8 @@ def ask(body: AskRequest, request: Request, response: Response) -> AskResponse:
                                  state.settings, follow_up=body.follow_up,
                                  eval_request=request.headers.get('X-RAGOps-Eval') == '1')
     except RetrievalError as exc:
+        ragops.update(error=str(exc), response={
+            'detail': 'The document index is unavailable. Please try again shortly.'})
         log.error("retrieval unavailable", extra={"error": str(exc)})
         raise HTTPException(
             status_code=503,

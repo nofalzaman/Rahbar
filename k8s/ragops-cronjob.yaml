@@ -23,7 +23,7 @@ spec:
             fsGroup: 10001
           containers:
           - name: ingest
-            image: rahbar-indexer:a3-r3
+            image: rahbar-indexer:a3-r4
             imagePullPolicy: IfNotPresent
             command:
             - python

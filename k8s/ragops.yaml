@@ -45,7 +45,7 @@ spec:
         fsGroup: 10001
       containers:
       - name: data-shell
-        image: rahbar-indexer:a3-r3
+        image: rahbar-indexer:a3-r4
         imagePullPolicy: IfNotPresent
         command:
         - python
@@ -101,7 +101,7 @@ spec:
         fsGroup: 10001
       containers:
       - name: api
-        image: rahbar-api:a3-r3
+        image: rahbar-api:a3-r4
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -129,7 +129,7 @@ spec:
         - name: LLM_TIMEOUT_SECONDS
           value: '120'
         - name: RELEASE_IMAGE
-          value: rahbar-api:a3-r3
+          value: rahbar-api:a3-r4
         - name: EMBED_VERSION
           value: 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
         - name: LLM_VERSION
@@ -218,7 +218,7 @@ spec:
         fsGroup: 10001
       containers:
       - name: api
-        image: rahbar-api:a3-r3
+        image: rahbar-api:a3-r4
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -246,7 +246,7 @@ spec:
         - name: LLM_TIMEOUT_SECONDS
           value: '120'
         - name: RELEASE_IMAGE
-          value: rahbar-api:a3-r3
+          value: rahbar-api:a3-r4
         - name: EMBED_VERSION
           value: 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
         - name: LLM_VERSION
