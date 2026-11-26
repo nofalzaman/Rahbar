@@ -1,0 +1,2 @@
+# Library hours update
+This synthetic library notice replaces library-old.md. The demonstration library closes at 10 PM on weekdays, starting December 2026. It opens at 9 AM. This is test data, not an official university policy.

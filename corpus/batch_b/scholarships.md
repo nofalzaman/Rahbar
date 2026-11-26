@@ -1,0 +1,2 @@
+# Synthetic scholarship desk
+The demonstration scholarship desk accepts applications on Mondays. Applicants must bring their student card and transcript. This is synthetic test data and not an official policy.

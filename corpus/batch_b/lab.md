@@ -1,0 +1,2 @@
+# Synthetic laboratory desk
+The demonstration electronics laboratory requires closed shoes and protective goggles. Students book a workstation before the practical session. This is synthetic test data.

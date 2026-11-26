@@ -1,0 +1,97 @@
+[
+  {
+    "file": "notice-original.md",
+    "title": "notice-original.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "notice-original.md"
+  },
+  {
+    "file": "notice-copy-one.md",
+    "title": "notice-copy-one.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "notice-copy-one.md"
+  },
+  {
+    "file": "notice-copy-two.md",
+    "title": "notice-copy-two.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "notice-copy-two.md"
+  },
+  {
+    "file": "notice-near.md",
+    "title": "notice-near.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "notice-near.md"
+  },
+  {
+    "file": "truncated.md",
+    "title": "truncated.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "truncated.md"
+  },
+  {
+    "file": "missing-meta.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "missing-meta.md"
+  },
+  {
+    "file": "library-new.md",
+    "title": "library-new.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "demo-library"
+  },
+  {
+    "file": "injected.md",
+    "title": "injected.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "injected.md"
+  },
+  {
+    "file": "scholarships.md",
+    "title": "scholarships.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "scholarships.md"
+  },
+  {
+    "file": "exams.md",
+    "title": "exams.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "exams.md"
+  },
+  {
+    "file": "sports.md",
+    "title": "sports.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "sports.md"
+  },
+  {
+    "file": "lab.md",
+    "title": "lab.md",
+    "doc_version": "2026-12",
+    "page_count": 1,
+    "min_chars": 40,
+    "family": "lab.md"
+  }
+]
