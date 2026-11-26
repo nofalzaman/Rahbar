@@ -23,3 +23,9 @@
 {"id": "q23", "type": "version", "question": "Until which week can I withdraw from a course under the current rules?", "relevant": [{"source": "academic-rules-handbook-jun-2026.pdf", "section": "4.25", "page": 22}], "expect": "makeup week", "origin": "synthetic", "reviewed_by": "FILL", "hard": true}
 {"id": "q24", "type": "exact", "question": "How much is each BS credit charged in tuition?", "relevant": [{"source": "fee-structure-page.html", "section": "Tuition Fee", "page": 1}], "origin": "synthetic", "reviewed_by": "FILL", "hard": true}
 {"id": "q25", "type": "exact", "question": "Explain the attendance obligation in rule 1.21.", "relevant": [{"source": "academic-rules-handbook-jun-2026.pdf", "section": "1.21", "page": 10}], "origin": "synthetic", "reviewed_by": "FILL", "hard": true}
+{"id": "gap-l29", "question": "When is the campus shuttle departure?", "origin": "synthetic", "reviewed_by": "FILL", "hard": true, "must_abstain": true, "relevant": []}
+{"id": "gap-l30", "question": "Where is the university bus stop?", "origin": "synthetic", "reviewed_by": "FILL", "hard": true, "must_abstain": true, "relevant": []}
+{"id": "gap-l31", "question": "How do I buy a campus bus pass?", "origin": "synthetic", "reviewed_by": "FILL", "hard": true, "must_abstain": true, "relevant": []}
+{"id": "gap-l32", "question": "Does the campus shuttle run on Sundays?", "origin": "synthetic", "reviewed_by": "FILL", "hard": true, "must_abstain": true, "relevant": []}
+{"id": "gap-l33", "question": "What are hostel visiting hours?", "origin": "synthetic", "reviewed_by": "FILL", "hard": true, "must_abstain": true, "relevant": []}
+{"id": "gap-l34", "question": "How much is a hostel room?", "origin": "synthetic", "reviewed_by": "FILL", "hard": true, "must_abstain": true, "relevant": []}

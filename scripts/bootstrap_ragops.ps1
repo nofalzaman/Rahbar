@@ -13,13 +13,13 @@ python -m scripts.prepare_ragops --raw $Raw --output $Prepared
 Check-Step
 docker build -t rahbar-api:a3-r4 api
 Check-Step
-docker build -t rahbar-indexer:a3-r4 --build-context "corpus=$Raw" indexer
+docker build -t rahbar-indexer:a3-r5 --build-context "corpus=$Raw" indexer
 Check-Step
-docker build -t rahbar-eval:a3-r2 -f eval/Dockerfile .
+docker build -t rahbar-eval:a3-r3 -f eval/Dockerfile .
 Check-Step
 docker build -t rahbar-ui:a3 ui
 Check-Step
-minikube image load rahbar-api:a3-r4 rahbar-indexer:a3-r4 rahbar-eval:a3-r2 rahbar-ui:a3
+minikube image load rahbar-api:a3-r4 rahbar-indexer:a3-r5 rahbar-eval:a3-r3 rahbar-ui:a3
 Check-Step
 kubectl apply -f k8s/ragops.yaml
 Check-Step

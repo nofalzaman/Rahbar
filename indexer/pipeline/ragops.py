@@ -110,9 +110,9 @@ def ingest(settings: IndexerSettings, lake: Path, client: Any = None) -> dict[st
                                 f'near duplicate of {near} (cosine >= 0.985)' if near else 'distinct content'}
         accepted = all(c['pass'] for c in checks.values())
         reports.append({'source': source, 'accepted': accepted, 'checks': checks})
-        if digest and unique:
+        if digest and unique and quality and complete and not newer:
             seen[digest] = source
-        if fingerprint and unique:
+        if fingerprint and unique and quality and complete and not newer:
             representatives.append((source, family, fingerprint))
         if not accepted:
             destination = lake / ('archive' if newer else 'quarantine') / run_id / source

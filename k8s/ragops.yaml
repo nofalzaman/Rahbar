@@ -45,7 +45,7 @@ spec:
         fsGroup: 10001
       containers:
       - name: data-shell
-        image: rahbar-indexer:a3-r4
+        image: rahbar-indexer:a3-r5
         imagePullPolicy: IfNotPresent
         command:
         - python

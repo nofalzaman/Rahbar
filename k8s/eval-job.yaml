@@ -19,7 +19,7 @@ spec:
         fsGroup: 10001
       containers:
       - name: eval
-        image: rahbar-eval:a3-r2
+        image: rahbar-eval:a3-r3
         imagePullPolicy: IfNotPresent
         args:
         - --api
