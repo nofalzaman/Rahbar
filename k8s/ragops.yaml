@@ -101,7 +101,7 @@ spec:
         fsGroup: 10001
       containers:
       - name: api
-        image: rahbar-api:a3-r2
+        image: rahbar-api:a3-r3
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -129,7 +129,11 @@ spec:
         - name: LLM_TIMEOUT_SECONDS
           value: '120'
         - name: RELEASE_IMAGE
-          value: rahbar-api:a3-r2
+          value: rahbar-api:a3-r3
+        - name: EMBED_VERSION
+          value: 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
+        - name: LLM_VERSION
+          value: a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72
         startupProbe:
           httpGet:
             path: /healthz
@@ -214,7 +218,7 @@ spec:
         fsGroup: 10001
       containers:
       - name: api
-        image: rahbar-api:a3-r2
+        image: rahbar-api:a3-r3
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -242,7 +246,11 @@ spec:
         - name: LLM_TIMEOUT_SECONDS
           value: '120'
         - name: RELEASE_IMAGE
-          value: rahbar-api:a3-r2
+          value: rahbar-api:a3-r3
+        - name: EMBED_VERSION
+          value: 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
+        - name: LLM_VERSION
+          value: a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72
         startupProbe:
           httpGet:
             path: /healthz

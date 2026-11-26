@@ -21,9 +21,10 @@ router = APIRouter(prefix="/api")
 def ask(body: AskRequest, request: Request, response: Response) -> AskResponse:
     state = request.app.state
     ragops.update(user_query=body.question, embedding_model=state.settings.embed_model,
-                  embedding_version=state.settings.embed_model,
+                  embedding_version=os.environ.get('EMBED_VERSION', state.settings.embed_model),
                   collection=state.settings.collection,
                   model=state.settings.llm_model,
+                  model_version=os.environ.get('LLM_VERSION', state.settings.llm_model),
                   deployment={'collection': state.settings.collection, 'model': state.settings.embed_model,
                               'top_k': state.settings.top_k, 'image': os.environ.get('RELEASE_IMAGE', 'unknown')},
                   parameters={'temperature': state.settings.temperature, 'seed': state.settings.seed,

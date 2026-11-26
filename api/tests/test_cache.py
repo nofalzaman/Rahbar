@@ -39,6 +39,7 @@ def test_a_similar_question_hits_and_a_different_one_misses(
     cache.store("attendance?", "idx-1", response())
     hit = cache.lookup("attendance rule?", "idx-1")
     assert hit is not None and hit.cached is True and hit.answer == "80 percent."
+    assert hit.request_id == 'req-1'  # internal provenance; answer service replaces the public request id
     assert hit.retrieved[0].chunk_id == "c1"
     assert cache.lookup("fees?", "idx-1") is None
 

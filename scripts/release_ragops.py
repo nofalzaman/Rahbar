@@ -35,6 +35,8 @@ def main() -> None:
     subprocess.run(['kubectl', '-n', 'rahbar', 'patch', 'deployment', 'api', '--type=strategic',
                     '-p', json.dumps(patch)], check=True)
     subprocess.run(['kubectl', '-n', 'rahbar', 'rollout', 'status', 'deployment/api', '--timeout=300s'], check=True)
+    subprocess.run(['kubectl', '-n', 'rahbar', 'set', 'env', 'cronjob/ragops-reindex',
+                    f'CHROMA_COLLECTION={args.collection}', f'EMBED_MODEL={args.model}'], check=True)
 
 
 if __name__ == '__main__':

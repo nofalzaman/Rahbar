@@ -117,7 +117,8 @@ class RedisCache:
             return None
         log.info("cache hit", extra={"similarity": round(best_score, 4),
                                      "cached_question": best["question"]})
-        return AskResponse.model_validate({**best["response"], "request_id": "", "cached": True})
+        return AskResponse.model_validate({**best["response"],
+                                           "request_id": best.get('source_trace_id', ''), "cached": True})
 
     def store(self, question: str, index_id: str, response: AskResponse) -> None:
         try:
@@ -125,6 +126,7 @@ class RedisCache:
             entry_id = uuid.uuid4().hex
             payload = json.dumps({
                 "vector": _encode(vector), "question": question,
+                "source_trace_id": response.request_id,
                 "response": response.model_dump(mode="json", exclude={"request_id", "cached"}),
             })
             ids_key = self._ids_key(index_id)
