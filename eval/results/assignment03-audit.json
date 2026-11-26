@@ -1,0 +1,157 @@
+{
+  "technical_failures": 0,
+  "needs_human": [
+    {
+      "item": "B human-written questions",
+      "status": "NEEDS HUMAN",
+      "detail": "0/8 actually labelled human"
+    },
+    {
+      "item": "B hand-reviewed synthetic questions",
+      "status": "NEEDS HUMAN",
+      "detail": "0/8 recorded"
+    },
+    {
+      "item": "G manual screenshot appendix",
+      "status": "NEEDS HUMAN",
+      "detail": "0 supplied images; follow SCREENSHOTS.md"
+    },
+    {
+      "item": "G actual student review/demo",
+      "status": "NEEDS HUMAN",
+      "detail": "FILL: record actual review/demo in HUMAN-REVIEW.json"
+    }
+  ],
+  "checks": [
+    {
+      "item": "B golden counts",
+      "status": "PASS",
+      "detail": "31 total / 20 answerable / 11 unanswerable"
+    },
+    {
+      "item": "B human-written questions",
+      "status": "NEEDS HUMAN",
+      "detail": "0/8 actually labelled human"
+    },
+    {
+      "item": "B hand-reviewed synthetic questions",
+      "status": "NEEDS HUMAN",
+      "detail": "0/8 recorded"
+    },
+    {
+      "item": "A four checks and counts",
+      "status": "PASS",
+      "detail": "18 actual run reports"
+    },
+    {
+      "item": "A unchanged zero chunks",
+      "status": "PASS",
+      "detail": "Separate fingerprint counts remain visible"
+    },
+    {
+      "item": "B suite baseline",
+      "status": "PASS",
+      "detail": "20261126T134738-bounded-baseline"
+    },
+    {
+      "item": "B controlled golden identity baseline",
+      "status": "PASS",
+      "detail": "Historical controlled comparison retains its original 25-question version"
+    },
+    {
+      "item": "B suite candidate",
+      "status": "PASS",
+      "detail": "20261126T135846-final-candidate"
+    },
+    {
+      "item": "B controlled golden identity candidate",
+      "status": "PASS",
+      "detail": "Historical controlled comparison retains its original 25-question version"
+    },
+    {
+      "item": "B suite bad",
+      "status": "PASS",
+      "detail": "20261126T135318-bad-k1"
+    },
+    {
+      "item": "B controlled golden identity bad",
+      "status": "PASS",
+      "detail": "Historical controlled comparison retains its original 25-question version"
+    },
+    {
+      "item": "C passing candidate",
+      "status": "PASS",
+      "detail": "Actual saved measurements under committed thresholds"
+    },
+    {
+      "item": "C failing candidate",
+      "status": "PASS",
+      "detail": "Bad candidate must be rejected"
+    },
+    {
+      "item": "D complete successful traces",
+      "status": "PASS",
+      "detail": "681 saved main-cluster trace records"
+    },
+    {
+      "item": "D planted injection",
+      "status": "PASS",
+      "detail": "Actual retrieved injected chunk excluded"
+    },
+    {
+      "item": "D cache provenance",
+      "status": "PASS",
+      "detail": "Actual Redis cache hit references original trace"
+    },
+    {
+      "item": "E coverage improvement",
+      "status": "PASS",
+      "detail": "0.750 -> 0.875"
+    },
+    {
+      "item": "E six extra active questions",
+      "status": "PASS",
+      "detail": "Expanded questions are active in eval/golden.jsonl"
+    },
+    {
+      "item": "E active suite identity",
+      "status": "PASS",
+      "detail": "Full suite rerun on the active expanded set; rerun after human edits"
+    },
+    {
+      "item": "F versioned rollback",
+      "status": "PASS",
+      "detail": "rollback-versioned-20261126"
+    },
+    {
+      "item": "F ConfigMap flip",
+      "status": "PASS",
+      "detail": "Same eval image digest; stored measurements are re-gated"
+    },
+    {
+      "item": "F fresh-cluster smoke",
+      "status": "PASS",
+      "detail": "Readiness and actual sourced answer on separate fresh profile"
+    },
+    {
+      "item": "F fresh-cluster suite",
+      "status": "PASS",
+      "detail": "Fresh namespace completed ingestion, candidate indexing and full evaluation"
+    },
+    {
+      "item": "G report main-page limit",
+      "status": "PASS",
+      "detail": "7 main pages; 8 total including appendix"
+    },
+    {
+      "item": "G manual screenshot appendix",
+      "status": "NEEDS HUMAN",
+      "detail": "0 supplied images; follow SCREENSHOTS.md"
+    },
+    {
+      "item": "G actual student review/demo",
+      "status": "NEEDS HUMAN",
+      "detail": "FILL: record actual review/demo in HUMAN-REVIEW.json"
+    }
+  ]
+}

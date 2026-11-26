@@ -1,0 +1,46 @@
+{
+  "event": "ragops_trace",
+  "schema_version": 1,
+  "trace_id": "5505794a822553703577c735a571c2e8",
+  "timestamp": "2026-11-26T13:47:55.276951+00:00",
+  "user_query": "What was the course withdrawal deadline under the 2023 undergraduate academic rules?",
+  "rewritten_query": null,
+  "retrieved": [],
+  "context": [],
+  "filters": {
+    "superseded": true
+  },
+  "reranked_order": [],
+  "generation_attempts": [],
+  "prompt_hash": null,
+  "guardrail_actions": [],
+  "latency_ms": {
+    "cache": 0.010900999996010796,
+    "embed": 24.825214999964373,
+    "retrieve_including_embed": 43.58567400004176,
+    "generate_and_validate": 0.022162000050229835,
+    "total": 44.79936500001713
+  },
+  "cache": "bypass",
+  "embedding_model": "nomic-embed-text",
+  "embedding_version": "nomic-embed-text",
+  "collection": "rahbar-a3-baseline",
+  "model": "llama3.2:3b",
+  "deployment": {
+    "collection": "rahbar-a3-baseline",
+    "model": "nomic-embed-text",
+    "top_k": 5,
+    "image": "rahbar-api:a3-r2"
+  },
+  "parameters": {
+    "temperature": 0.0,
+    "seed": 42,
+    "num_predict": 512
+  },
+  "index_version": "457bad5f62eb44199c9bf480e547f6db",
+  "response": "The documents I have do not cover this question, so I cannot answer it.",
+  "citations": [],
+  "answered_from_context": false,
+  "fallback": false,
+  "status_code": 200
+}

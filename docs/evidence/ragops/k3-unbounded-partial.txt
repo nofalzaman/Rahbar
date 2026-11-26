@@ -1,0 +1,6 @@
+{"question": "q01", "noise": false, "seconds": 0.9306030299999293, "answered": true}
+{"question": "q02", "noise": false, "seconds": 0.8849374970000099, "answered": true}
+{"question": "q03", "noise": false, "seconds": 2.1121834830000807, "answered": false}
+{"question": "q04", "noise": false, "seconds": 2.0859317880001527, "answered": false}
+{"question": "q05", "noise": false, "seconds": 1.5965420580000682, "answered": true}
+{"question": "q06", "noise": false, "seconds": 1.227949623000086, "answered": false}

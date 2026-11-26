@@ -20,4 +20,9 @@ commit authorship does not mean the human typed the AI-written content. Results 
 actual tool outputs, not invented measurements. We do not invent a >1-hour incident,
 an external PR approval, a green deployment, or a Classroom submission. Final status
 and any remaining human actions are recorded in `docs/FINAL-CHECKLIST.md`.
-`n| Codex, Assignment 03 | Verified incremental ingestion, archives, Batch B, evaluation, gate, coverage tools and synthetic questions in the authorized Aoun checkout | Offline tests recorded in PR; human question authorship and review remain pending. |
+
+| Codex, Assignment 03 | Verified incremental ingestion, archives, Batch B, evaluation, gate, coverage tools and synthetic questions in the authorized Aoun checkout | Offline tests recorded in PR; human question authorship and review remain pending. |
+
+| Codex, Assignment 03 | Nofal API tracing, seeded generation, evaluation cache bypass and retrieval injection rail | 85 API tests passed, 96.72% coverage, mypy and ruff passed. Human review remains pending. |
+
+| Codex, Assignment 03 evidence/report | Actual ingestion/evaluation/drift, controlled release/undo, trace/cache/injection checks, fresh-cluster verification, report and screenshot checklist | Results are saved under eval/results, traces and docs/evidence/ragops. Automated approvals are authorized; actual human question authorship/review and screenshots remain pending. |

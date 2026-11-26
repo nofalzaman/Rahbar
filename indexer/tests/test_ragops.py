@@ -67,11 +67,12 @@ def test_incremental_replace_delete_and_quarantine(tmp_path: Path, monkeypatch: 
     (corpus/'test.md').write_text('# Revised\nStudents must now register at least two weeks before semester end.')
     third = ragops.ingest(settings, lake, client)
     assert third['chunks_embedded'] > 0
-    assert len(list((lake/'archive/test.md').glob('*.json'))) == 2
+    assert len(list((lake/'archive/test/test.md').glob('*.json'))) == 2
     manifest([])
     deleted = ragops.ingest(settings, lake, client)
     assert deleted['count_by_document']['test.md'] == 0
     assert client.collection.count() == 0
+    assert not (lake/'active/test/test.md').exists()
     manifest([{**entry, 'title': ''}])
     rejected = ragops.ingest(settings, lake, client)
     assert not rejected['documents'][0]['checks']['completeness']['pass']
@@ -85,3 +86,18 @@ def test_cosine_and_malicious_manifest(tmp_path: Path) -> None:
     settings = IndexerSettings('fake', '', 8000, 'test', str(tmp_path), 100, 10, '')
     with pytest.raises(ValueError, match='direct child'):
         ragops.ingest(settings, tmp_path/'lake', Client())
+
+
+def test_archived_version_does_not_quarantine_identical_newer_version(tmp_path: Path, monkeypatch: Any) -> None:
+    text = '# Same notice\nStudents must bring their identification card to the registration desk.'
+    entries = []
+    for name, version in [('old.md', '2026-01'), ('new.md', '2026-02')]:
+        (tmp_path/name).write_text(text)
+        entries.append(dict(file=name, title='Notice', family='notice', doc_version=version, page_count=1))
+    (tmp_path/'_index.json').write_text(json.dumps(entries))
+    monkeypatch.setattr(ragops, 'embed', lambda texts, settings: [[1.0, 0.0] for t in texts])
+    settings = IndexerSettings('fake', '', 8000, 'versions', str(tmp_path), 100, 10, '')
+    result = ragops.ingest(settings, tmp_path/'lake', Client())
+    assert not result['documents'][0]['accepted']
+    assert result['documents'][1]['accepted']
+    assert result['count_by_document']['new.md'] == 1

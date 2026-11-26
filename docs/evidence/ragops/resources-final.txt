@@ -1,0 +1,8 @@
+NAME                             CPU(cores)   MEMORY(bytes)   
+api-585c474d88-hxm6b             3m           76Mi            
+api-candidate-59f64b6b94-tfqns   3m           67Mi            
+chroma-0                         1m           153Mi           
+data-shell-5fb49f564-6xkv2       0m           25Mi            
+redis-5694859fd7-nxgtp           7m           13Mi            
+ui-8498ddc5c6-88kn6              1m           2Mi             
+ui-8498ddc5c6-przrv              1m           2Mi             

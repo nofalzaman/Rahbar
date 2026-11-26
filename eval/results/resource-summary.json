@@ -1,0 +1,37 @@
+{
+  "api": {
+    "samples": 19,
+    "max_observed_cpu_m": 110,
+    "max_observed_memory_mi": 97
+  },
+  "chroma": {
+    "samples": 9,
+    "max_observed_cpu_m": 19,
+    "max_observed_memory_mi": 153
+  },
+  "data-shell": {
+    "samples": 9,
+    "max_observed_cpu_m": 11,
+    "max_observed_memory_mi": 36
+  },
+  "redis": {
+    "samples": 9,
+    "max_observed_cpu_m": 8,
+    "max_observed_memory_mi": 13
+  },
+  "ui": {
+    "samples": 18,
+    "max_observed_cpu_m": 1,
+    "max_observed_memory_mi": 4
+  },
+  "evaluation": {
+    "samples": 3,
+    "max_observed_cpu_m": 29,
+    "max_observed_memory_mi": 26
+  },
+  "ingestion": {
+    "samples": 2,
+    "max_observed_cpu_m": 992,
+    "max_observed_memory_mi": 212
+  }
+}

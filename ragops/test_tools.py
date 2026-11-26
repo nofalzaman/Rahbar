@@ -26,7 +26,9 @@ def test_gate_rejects_missing_nan_and_regression() -> None:
 def test_trace_summary_handles_empty_and_stage_samples() -> None:
     assert summary([])['queries'] == 0
     result = summary([{'latency_ms': {'embed': 5}, 'cache': 'hit',
-                       'guardrail_actions': ['blocked'], 'answered_from_context': True}])
+                       'guardrail_actions': [{'action': 'exclude_retrieved_instruction'},
+                                             {'action': 'generation_retry'}],
+                       'answered_from_context': True}])
     assert result['cache_hit_rate'] == 1
     assert result['injection_attempts_flagged'] == 1
     assert result['p95_stage_ms']['embed'] == 5

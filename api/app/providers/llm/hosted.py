@@ -9,6 +9,7 @@ from __future__ import annotations
 import httpx
 
 from ... import telemetry
+from ... import ragops
 from ...config import Settings
 from ...schemas import Answer, Passage
 from .base import ProviderError
@@ -24,12 +25,14 @@ class HostedProvider:
         self.settings = settings
 
     def generate(self, question: str, passages: list[Passage]) -> Answer:
+        messages = build_messages(question, passages)
+        ragops.attempt(messages, self.settings.llm_model, {'temperature': self.settings.temperature})
         response = httpx.post(
             f"{self.settings.hosted_base_url.rstrip('/')}/chat/completions",
             headers={"Authorization": f"Bearer {self.settings.llm_api_key}"},
             json={
                 "model": self.settings.llm_model,
-                "messages": build_messages(question, passages),
+                "messages": messages,
                 "temperature": self.settings.temperature,
                 "response_format": {"type": "json_object"},
             },

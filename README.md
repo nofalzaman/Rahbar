@@ -1,3 +1,29 @@
+# Assignment 03 / RAGOps
+
+The Assignment 03 implementation, actual result files, traces and review report build on the original RAHBAR service below. Start with [the Kubernetes runbook](k8s/README.md), [PDF crosscheck](docs/report/CROSSCHECK.md), [manual screenshots](docs/report/SCREENSHOTS.md) and [review report](docs/report/RAHBAR_Assignment03_Report.pdf).
+
+Run from the repo root with Python 3.12 and the required local Kubernetes/Ollama runtime:
+
+| Part | Exact entry command |
+| --- | --- |
+| Setup / F | `./scripts/bootstrap_ragops.ps1` |
+| A: complete data lifecycle demo | `./scripts/demo_ragops_data.ps1` |
+| B: complete suite | `kubectl apply -f k8s/eval-job.yaml` |
+| C: gate | `python -m ragops.gate --baseline eval/results/baseline.json --candidate eval/results/candidate.json --thresholds eval/thresholds.json` |
+| C/F: release | `python -m scripts.release_ragops --baseline eval/results/drift.json --candidate eval/results/final-verification.json --thresholds eval/thresholds.json --collection rahbar-a3-candidate --top-k 3` |
+| D: trace prompt | `python -m ragops.traces traces/cluster.jsonl --trace-id demo-answer-20261126` |
+| D: trace metrics | `python -m ragops.traces traces/cluster.jsonl --since 2026-11-26T00:00:00+00:00` |
+| E: coverage before / after | `kubectl apply -f k8s/runs/coverage-before.yaml -f k8s/runs/coverage-after.yaml` |
+| E: stage Batch B and retain existing data | `./scripts/stage_ragops_drift.ps1 -Name ragops-new-drift` |
+| F: cluster evidence | `kubectl get all,pvc,configmap,cronjob,job -n rahbar` |
+| Export actual artifacts | `./scripts/collect_ragops.ps1` |
+| G: rebuild report (ReportLab required) | `python -m scripts.build_ragops_report` |
+
+Jobs are immutable: on the already-running cluster, preserve completed Jobs and create a new name with `scripts/run_ragops.ps1` for repeats. The runbook explains raw-corpus preparation, image loading, candidate indexing, data drift and rollback. Never delete the PVCs just to rerun a Job.
+
+**Human work remains:** eight genuinely group-written questions, hand-review of at least eight synthetic questions, student review of code/report, and the required terminal screenshot appendix. All generated questions remain labelled synthetic. Automated GitHub approvals were explicitly authorized and are disclosed as AI-assisted; they are not claims of completed human review.
+
+---
 # RAHBAR
 
 ![ci](https://github.com/nofalzaman/Rahbar/actions/workflows/ci.yml/badge.svg?branch=dev)
