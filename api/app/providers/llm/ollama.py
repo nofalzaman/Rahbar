@@ -20,7 +20,8 @@ class OllamaProvider:
 
     def generate(self, question: str, passages: list[Passage]) -> Answer:
         messages = build_messages(question, passages)
-        options = {'temperature': self.settings.temperature, 'seed': self.settings.seed}
+        options = {'temperature': self.settings.temperature, 'seed': self.settings.seed,
+                   'num_predict': 512}
         ragops.attempt(messages, self.settings.llm_model, options)
         response = httpx.post(
             f"{self.settings.ollama_url}/api/chat",

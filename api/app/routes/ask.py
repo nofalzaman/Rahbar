@@ -26,7 +26,8 @@ def ask(body: AskRequest, request: Request, response: Response) -> AskResponse:
                   model=state.settings.llm_model,
                   deployment={'collection': state.settings.collection, 'model': state.settings.embed_model,
                               'top_k': state.settings.top_k, 'image': os.environ.get('RELEASE_IMAGE', 'unknown')},
-                  parameters={'temperature': state.settings.temperature, 'seed': state.settings.seed})
+                  parameters={'temperature': state.settings.temperature, 'seed': state.settings.seed,
+                              'num_predict': 512})
     try:
         result = answer_question(body.question, state.retriever, state.provider, state.cache,
                                  state.settings, follow_up=body.follow_up,

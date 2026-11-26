@@ -38,7 +38,7 @@ jobs:
             api/requirements*.txt
             indexer/requirements*.txt
       - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
-      - run: ruff check api indexer eval corpus
+      - run: ruff check api indexer eval corpus ragops scripts
       - run: cd api && mypy app
       - run: cd indexer && mypy pipeline
 
@@ -57,7 +57,7 @@ jobs:
       # Stub provider and fakes only: no network, no model, no cluster.
       - run: cd api && pytest -q --cov=app --cov-fail-under=60
       - run: cd indexer && pytest -q
-      - run: pytest -q eval/tests
+      - run: pytest -q eval/tests ragops scripts/tests
 
   manifests:
     runs-on: ubuntu-latest

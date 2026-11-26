@@ -67,11 +67,12 @@ def test_incremental_replace_delete_and_quarantine(tmp_path: Path, monkeypatch: 
     (corpus/'test.md').write_text('# Revised\nStudents must now register at least two weeks before semester end.')
     third = ragops.ingest(settings, lake, client)
     assert third['chunks_embedded'] > 0
-    assert len(list((lake/'archive/test.md').glob('*.json'))) == 2
+    assert len(list((lake/'archive/test/test.md').glob('*.json'))) == 2
     manifest([])
     deleted = ragops.ingest(settings, lake, client)
     assert deleted['count_by_document']['test.md'] == 0
     assert client.collection.count() == 0
+    assert not (lake/'active/test/test.md').exists()
     manifest([{**entry, 'title': ''}])
     rejected = ragops.ingest(settings, lake, client)
     assert not rejected['documents'][0]['checks']['completeness']['pass']

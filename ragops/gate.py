@@ -9,7 +9,11 @@ from typing import Any
 
 
 def evaluate(baseline: dict[str, Any], candidate: dict[str, Any], thresholds: dict[str, Any]) -> dict[str, Any]:
-    b, c = baseline['run1']['metrics'], candidate['run1']['metrics']
+    b, c = dict(baseline['run1']['metrics']), dict(candidate['run1']['metrics'])
+    for result, metrics in ((baseline, b), (candidate, c)):
+        rows = [r for r in result['run1'].get('answers', []) if not r['golden'].get('must_abstain')]
+        if rows and 'answerable_answer_rate' not in metrics:
+            metrics['answerable_answer_rate'] = sum(r['response']['answered_from_context'] for r in rows)/len(rows)
     tests = {}
     def number(value: Any) -> bool:
         return isinstance(value, (float, int)) and not isinstance(value, bool) and math.isfinite(value)

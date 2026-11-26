@@ -7,6 +7,7 @@ import json
 import math
 import os
 import shutil
+import copy
 import time
 import uuid
 from pathlib import Path
@@ -131,8 +132,8 @@ def ingest(settings: IndexerSettings, lake: Path, client: Any = None) -> dict[st
             collection.upsert(**{k: row[k][start:start+200] for k in
                                  ('ids', 'documents', 'embeddings', 'metadatas')})
         new[source] = row
-        dump(lake / 'archive' / source / f'{digest}.json', row)
-        target = lake / 'active' / source
+        dump(lake / 'archive' / settings.collection / source / f'{digest}.json', row)
+        target = lake / 'active' / settings.collection / source
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(path, target)
     wanted = {i for row in new.values() for i in row['ids']}
@@ -141,6 +142,18 @@ def ingest(settings: IndexerSettings, lake: Path, client: Any = None) -> dict[st
     for start in range(0, len(stale), 200):
         collection.delete(ids=stale[start:start+200])
     changed = old != new or bool(stale)
+    # The curated lake mirrors accepted documents; upstream raw inputs remain immutable.
+    for source, previous in old.items():
+        if source not in new or previous['hash'] != new[source]['hash']:
+            archived = copy.deepcopy(previous)
+            for meta in archived['metadatas']:
+                meta['superseded'] = True
+            dump(lake / 'archive' / settings.collection / source / f'{previous["hash"]}.json', archived)
+            active = lake / 'active' / settings.collection / source
+            if source not in new and active.exists():
+                destination = lake / 'archive' / 'raw' / run_id / source
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(active), destination)
     metadata = dict(collection.metadata or {})
     metadata.pop('hnsw:space', None)
     metadata.update(embed_model=settings.embed_model)
@@ -160,7 +173,10 @@ def ingest(settings: IndexerSettings, lake: Path, client: Any = None) -> dict[st
 
 def restore(settings: IndexerSettings, lake: Path, source: str, digest: str) -> None:
     """Restore an archived version from the ingestion Job, excluding its current family."""
-    row = json.loads((lake / 'archive' / source / f'{digest}.json').read_text())
+    snapshot = lake / 'archive' / settings.collection / source / f'{digest}.json'
+    if not snapshot.exists():
+        snapshot = lake / 'archive' / source / f'{digest}.json'  # migrate the first run's journal
+    row = json.loads(snapshot.read_text())
     collection = get_client(settings).get_collection(settings.collection)
     state_path = lake / 'state' / f'{settings.collection}.json'
     state = json.loads(state_path.read_text())

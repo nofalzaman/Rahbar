@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ragops-gate-normal
+  namespace: rahbar
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: ragops-eval
+    spec:
+      automountServiceAccountToken: false
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      containers:
+      - name: eval
+        image: rahbar-eval:a3-r2
+        imagePullPolicy: IfNotPresent
+        args:
+        - --baseline
+        - /data/results/baseline.json
+        - --candidate
+        - /data/results/candidate.json
+        - --thresholds
+        - /thresholds/thresholds.json
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: thresholds
+          mountPath: /thresholds
+          readOnly: true
+        command:
+        - python
+        - -m
+        - ragops.gate
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: ragops-data
+      - name: thresholds
+        configMap:
+          name: ragops-thresholds

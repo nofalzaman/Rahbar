@@ -102,6 +102,9 @@ def score_answers(rows: list[dict[str, Any]]) -> dict[str, Any]:
     result['latency_p50_seconds'] = percentile([r['seconds'] for r in rows], .5)
     result['latency_p95_seconds'] = percentile([r['seconds'] for r in rows], .95)
     result['answered_count'] = len(supported)
+    answerable = [r for r in rows if not r['golden'].get('must_abstain')]
+    result['answerable_answer_rate'] = (sum(r['response']['answered_from_context'] for r in answerable)
+                                       /len(answerable) if answerable else None)
     return result
 
 
@@ -130,7 +133,7 @@ def run(client: httpx.Client, args: argparse.Namespace, questions: list[dict[str
         evidence = set(re.findall(r'\b\w+\b', context.lower()))
         token_support = len(words & evidence)/max(len(words), 1)
         rows.append({'golden': q, 'response': body, 'seconds': seconds,
-                     'trace_id': trace_id, 'token_support': token_support})
+                     'trace_id': trace_id, 'token_support': token_support, 'deployment': record['deployment']})
         print(json.dumps({'question': q['id'], 'noise': noise, 'seconds': seconds,
                           'answered': body['answered_from_context']}), flush=True)
     return {'metrics': score_answers(rows), 'answers': rows}
@@ -164,6 +167,10 @@ def main() -> None:
         for repetition in (1, 2):
             args.run_id = result['run_id']+f'-r{repetition}'
             result[f'run{repetition}'] = run(client, args, golden)
+        identities = [r['deployment'] for r in result['run1']['answers']+result['run2']['answers']]
+        if any(identity != identities[0] for identity in identities):
+            raise RuntimeError('deployment changed during evaluation')
+        result['deployment'] = identities[0]
         result['stochasticity_delta'] = {k: (result['run2']['metrics'][k]-v)
             for k, v in result['run1']['metrics'].items() if isinstance(v, (int, float))
             and isinstance(result['run2']['metrics'][k], (int, float))}

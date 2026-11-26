@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ragops-demo-restore
+  namespace: rahbar
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: ragops-ingest
+    spec:
+      automountServiceAccountToken: false
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      containers:
+      - name: ingest
+        image: rahbar-indexer:a3-r3
+        imagePullPolicy: IfNotPresent
+        command:
+        - python
+        - -m
+        - pipeline.ragops
+        envFrom:
+        - configMapRef:
+            name: rahbar-config
+        env:
+        - name: CORPUS_DIR
+          value: /data/combined_b
+        - name: CHROMA_COLLECTION
+          value: rahbar-a3-demo
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        args:
+        - --restore
+        - library-old.md
+        - 7436b017bf524df40de9a0875d5bdf1e44bb4616390dc42ae61965cbc1fee3d2
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: ragops-data

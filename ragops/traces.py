@@ -20,7 +20,8 @@ def summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     stages = {k for r in rows for k in r.get('latency_ms', {})}
     return {'queries': n, 'abstention_rate': sum(not r.get('answered_from_context', False) for r in rows)/max(n, 1),
         'cache_hit_rate': sum(r.get('cache') == 'hit' for r in rows)/max(n, 1),
-        'injection_attempts_flagged': sum(len(r.get('guardrail_actions', [])) for r in rows),
+        'injection_attempts_flagged': sum(a.get('action') == 'exclude_retrieved_instruction'
+            for r in rows for a in r.get('guardrail_actions', []) if isinstance(a, dict)),
         'top1_similarity': [r['retrieved'][0]['score'] for r in rows if r.get('retrieved')],
         'p95_stage_ms': {k: percentile([r['latency_ms'][k] for r in rows if k in r.get('latency_ms', {})], .95)
                          for k in stages}}
@@ -45,6 +46,11 @@ def main() -> None:
         row = next((r for r in rows if r['trace_id'] == args.trace_id), None)
         if row is None:
             raise SystemExit('trace id not found in window')
+        if row.get('cache_source_trace'):
+            source = next((r for r in rows if r['trace_id'] == row['cache_source_trace']), None)
+            if source is None:
+                raise SystemExit('cached answer source trace is outside this log/window')
+            row = source
         print(json.dumps({'trace_id': row['trace_id'], 'context': row['context'],
                           'generation_attempts': row['generation_attempts'],
                           'prompt_hash': row['prompt_hash']}, indent=2))
