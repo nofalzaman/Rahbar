@@ -14,6 +14,7 @@ import time
 import httpx
 
 from .. import telemetry
+from .. import ragops
 from ..providers.llm.base import LLMProvider, ProviderError
 from ..schemas import Answer, Citation, Passage
 
@@ -94,12 +95,19 @@ def generate_checked(provider: LLMProvider, question: str,
         for attempt in (1, 2):
             try:
                 raw = provider.generate(question, passages)
+                trace = ragops.current.get()
+                if trace is not None and trace['generation_attempts']:
+                    trace['generation_attempts'][-1]['raw_answer'] = raw.model_dump()
                 log.info("model verdict", extra={
                     "attempt": attempt, "answered_from_context": raw.answered_from_context,
                     "confidence": raw.confidence, "citations": len(raw.citations),
                     "reasoning": raw.reasoning[:300]})
                 return check_citations(raw, passages), False
             except (ValueError, ProviderError, httpx.HTTPError) as exc:
+                trace = ragops.current.get()
+                if trace is not None:
+                    trace['guardrail_actions'].append({'action': 'generation_retry',
+                                                       'attempt': attempt, 'reason': type(exc).__name__})
                 # ValueError covers pydantic's ValidationError, bad JSON and UngroundedAnswer
                 log.warning("generation failed", extra={
                     "attempt": attempt, "error": type(exc).__name__, "detail": str(exc)[:200]})

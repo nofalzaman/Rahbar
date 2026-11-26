@@ -17,6 +17,7 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 
 from .config import get_settings
+from . import ragops
 from .logjson import configure_logging, request_id_var
 from .providers.llm import get_provider
 from .retrieval import get_retriever
@@ -59,6 +60,8 @@ app = FastAPI(title="RAHBAR API", lifespan=lifespan)
 async def request_context(request: Request, call_next):  # type: ignore[no-untyped-def]
     rid = request.headers.get("X-Request-ID") or uuid.uuid4().hex
     token = request_id_var.set(rid)
+    trace = ragops.begin(rid) if request.url.path == '/api/ask' else None
+    trace_token = ragops.current.set(trace)
     start = time.perf_counter()
     status = 500
     try:
@@ -76,6 +79,11 @@ async def request_context(request: Request, call_next):  # type: ignore[no-untyp
             log.info("request", extra={"path": path, "status": status,
                                        "ms": round(elapsed * 1000, 1)})
         request_id_var.reset(token)
+        if trace is not None:
+            trace['status_code'] = status
+            trace['latency_ms']['total'] = elapsed*1000
+            ragops.emit(trace)
+        ragops.current.reset(trace_token)
 
 
 app.include_router(health.router)

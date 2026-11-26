@@ -10,6 +10,7 @@ from ..config import Settings
 from ..schemas import Passage
 from .base import IndexInfo, RetrievalError
 from .embedding import embed_query
+from .. import ragops
 
 # A question that names an older version, or a year before the current rules, is about the
 # superseded documents. Anything else is answered from the current ones only.
@@ -48,7 +49,13 @@ class ChromaRetriever:
 
     def __init__(self, settings: Settings, client: Any | None = None) -> None:
         self.settings = settings
-        self.client = client if client is not None else _http_client(settings)
+        self._client = client
+
+    @property
+    def client(self) -> Any:
+        if self._client is None:
+            self._client = _http_client(self.settings)
+        return self._client
 
     def _collection(self) -> Any:
         try:
@@ -72,8 +79,10 @@ class ChromaRetriever:
         """The closest chunks, best first. Chunks that contain a clause number named in the
         question come first, then the nearest by meaning; duplicate texts are dropped."""
         collection = self._collection()
+        ragops.update(index_version=(collection.metadata or {}).get('index_id', ''))
         vector = embed_query(self.settings, question)
         where = {"superseded": wants_older_versions(question)}
+        ragops.update(filters=where)
         exact: list[Passage] = []
         for term in clause_numbers(question):
             exact += self._query(collection, vector, EXACT_HITS, where,

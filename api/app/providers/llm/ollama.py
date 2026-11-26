@@ -5,6 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ... import telemetry
+from ... import ragops
 from ...config import Settings
 from ...schemas import Answer, Passage
 from .base import ProviderError
@@ -18,14 +19,17 @@ class OllamaProvider:
         self.settings = settings
 
     def generate(self, question: str, passages: list[Passage]) -> Answer:
+        messages = build_messages(question, passages)
+        options = {'temperature': self.settings.temperature, 'seed': self.settings.seed}
+        ragops.attempt(messages, self.settings.llm_model, options)
         response = httpx.post(
             f"{self.settings.ollama_url}/api/chat",
             json={
                 "model": self.settings.llm_model,
-                "messages": build_messages(question, passages),
+                "messages": messages,
                 "stream": False,
                 "format": Answer.model_json_schema(),   # Ollama enforces the schema
-                "options": {"temperature": self.settings.temperature},
+                "options": options,
             },
             timeout=self.settings.llm_timeout_seconds,
         )

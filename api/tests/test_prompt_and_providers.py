@@ -86,7 +86,7 @@ def test_ollama_receives_the_schema_the_model_and_the_temperature(monkeypatch: A
     assert answer == good_answer()
     body = seen[0]
     assert (body["model"], body["stream"], body["options"]) == (
-        "llama3.2:3b", False, {"temperature": 0.2})
+        "llama3.2:3b", False, {"temperature": 0.2, "seed": 42})
     assert body["format"] == Answer.model_json_schema()
     assert "<evidence" in body["messages"][1]["content"]
 

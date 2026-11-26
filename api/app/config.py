@@ -51,6 +51,7 @@ class Settings:
     cache_max_entries: int = 200
 
     log_level: str = "INFO"
+    seed: int = 42
 
 
 def get_settings() -> Settings:
@@ -75,4 +76,5 @@ def get_settings() -> Settings:
         cache_ttl_seconds=_int("CACHE_TTL_SECONDS", 86400),
         cache_max_entries=_int("CACHE_MAX_ENTRIES", 200),
         log_level=os.environ.get("LOG_LEVEL", "INFO"),
+        seed=_int('SEED', 42),
     )
