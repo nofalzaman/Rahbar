@@ -1,6 +1,6 @@
 # Assignment 03 / RAGOps
 
-The Assignment 03 implementation, actual result files, traces and review report build on the original RAHBAR service below. Start with [the Kubernetes runbook](k8s/README.md), [PDF crosscheck](docs/report/CROSSCHECK.md), [manual screenshots](docs/report/SCREENSHOTS.md) and [review report](docs/report/RAHBAR_Assignment03_Report.pdf).
+The Assignment 03 implementation, actual result files, traces and review report build on the original RAHBAR service below. See [the Kubernetes runbook](k8s/README.md), [implementation contracts](docs/RAGOPS.md), [final student report](docs/report/RAHBAR_Assignment03_Report.pdf) and [completed question worksheet](docs/report/RAHBAR_Question_Worksheet_filled.docx).
 
 Run from the repo root with Python 3.12 and the required local Kubernetes/Ollama runtime:
 
@@ -17,11 +17,11 @@ Run from the repo root with Python 3.12 and the required local Kubernetes/Ollama
 | E: stage Batch B and retain existing data | `./scripts/stage_ragops_drift.ps1 -Name ragops-new-drift` |
 | F: cluster evidence | `kubectl get all,pvc,configmap,cronjob,job -n rahbar` |
 | Export actual artifacts | `./scripts/collect_ragops.ps1` |
-| G: rebuild report (ReportLab required) | `python -m scripts.build_ragops_report` |
+| Historical report draft generator | `python -m scripts.build_ragops_report` (writes a separate draft; preserves the final student PDF) |
 
 Jobs are immutable: on the already-running cluster, preserve completed Jobs and create a new name with `scripts/run_ragops.ps1` for repeats. The runbook explains raw-corpus preparation, image loading, candidate indexing, data drift and rollback. Never delete the PVCs just to rerun a Job.
 
-**Human work remains:** eight genuinely group-written questions, hand-review of at least eight synthetic questions, student review of code/report, and the required terminal screenshot appendix. All generated questions remain labelled synthetic. Automated GitHub approvals were explicitly authorized and are disclosed as AI-assisted; they are not claims of completed human review.
+The active evaluation set includes eight student-authored questions and eight reviewed synthetic questions from the completed worksheet. The supplied final report retains its historical 25-question comparison; the newly rerun 39-question results are stored separately under `eval/results/reviewed-20261128/`.
 
 ---
 # RAHBAR
@@ -151,7 +151,7 @@ The 17-question real-corpus run has recall@3 0.7333, recall@5 0.8000, 100% citat
 validity and 100% must-abstain correctness. Version-sensitive recall is 50%; some
 answerable questions decline or fall back. These automated gates do not certify answer
 quality. Reindexing has a brief non-atomic delete/rename interval. See
-`docs/PIPELINE.md` and `docs/FINAL-CHECKLIST.md` for evidence and remaining release actions.
+`docs/PIPELINE.md` for measured pipeline evidence.
 
 To run checks locally after cloning:
 ```powershell

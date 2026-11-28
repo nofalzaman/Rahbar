@@ -187,7 +187,7 @@ def main() -> None:
     screenshots = sorted(p for p in (OUT/'screenshots').glob('*') if p.suffix.lower() in ('.png', '.jpg', '.jpeg'))
     if not screenshots:
         page('Appendix / Manual screenshots pending')
-        text('FILL: screenshots must be captured by the students from their own terminal/cluster, showing each command and its complete output. No terminal screenshots have been manufactured. Follow SCREENSHOTS.md, save labelled images under docs/report/screenshots, then rebuild this report. The seven main pages remain below the eight-page limit; screenshot appendix pages do not count.')
+        text('FILL: screenshots must be captured by the students from their own terminal/cluster, showing each command and its complete output. No terminal screenshots have been manufactured. Student-supplied images are read from docs/report/screenshots. The seven main pages remain below the eight-page limit; screenshot appendix pages do not count.')
     for path in screenshots:
         page('Appendix / '+path.stem)
         img = Image(str(path))
@@ -199,7 +199,7 @@ def main() -> None:
         canvas.setFillColor(colors.HexColor('#536574'))
         canvas.drawString(18*mm, 12*mm, 'RAHBAR Assignment 03 - measured review draft')
         canvas.drawRightString(192*mm, 12*mm, str(doc.page))
-    path = OUT/'RAHBAR_Assignment03_Report.pdf'
+    path = OUT/'RAHBAR_Assignment03_Generated_Draft.pdf'
     SimpleDocTemplate(str(path), pagesize=A4, rightMargin=18*mm, leftMargin=18*mm,
                       topMargin=16*mm, bottomMargin=18*mm).build(story, onFirstPage=footer, onLaterPages=footer)
     print(path)

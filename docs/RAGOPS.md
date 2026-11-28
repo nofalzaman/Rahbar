@@ -1,6 +1,6 @@
 # Assignment 03 implementation contracts
 
-This implementation map derives from the five-page Assignment 03 PDF and the RAGOps paper, https://arxiv.org/abs/2506.03401. The previously referenced spec was absent from the repository; this file documents the actual implementation, not an invented earlier agreement.
+This implementation map derives from the five-page Assignment 03 PDF and the RAGOps paper, https://arxiv.org/abs/2506.03401. It records the implemented data, evaluation, trace and Kubernetes contracts.
 
 ## 1. Data contracts
 
@@ -24,6 +24,3 @@ Each query emits `event=ragops_trace` with timestamp/id/query, optional rewritte
 
 Everything runs in `rahbar`. PVCs persist Chroma, Redis, lake, quarantine, archive, results and traces. API/candidate use distinct Services and collections. Ingestion and evaluation are Jobs; verified ingestion has a CronJob. Resources are explicit and accompanied by measured samples. NetworkPolicy gates connections, not Chroma HTTP methods; read-only access is enforced by code ownership/behavior.
 
-## 5. Current work protocol
-
-The latest user request authorizes completing the whole assignment rather than stopping after one relay card. Work in the two authorized checkouts; retain honest commit and AI attribution. Review open PRs, run applicable validation and disclose automated verdicts. Merge only after validation passes under the explicit session authorization; human review is still pending. Never weaken checks to force a merge. Keep Kubernetes/evidence commits and pushes under Nofal. Capture actual outputs, preserve failed experiments, and list unfulfilled human requirements. No direct pushes to protected branches.
