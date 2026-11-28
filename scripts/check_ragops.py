@@ -55,8 +55,17 @@ def main() -> None:
     check('E coverage improvement', after['coverage'] > before['coverage'] and len(before['queries']) >= 40,
           f'{before["coverage"]:.3f} -> {after["coverage"]:.3f}')
     check('E six extra active questions', len(golden) >= len(initial)+6, 'Expanded questions are active in eval/golden.jsonl')
-    active = read('eval/results/expanded-verification.json')
-    check('E active suite identity', active['golden_sha256'] == hashlib.sha256(Path('eval/golden.jsonl').read_bytes()).hexdigest(), 'Full suite rerun on the active expanded set; rerun after human edits')
+    active = read('eval/results/reviewed-20261128/current.json')
+    reviewed_summary = read('eval/results/reviewed-20261128/summary.json')
+    reviewed_baseline = read('eval/results/reviewed-20261128/'+reviewed_summary['baseline'])
+    check('B reviewed suite', active['human_written'] >= 8 and active['human_reviewed_synthetic'] >= 8
+          and all(k in active for k in ('run1', 'run2', 'noise')),
+          'Updated 39-question suite completed twice plus typo noise')
+    check('C reviewed candidate', reviewed_baseline['golden_sha256'] == active['golden_sha256']
+          and evaluate(reviewed_baseline, active, rules)['pass'], 'Same reviewed input and unchanged thresholds')
+    snapshot = Path('eval/results/reviewed-20261128/golden-input.jsonl')
+    check('E active suite identity', active['golden_sha256'] == hashlib.sha256(snapshot.read_bytes()).hexdigest()
+          and load_golden(snapshot) == golden, 'Exact evaluated input snapshot hash and active question content agree; Git newline conversion does not change questions')
     rollback = read('eval/results/rollback-proof.json')
     check('F versioned rollback', rollback['collection'] == 'rahbar-a3-candidate' and len(rollback['embedding_version']) == 64,
           rollback['trace_id'])
@@ -67,10 +76,10 @@ def main() -> None:
     check('F fresh-cluster suite', any(isinstance(r, dict) and r.get('run1') for r in fresh)
           and any(isinstance(r, dict) and r.get('pass') is True for r in fresh), 'Fresh namespace completed ingestion, candidate indexing and full evaluation')
     pages = PdfReader('docs/report/RAHBAR_Assignment03_Report.pdf').pages
-    main_pages = next((i for i, p in enumerate(pages) if 'Appendix /' in p.extract_text()), len(pages))
+    main_pages = next((i for i, p in enumerate(pages) if 'Appendix /' in p.extract_text() or 'A1 verification' in p.extract_text()), len(pages))
     check('G report main-page limit', main_pages <= 8, f'{main_pages} main pages; {len(pages)} total including appendix')
     screenshots = [p for p in Path('docs/report/screenshots').glob('*') if p.suffix.lower() in ('.png', '.jpg', '.jpeg')]
-    check('G manual screenshot appendix', len(screenshots) >= 17, f'{len(screenshots)} supplied images; follow SCREENSHOTS.md', True)
+    check('G manual screenshot appendix', any(p.stem == 'F1-cluster' for p in screenshots) and len(screenshots) >= 17, f'{len(screenshots)} supplied images; combined coverage image accepted, cluster overview F1 still missing', True)
     human = read('docs/report/HUMAN-REVIEW.json')
     owners = {'nofalzaman', 'itsmeaounmuhammad-boop'}
     human_complete = (owners <= set(human['reviewed_by']) and bool(human['reviewed_at'])

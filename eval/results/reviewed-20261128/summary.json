@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-28",
+  "questions": 39,
+  "human_written": 8,
+  "reviewed_synthetic": 8,
+  "answerable": 28,
+  "unanswerable": 11,
+  "baseline": "20261128T132845-reviewed-baseline-k5.json",
+  "candidate": "20261128T133148-reviewed-candidate-k3.json",
+  "golden_sha256": "1aaee7409c0a55c7bdf4b19f6609e4744588616fd0977ba0e241e571bfdbdd9e",
+  "baseline_metrics": {
+    "recall@3": 0.6577380952380952,
+    "recall@5": 0.6717687074829932,
+    "mrr": 0.6571428571428571,
+    "ndcg@5": 0.6327716946667781,
+    "abstention_correctness": 1,
+    "citation_validity": 1.0,
+    "faithfulness_proxy": 0.9755291005291005,
+    "latency_p50_seconds": 1.2417762379991473,
+    "latency_p95_seconds": 2.282370338994952,
+    "answered_count": 14,
+    "answerable_answer_rate": 0.5
+  },
+  "candidate_metrics": {
+    "recall@3": 0.6577380952380952,
+    "recall@5": 0.6577380952380952,
+    "mrr": 0.6428571428571429,
+    "ndcg@5": 0.622692241247487,
+    "abstention_correctness": 1,
+    "citation_validity": 1.0,
+    "faithfulness_proxy": 0.9644484056248762,
+    "latency_p50_seconds": 1.0905431089995545,
+    "latency_p95_seconds": 2.079140630296752,
+    "answered_count": 17,
+    "answerable_answer_rate": 0.6071428571428571
+  },
+  "gate_pass": true,
+  "coverage": 0.875,
+  "trace_records": 234,
+  "input_snapshot": "golden-input.jsonl",
+  "source_worksheet": "docs/report/RAHBAR_Question_Worksheet_filled.docx",
+  "report_sha256": "53cdbfeaac6e93b1a810342645d15abfe68d40f5bf92a6059ce985b376d3ed29",
+  "report_notes": [
+    "Student-supplied PDF preserved byte for byte.",
+    "PDF contains historical 25-question measurements; new 39-question measurements are separate.",
+    "Nine report pages precede screenshot appendix; assignment limit is eight.",
+    "F1 cluster-overview screenshot was not supplied.",
+    "Whole-code student review and demo attendance are not established by the question worksheet."
+  ],
+  "limits": [
+    "Lexical faithfulness is a proxy, not semantic correctness.",
+    "Retrieval metrics use relevant source/page labels; multi-source questions can have lower recall under top-k 3.",
+    "The h05 archived 2023 source is retained as contrast in source_notes, not as required active retrieval evidence."
+  ]
+}

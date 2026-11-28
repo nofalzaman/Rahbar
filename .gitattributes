@@ -3,3 +3,5 @@
 *.png binary
 *.jpg binary
 *.pdf binary
+# Preserve the exact evaluated input bytes for the recorded SHA-256.
+eval/results/reviewed-20261128/golden-input.jsonl -text

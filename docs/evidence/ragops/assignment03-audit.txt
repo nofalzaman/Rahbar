@@ -1,6 +1,6 @@
-PASS: B golden counts - 31 total / 20 answerable / 11 unanswerable
-NEEDS HUMAN: B human-written questions - 0/8 actually labelled human
-NEEDS HUMAN: B hand-reviewed synthetic questions - 0/8 recorded
+PASS: B golden counts - 39 total / 28 answerable / 11 unanswerable
+PASS: B human-written questions - 8/8 actually labelled human
+PASS: B hand-reviewed synthetic questions - 8/8 recorded
 PASS: A four checks and counts - 18 actual run reports
 PASS: A unchanged zero chunks - Separate fingerprint counts remain visible
 PASS: B suite baseline - 20261126T134738-bounded-baseline
@@ -16,12 +16,14 @@ PASS: D planted injection - Actual retrieved injected chunk excluded
 PASS: D cache provenance - Actual Redis cache hit references original trace
 PASS: E coverage improvement - 0.750 -> 0.875
 PASS: E six extra active questions - Expanded questions are active in eval/golden.jsonl
-PASS: E active suite identity - Full suite rerun on the active expanded set; rerun after human edits
+PASS: B reviewed suite - Updated 39-question suite completed twice plus typo noise
+PASS: C reviewed candidate - Same reviewed input and unchanged thresholds
+PASS: E active suite identity - Exact evaluated input snapshot hash and active question content agree; Git newline conversion does not change questions
 PASS: F versioned rollback - rollback-versioned-20261126
 PASS: F ConfigMap flip - Same eval image digest; stored measurements are re-gated
 PASS: F fresh-cluster smoke - Readiness and actual sourced answer on separate fresh profile
 PASS: F fresh-cluster suite - Fresh namespace completed ingestion, candidate indexing and full evaluation
-PASS: G report main-page limit - 7 main pages; 8 total including appendix
-NEEDS HUMAN: G manual screenshot appendix - 0 supplied images; follow SCREENSHOTS.md
+FAIL: G report main-page limit - 9 main pages; 25 total including appendix
+NEEDS HUMAN: G manual screenshot appendix - 16 supplied images; combined coverage image accepted, cluster overview F1 still missing
 NEEDS HUMAN: G actual student review/demo - FILL: record actual review/demo in HUMAN-REVIEW.json
-{"technical_failures": 0, "human_items": 4}
+{"technical_failures": 1, "human_items": 2}
