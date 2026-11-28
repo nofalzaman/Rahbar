@@ -15,6 +15,8 @@ import logging
 import time
 
 from .. import telemetry
+from .. import ragops
+from ..providers.llm.prompt import build_messages
 from ..config import Settings
 from ..logjson import request_id_var
 from ..providers.llm.base import LLMProvider
@@ -41,13 +43,25 @@ def _cache_scope(retriever: Retriever, cache: Cache, follow_up: bool) -> str | N
 
 def answer_question(
     question: str, retriever: Retriever, provider: LLMProvider, cache: Cache,
-    settings: Settings, follow_up: bool = False,
+    settings: Settings, follow_up: bool = False, eval_request: bool = False,
 ) -> AskResponse:
-    index_id = _cache_scope(retriever, cache, follow_up)
+    cache_started = time.perf_counter()
+    index_id = _cache_scope(retriever, cache, follow_up or eval_request)
+    ragops.update(cache='bypass' if eval_request else 'miss')
     if index_id is not None:
         hit = cache.lookup(question, index_id)
         telemetry.CACHE_LOOKUPS.labels("hit" if hit else "miss").inc()
         if hit is not None:
+            try:
+                original = ragops.read_trace(hit.request_id)
+                ragops.update(context=original['context'], generation_attempts=[],
+                              prompt_hash=original['prompt_hash'], cache_source_trace=hit.request_id)
+            except FileNotFoundError:
+                ragops.update(cache_context_unavailable=True)
+            ragops.update(cache='hit', response=hit.answer, citations=[c.model_dump() for c in hit.citations],
+                          answered_from_context=hit.answered_from_context,
+                          retrieved=[r.model_dump() for r in hit.retrieved])
+            ragops.stage('cache', cache_started)
             log.info("answered", extra={"cached": True, "top_k": settings.top_k,
                                         "answered_from_context": hit.answered_from_context,
                                         "abstained": not hit.answered_from_context,
@@ -55,16 +69,29 @@ def answer_question(
                                         "chunk_ids": [r.chunk_id for r in hit.retrieved]})
             return hit.model_copy(update={"request_id": request_id_var.get()})
 
+    ragops.stage('cache', cache_started)
+
     started = time.perf_counter()
     passages = retriever.retrieve(question, k=settings.top_k)
     telemetry.RETRIEVAL_SECONDS.observe(time.perf_counter() - started)
+    ragops.stage('retrieve_including_embed', started)
+    if passages:
+        ragops.TOP1.observe(passages[0].score)
+    ragops.update(retrieved=[{**p.model_dump(), 'document_id': p.source} for p in passages],
+                  reranked_order=[p.chunk_id for p in passages])
 
-    usable = [p for p in passages if p.score >= settings.relevance_floor]
+    usable = [p for p in passages if p.score >= settings.relevance_floor
+              and not ragops.flag(p.text, p.chunk_id)]
+    ragops.update(context=[p.model_dump() for p in usable])
     fallback = False
+    generated = time.perf_counter()
     if usable:
+        if provider.name == 'stub':
+            ragops.attempt(build_messages(question, usable), 'stub', {'seed': settings.seed})
         answer, fallback = generate_checked(provider, question, usable)
     else:
         answer = abstention("nothing retrieved cleared the relevance floor")
+    ragops.stage('generate_and_validate', generated)
     abstained = not answer.answered_from_context and not fallback
     if abstained:
         telemetry.ABSTENTIONS.inc()
@@ -76,6 +103,8 @@ def answer_question(
                                 page=p.page, score=p.score, doc_version=p.doc_version,
                                 superseded=p.superseded) for p in passages],
         provider=provider.name)
+    ragops.update(response=response.answer, citations=[c.model_dump() for c in response.citations],
+                  answered_from_context=response.answered_from_context, fallback=fallback)
     if index_id is not None and not never_cache(response, fallback=fallback, follow_up=follow_up):
         cache.store(question, index_id, response)
 

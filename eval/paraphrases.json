@@ -1,0 +1,77 @@
+[
+  {
+    "a": "What CGPA does an undergraduate need to stay off academic warning?",
+    "paraphrase": "Would a CGPA under two trigger an academic warning?",
+    "unrelated": "How do black holes evaporate?"
+  },
+  {
+    "a": "What happens to a student whose attendance falls below the required minimum in a course?",
+    "paraphrase": "If I miss too many lectures, what academic penalty applies?",
+    "unrelated": "How long should sourdough rise?"
+  },
+  {
+    "a": "How is a student's CGPA calculated?",
+    "paraphrase": "Please explain: how is a student's cgpa calculated?",
+    "unrelated": "Who won the latest cricket match?"
+  },
+  {
+    "a": "How many grade points does a B+ carry?",
+    "paraphrase": "Please explain: how many grade points does a b+ carry?",
+    "unrelated": "What is the weather in Tokyo?"
+  },
+  {
+    "a": "What is the refund timeline when a student withdraws from the university?",
+    "paraphrase": "Please explain: what is the refund timeline when a student withdraws from the university?",
+    "unrelated": "How can I repair a bicycle tyre?"
+  },
+  {
+    "a": "What does the Student Handbook say about using generative AI in assignments?",
+    "paraphrase": "Please explain: what does the student handbook say about using generative ai in assignments?",
+    "unrelated": "How do black holes evaporate?"
+  },
+  {
+    "a": "How many applications did the university receive in 2023-24, by discipline?",
+    "paraphrase": "Please explain: how many applications did the university receive in 2023-24, by discipline?",
+    "unrelated": "How long should sourdough rise?"
+  },
+  {
+    "a": "What is the purpose of the Faculty Entrepreneurship and Technical Start-ups Policy?",
+    "paraphrase": "Please explain: what is the purpose of the faculty entrepreneurship and technical start-ups policy?",
+    "unrelated": "Who won the latest cricket match?"
+  },
+  {
+    "a": "What was the course withdrawal deadline under the 2023 undergraduate academic rules?",
+    "paraphrase": "Please explain: what was the course withdrawal deadline under the 2023 undergraduate academic rules?",
+    "unrelated": "What is the weather in Tokyo?"
+  },
+  {
+    "a": "What is the course withdrawal deadline under the current academic rules?",
+    "paraphrase": "Until which week can I withdraw from a course under the current rules?",
+    "unrelated": "How can I repair a bicycle tyre?"
+  },
+  {
+    "a": "What attendance percentage did the 2023 academic rules require?",
+    "paraphrase": "Please explain: what attendance percentage did the 2023 academic rules require?",
+    "unrelated": "How do black holes evaporate?"
+  },
+  {
+    "a": "What attendance percentage do the current academic rules require?",
+    "paraphrase": "Explain the attendance obligation in rule 1.21.",
+    "unrelated": "How long should sourdough rise?"
+  },
+  {
+    "a": "What does clause 1.21 of the academic rules handbook require?",
+    "paraphrase": "Explain the attendance obligation in rule 1.21.",
+    "unrelated": "Who won the latest cricket match?"
+  },
+  {
+    "a": "What is the tuition fee per credit hour for BS programmes?",
+    "paraphrase": "How much is each BS credit charged in tuition?",
+    "unrelated": "What is the weather in Tokyo?"
+  },
+  {
+    "a": "What are the visiting hours at the university hostel?",
+    "paraphrase": "Please explain: what are the visiting hours at the university hostel?",
+    "unrelated": "How can I repair a bicycle tyre?"
+  }
+]

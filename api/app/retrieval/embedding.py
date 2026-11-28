@@ -5,6 +5,8 @@ from __future__ import annotations
 from functools import lru_cache
 
 import httpx
+import time
+from .. import ragops
 
 from ..config import Settings
 from .base import RetrievalError
@@ -24,8 +26,11 @@ def embed_query(settings: Settings, question: str) -> list[float]:
     """The cache and the retriever both need the vector, so repeated questions are
     served from a small in-process memo instead of calling the model twice."""
     try:
+        started = time.perf_counter()
         return list(_embed(settings.ollama_url, settings.embed_model,
                            settings.embed_query_prefix + question))
     except (httpx.HTTPError, KeyError, IndexError, ValueError) as exc:
         raise RetrievalError(
             f"could not embed the question with {settings.embed_model}: {exc}") from exc
+    finally:
+        ragops.stage('embed', started)

@@ -1,0 +1,16 @@
+[
+  {
+    "file": "old.md",
+    "title": "Synthetic identical notice",
+    "family": "identical-notice",
+    "doc_version": "2026-01",
+    "page_count": 1
+  },
+  {
+    "file": "new.md",
+    "title": "Synthetic identical notice",
+    "family": "identical-notice",
+    "doc_version": "2026-02",
+    "page_count": 1
+  }
+]

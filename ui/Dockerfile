@@ -1,7 +1,6 @@
-FROM nginxinc/nginx-unprivileged:1.30-alpine
+FROM alpine:3.24
 
-USER root
-RUN apk upgrade --no-cache
+RUN apk add --no-cache nginx && apk upgrade --no-cache
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /usr/share/nginx/html/index.html

@@ -1,6 +1,32 @@
+# Assignment 03 / RAGOps
+
+The Assignment 03 implementation, actual result files, traces and review report build on the original RAHBAR service below. See [the Kubernetes runbook](k8s/README.md), [implementation contracts](docs/RAGOPS.md), [final student report](docs/report/RAHBAR_Assignment03_Report.pdf) and [completed question worksheet](docs/report/RAHBAR_Question_Worksheet_filled.docx).
+
+Run from the repo root with Python 3.12 and the required local Kubernetes/Ollama runtime:
+
+| Part | Exact entry command |
+| --- | --- |
+| Setup / F | `./scripts/bootstrap_ragops.ps1` |
+| A: complete data lifecycle demo | `./scripts/demo_ragops_data.ps1` |
+| B: complete suite | `kubectl apply -f k8s/eval-job.yaml` |
+| C: gate | `python -m ragops.gate --baseline eval/results/baseline.json --candidate eval/results/candidate.json --thresholds eval/thresholds.json` |
+| C/F: release | `python -m scripts.release_ragops --baseline eval/results/drift.json --candidate eval/results/final-verification.json --thresholds eval/thresholds.json --collection rahbar-a3-candidate --top-k 3` |
+| D: trace prompt | `python -m ragops.traces traces/cluster.jsonl --trace-id demo-answer-20261126` |
+| D: trace metrics | `python -m ragops.traces traces/cluster.jsonl --since 2026-11-26T00:00:00+00:00` |
+| E: coverage before / after | `kubectl apply -f k8s/runs/coverage-before.yaml -f k8s/runs/coverage-after.yaml` |
+| E: stage Batch B and retain existing data | `./scripts/stage_ragops_drift.ps1 -Name ragops-new-drift` |
+| F: cluster evidence | `kubectl get all,pvc,configmap,cronjob,job -n rahbar` |
+| Export actual artifacts | `./scripts/collect_ragops.ps1` |
+| Historical report draft generator | `python -m scripts.build_ragops_report` (writes a separate draft; preserves the final student PDF) |
+
+Jobs are immutable: on the already-running cluster, preserve completed Jobs and create a new name with `scripts/run_ragops.ps1` for repeats. The runbook explains raw-corpus preparation, image loading, candidate indexing, data drift and rollback. Never delete the PVCs just to rerun a Job.
+
+The active evaluation set includes eight student-authored questions and eight reviewed synthetic questions from the completed worksheet. The supplied final report retains its historical 25-question comparison; the newly rerun 39-question results are stored separately under `eval/results/reviewed-20261128/`.
+
+---
 # RAHBAR
 
-![ci](https://github.com/nofalzaman/Rahbar/actions/workflows/ci.yml/badge.svg)
+![ci](https://github.com/nofalzaman/Rahbar/actions/workflows/ci.yml/badge.svg?branch=dev)
 
 A student wants to know whether they can register for a course after failing its
 prerequisite. The answer exists in a university PDF, but a general language model will
@@ -125,7 +151,7 @@ The 17-question real-corpus run has recall@3 0.7333, recall@5 0.8000, 100% citat
 validity and 100% must-abstain correctness. Version-sensitive recall is 50%; some
 answerable questions decline or fall back. These automated gates do not certify answer
 quality. Reindexing has a brief non-atomic delete/rename interval. See
-`docs/PIPELINE.md` and `docs/FINAL-CHECKLIST.md` for evidence and remaining release actions.
+`docs/PIPELINE.md` for measured pipeline evidence.
 
 To run checks locally after cloning:
 ```powershell
@@ -136,3 +162,10 @@ Push-Location indexer; ..\.venv\Scripts\pytest -q; ..\.venv\Scripts\mypy pipelin
 .\.venv\Scripts\pytest -q eval/tests
 .\.venv\Scripts\python scripts/check_submission.py
 ```
+
+## Verified release
+[Successful CD run](https://github.com/nofalzaman/Rahbar/actions/runs/43026589471)
+published and deployed `cad1630b5d42f63cef00b4b229771b2d31c5fcb3`.
+Public SHA-tagged images: [API](https://hub.docker.com/r/nofalz/rahbar-api/tags),
+[UI](https://hub.docker.com/r/nofalz/rahbar-ui/tags),
+[indexer](https://hub.docker.com/r/nofalz/rahbar-indexer/tags).

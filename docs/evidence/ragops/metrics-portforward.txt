@@ -1,0 +1,277 @@
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 35863.0
+python_gc_objects_collected_total{generation="1"} 5661.0
+python_gc_objects_collected_total{generation="2"} 719.0
+# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 275.0
+python_gc_collections_total{generation="1"} 25.0
+python_gc_collections_total{generation="2"} 2.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="12",patchlevel="16",version="3.12.16"} 1.0
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 1.040867328e+09
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 1.03141376e+08
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.79570152038e+09
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 5.44
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 12.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP rahbar_injection_attempts_total Flagged retrieved instruction attempts
+# TYPE rahbar_injection_attempts_total counter
+rahbar_injection_attempts_total 4.0
+# HELP rahbar_injection_attempts_created Flagged retrieved instruction attempts
+# TYPE rahbar_injection_attempts_created gauge
+rahbar_injection_attempts_created 1.7957015226738794e+09
+# HELP rahbar_top1_similarity Top retrieval similarity
+# TYPE rahbar_top1_similarity histogram
+rahbar_top1_similarity_bucket{le="0.0"} 0.0
+rahbar_top1_similarity_bucket{le="0.2"} 0.0
+rahbar_top1_similarity_bucket{le="0.4"} 0.0
+rahbar_top1_similarity_bucket{le="0.6"} 5.0
+rahbar_top1_similarity_bucket{le="0.8"} 57.0
+rahbar_top1_similarity_bucket{le="0.9"} 71.0
+rahbar_top1_similarity_bucket{le="1.0"} 71.0
+rahbar_top1_similarity_bucket{le="+Inf"} 71.0
+rahbar_top1_similarity_count 71.0
+rahbar_top1_similarity_sum 52.280100000000026
+# HELP rahbar_top1_similarity_created Top retrieval similarity
+# TYPE rahbar_top1_similarity_created gauge
+rahbar_top1_similarity_created 1.795701522673895e+09
+# HELP rahbar_stage_seconds Trace stage latency
+# TYPE rahbar_stage_seconds histogram
+rahbar_stage_seconds_bucket{le="0.005",stage="cache"} 76.0
+rahbar_stage_seconds_bucket{le="0.01",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="0.025",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="0.05",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="0.075",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="0.1",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="0.25",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="0.5",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="0.75",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="1.0",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="2.5",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="5.0",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="7.5",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="10.0",stage="cache"} 78.0
+rahbar_stage_seconds_bucket{le="+Inf",stage="cache"} 78.0
+rahbar_stage_seconds_count{stage="cache"} 78.0
+rahbar_stage_seconds_sum{stage="cache"} 0.016011829001399747
+rahbar_stage_seconds_bucket{le="0.005",stage="embed"} 29.0
+rahbar_stage_seconds_bucket{le="0.01",stage="embed"} 29.0
+rahbar_stage_seconds_bucket{le="0.025",stage="embed"} 72.0
+rahbar_stage_seconds_bucket{le="0.05",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="0.075",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="0.1",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="0.25",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="0.5",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="0.75",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="1.0",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="2.5",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="5.0",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="7.5",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="10.0",stage="embed"} 79.0
+rahbar_stage_seconds_bucket{le="+Inf",stage="embed"} 79.0
+rahbar_stage_seconds_count{stage="embed"} 79.0
+rahbar_stage_seconds_sum{stage="embed"} 1.1887066669992237
+rahbar_stage_seconds_bucket{le="0.005",stage="retrieve_including_embed"} 0.0
+rahbar_stage_seconds_bucket{le="0.01",stage="retrieve_including_embed"} 0.0
+rahbar_stage_seconds_bucket{le="0.025",stage="retrieve_including_embed"} 24.0
+rahbar_stage_seconds_bucket{le="0.05",stage="retrieve_including_embed"} 71.0
+rahbar_stage_seconds_bucket{le="0.075",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="0.1",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="0.25",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="0.5",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="0.75",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="1.0",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="2.5",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="5.0",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="7.5",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="10.0",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_bucket{le="+Inf",stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_count{stage="retrieve_including_embed"} 77.0
+rahbar_stage_seconds_sum{stage="retrieve_including_embed"} 2.8078329049976674
+rahbar_stage_seconds_bucket{le="0.005",stage="generate_and_validate"} 6.0
+rahbar_stage_seconds_bucket{le="0.01",stage="generate_and_validate"} 6.0
+rahbar_stage_seconds_bucket{le="0.025",stage="generate_and_validate"} 6.0
+rahbar_stage_seconds_bucket{le="0.05",stage="generate_and_validate"} 6.0
+rahbar_stage_seconds_bucket{le="0.075",stage="generate_and_validate"} 6.0
+rahbar_stage_seconds_bucket{le="0.1",stage="generate_and_validate"} 6.0
+rahbar_stage_seconds_bucket{le="0.25",stage="generate_and_validate"} 6.0
+rahbar_stage_seconds_bucket{le="0.5",stage="generate_and_validate"} 6.0
+rahbar_stage_seconds_bucket{le="0.75",stage="generate_and_validate"} 13.0
+rahbar_stage_seconds_bucket{le="1.0",stage="generate_and_validate"} 50.0
+rahbar_stage_seconds_bucket{le="2.5",stage="generate_and_validate"} 74.0
+rahbar_stage_seconds_bucket{le="5.0",stage="generate_and_validate"} 74.0
+rahbar_stage_seconds_bucket{le="7.5",stage="generate_and_validate"} 74.0
+rahbar_stage_seconds_bucket{le="10.0",stage="generate_and_validate"} 75.0
+rahbar_stage_seconds_bucket{le="+Inf",stage="generate_and_validate"} 77.0
+rahbar_stage_seconds_count{stage="generate_and_validate"} 77.0
+rahbar_stage_seconds_sum{stage="generate_and_validate"} 101.52340298800209
+# HELP rahbar_stage_seconds_created Trace stage latency
+# TYPE rahbar_stage_seconds_created gauge
+rahbar_stage_seconds_created{stage="cache"} 1.7957017077621384e+09
+rahbar_stage_seconds_created{stage="embed"} 1.7957017078107378e+09
+rahbar_stage_seconds_created{stage="retrieve_including_embed"} 1.7957017078274539e+09
+rahbar_stage_seconds_created{stage="generate_and_validate"} 1.795701708741756e+09
+# HELP rahbar_retrieval_seconds Question embedding plus vector search
+# TYPE rahbar_retrieval_seconds histogram
+rahbar_retrieval_seconds_bucket{le="0.01"} 0.0
+rahbar_retrieval_seconds_bucket{le="0.025"} 24.0
+rahbar_retrieval_seconds_bucket{le="0.05"} 71.0
+rahbar_retrieval_seconds_bucket{le="0.1"} 77.0
+rahbar_retrieval_seconds_bucket{le="0.25"} 77.0
+rahbar_retrieval_seconds_bucket{le="0.5"} 77.0
+rahbar_retrieval_seconds_bucket{le="1.0"} 77.0
+rahbar_retrieval_seconds_bucket{le="2.5"} 77.0
+rahbar_retrieval_seconds_bucket{le="5.0"} 77.0
+rahbar_retrieval_seconds_bucket{le="+Inf"} 77.0
+rahbar_retrieval_seconds_count 77.0
+rahbar_retrieval_seconds_sum 2.8069803689973014
+# HELP rahbar_retrieval_seconds_created Question embedding plus vector search
+# TYPE rahbar_retrieval_seconds_created gauge
+rahbar_retrieval_seconds_created 1.7957015226793752e+09
+# HELP rahbar_generation_seconds LLM call, including the one retry
+# TYPE rahbar_generation_seconds histogram
+rahbar_generation_seconds_bucket{le="0.25"} 0.0
+rahbar_generation_seconds_bucket{le="0.5"} 0.0
+rahbar_generation_seconds_bucket{le="1.0"} 44.0
+rahbar_generation_seconds_bucket{le="2.0"} 65.0
+rahbar_generation_seconds_bucket{le="5.0"} 68.0
+rahbar_generation_seconds_bucket{le="10.0"} 69.0
+rahbar_generation_seconds_bucket{le="20.0"} 71.0
+rahbar_generation_seconds_bucket{le="40.0"} 71.0
+rahbar_generation_seconds_bucket{le="60.0"} 71.0
+rahbar_generation_seconds_bucket{le="120.0"} 71.0
+rahbar_generation_seconds_bucket{le="+Inf"} 71.0
+rahbar_generation_seconds_count 71.0
+rahbar_generation_seconds_sum 101.52236423100157
+# HELP rahbar_generation_seconds_created LLM call, including the one retry
+# TYPE rahbar_generation_seconds_created gauge
+rahbar_generation_seconds_created 1.7957015226794088e+09
+# HELP rahbar_cache_lookups_total Semantic cache lookups
+# TYPE rahbar_cache_lookups_total counter
+rahbar_cache_lookups_total{result="skipped"} 76.0
+rahbar_cache_lookups_total{result="miss"} 1.0
+rahbar_cache_lookups_total{result="hit"} 1.0
+# HELP rahbar_cache_lookups_created Semantic cache lookups
+# TYPE rahbar_cache_lookups_created gauge
+rahbar_cache_lookups_created{result="skipped"} 1.7957017077620695e+09
+rahbar_cache_lookups_created{result="miss"} 1.7957021148503191e+09
+rahbar_cache_lookups_created{result="hit"} 1.7957021157390282e+09
+# HELP rahbar_abstentions_total Questions declined because the documents do not cover them
+# TYPE rahbar_abstentions_total counter
+rahbar_abstentions_total 27.0
+# HELP rahbar_abstentions_created Questions declined because the documents do not cover them
+# TYPE rahbar_abstentions_created gauge
+rahbar_abstentions_created 1.795701522679439e+09
+# HELP rahbar_fallbacks_total Canned responses given after the model failed validation twice
+# TYPE rahbar_fallbacks_total counter
+rahbar_fallbacks_total 9.0
+# HELP rahbar_fallbacks_created Canned responses given after the model failed validation twice
+# TYPE rahbar_fallbacks_created gauge
+rahbar_fallbacks_created 1.7957015226794446e+09
+# HELP rahbar_invalid_citations_total Model citations dropped because no such passage was retrieved
+# TYPE rahbar_invalid_citations_total counter
+rahbar_invalid_citations_total 12.0
+# HELP rahbar_invalid_citations_created Model citations dropped because no such passage was retrieved
+# TYPE rahbar_invalid_citations_created gauge
+rahbar_invalid_citations_created 1.795701522679449e+09
+# HELP rahbar_tokens_total LLM tokens used
+# TYPE rahbar_tokens_total counter
+rahbar_tokens_total{direction="in"} 130252.0
+rahbar_tokens_total{direction="out"} 9386.0
+# HELP rahbar_tokens_created LLM tokens used
+# TYPE rahbar_tokens_created gauge
+rahbar_tokens_created{direction="in"} 1.7957017087412083e+09
+rahbar_tokens_created{direction="out"} 1.7957017087412224e+09
+# HELP rahbar_requests_total HTTP requests
+# TYPE rahbar_requests_total counter
+rahbar_requests_total{path="/healthz",status="200"} 51.0
+rahbar_requests_total{path="/readyz",status="200"} 101.0
+rahbar_requests_total{path="/api/ask",status="200"} 78.0
+rahbar_requests_total{path="/api/traces/{trace_id}",status="200"} 78.0
+# HELP rahbar_requests_created HTTP requests
+# TYPE rahbar_requests_created gauge
+rahbar_requests_created{path="/healthz",status="200"} 1.7957015249269166e+09
+rahbar_requests_created{path="/readyz",status="200"} 1.7957015249348545e+09
+rahbar_requests_created{path="/api/ask",status="200"} 1.7957017087424614e+09
+rahbar_requests_created{path="/api/traces/{trace_id}",status="200"} 1.7957017087505662e+09
+# HELP rahbar_request_seconds HTTP request latency
+# TYPE rahbar_request_seconds histogram
+rahbar_request_seconds_bucket{le="0.05",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="0.1",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="0.25",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="0.5",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="1.0",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="2.0",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="5.0",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="10.0",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="30.0",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="60.0",path="/healthz"} 51.0
+rahbar_request_seconds_bucket{le="+Inf",path="/healthz"} 51.0
+rahbar_request_seconds_count{path="/healthz"} 51.0
+rahbar_request_seconds_sum{path="/healthz"} 0.04405276699935712
+rahbar_request_seconds_bucket{le="0.05",path="/readyz"} 100.0
+rahbar_request_seconds_bucket{le="0.1",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="0.25",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="0.5",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="1.0",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="2.0",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="5.0",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="10.0",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="30.0",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="60.0",path="/readyz"} 101.0
+rahbar_request_seconds_bucket{le="+Inf",path="/readyz"} 101.0
+rahbar_request_seconds_count{path="/readyz"} 101.0
+rahbar_request_seconds_sum{path="/readyz"} 0.6983180740012358
+rahbar_request_seconds_bucket{le="0.05",path="/api/ask"} 7.0
+rahbar_request_seconds_bucket{le="0.1",path="/api/ask"} 7.0
+rahbar_request_seconds_bucket{le="0.25",path="/api/ask"} 7.0
+rahbar_request_seconds_bucket{le="0.5",path="/api/ask"} 7.0
+rahbar_request_seconds_bucket{le="1.0",path="/api/ask"} 48.0
+rahbar_request_seconds_bucket{le="2.0",path="/api/ask"} 72.0
+rahbar_request_seconds_bucket{le="5.0",path="/api/ask"} 75.0
+rahbar_request_seconds_bucket{le="10.0",path="/api/ask"} 76.0
+rahbar_request_seconds_bucket{le="30.0",path="/api/ask"} 78.0
+rahbar_request_seconds_bucket{le="60.0",path="/api/ask"} 78.0
+rahbar_request_seconds_bucket{le="+Inf",path="/api/ask"} 78.0
+rahbar_request_seconds_count{path="/api/ask"} 78.0
+rahbar_request_seconds_sum{path="/api/ask"} 104.47631128300145
+rahbar_request_seconds_bucket{le="0.05",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="0.1",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="0.25",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="0.5",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="1.0",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="2.0",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="5.0",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="10.0",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="30.0",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="60.0",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_bucket{le="+Inf",path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_count{path="/api/traces/{trace_id}"} 78.0
+rahbar_request_seconds_sum{path="/api/traces/{trace_id}"} 0.07959745700236454
+# HELP rahbar_request_seconds_created HTTP request latency
+# TYPE rahbar_request_seconds_created gauge
+rahbar_request_seconds_created{path="/healthz"} 1.7957015249269347e+09
+rahbar_request_seconds_created{path="/readyz"} 1.7957015249348714e+09
+rahbar_request_seconds_created{path="/api/ask"} 1.7957017087424748e+09
+rahbar_request_seconds_created{path="/api/traces/{trace_id}"} 1.7957017087505865e+09
+

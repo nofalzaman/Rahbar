@@ -18,5 +18,12 @@ not claim that a human review happened when it has not been recorded.
 The generated prose and code were committed by the existing configured Git identity;
 commit authorship does not mean the human typed the AI-written content. Results are
 actual tool outputs, not invented measurements. We do not invent a >1-hour incident,
-an external PR approval, a green deployment, or a Classroom submission. Final status
-and any remaining human actions are recorded in `docs/FINAL-CHECKLIST.md`.
+an external PR approval, a green deployment, or a Classroom submission. Measured results and their limitations are retained with the run artifacts.
+
+| Codex, Assignment 03 | Verified incremental ingestion, archives, Batch B, evaluation, gate, coverage tools and synthetic questions in the authorized Aoun checkout | Offline tests recorded in PR; the initial generated questions stayed synthetic until students supplied their completed worksheet. |
+
+| Codex, Assignment 03 | Nofal API tracing, seeded generation, evaluation cache bypass and retrieval injection rail | 85 API tests passed, 96.72% coverage, mypy and ruff passed. Human review remains pending. |
+
+| Codex, Assignment 03 evidence/report | Actual ingestion/evaluation/drift, controlled release/undo, trace/cache/injection checks, fresh-cluster verification, report and screenshot checklist | Results are saved under eval/results, traces and docs/evidence/ragops. Automated approvals are authorized; student-supplied screenshots, the final report and the completed authorship/review worksheet were subsequently provided. |
+
+On 28 November 2026, the students supplied eight attributed human questions and eight synthetic reviews. Codex transferred the worksheet into the golden set, applied its corrections, reran live Kubernetes evaluations, and replaced the report with the supplied PDF without rewriting its results. Automated cross-account review remains distinct from student review of the whole codebase or demo attendance.

@@ -1,0 +1,142 @@
+NAME                                       READY   STATUS      RESTARTS      AGE
+pod/api-585c474d88-hxm6b                   1/1     Running     0             36m
+pod/api-candidate-59f64b6b94-tfqns         1/1     Running     0             36m
+pod/chroma-0                               1/1     Running     2 (94m ago)   18d
+pod/data-shell-5fb49f564-6xkv2             1/1     Running     0             35m
+pod/indexer-t8x6r                          0/1     Completed   0             16d
+pod/ragops-candidate-index-q5kzn           0/1     Error       0             79m
+pod/ragops-candidate-index-retry-r2wxm     0/1     Completed   0             77m
+pod/ragops-coverage-after-w7rck            0/1     Completed   0             77m
+pod/ragops-coverage-before-bx4vx           0/1     Error       0             77m
+pod/ragops-demo-a-wzj75                    0/1     Completed   0             75m
+pod/ragops-demo-b-4vx2v                    0/1     Completed   0             75m
+pod/ragops-demo-change-wsvvj               0/1     Completed   0             65m
+pod/ragops-demo-delete-tg52c               0/1     Completed   0             65m
+pod/ragops-demo-refinal-nhjx5              0/1     Completed   0             66m
+pod/ragops-demo-restore-bnw65              0/1     Completed   0             65m
+pod/ragops-demo-unchanged-pp2p8            0/1     Completed   0             72m
+pod/ragops-eval-7sgvw                      0/1     Completed   0             79m
+pod/ragops-eval-bad-k1-vchrm               0/1     Error       0             62m
+pod/ragops-eval-bounded-baseline-6bggw     0/1     Completed   0             68m
+pod/ragops-eval-bounded-k3-mnsh5           0/1     Completed   0             66m
+pod/ragops-eval-candidate-wdvgt            0/1     Completed   0             75m
+pod/ragops-eval-drift-ndq78                0/1     Completed   0             52m
+pod/ragops-eval-expanded-fkgmd             0/1     Completed   0             30m
+pod/ragops-eval-final-candidate-bnggc      0/1     Completed   0             57m
+pod/ragops-eval-final-verification-8vsh9   0/1     Completed   0             36m
+pod/ragops-final-drift-repeat-c2s2q        0/1     Completed   0             12m
+pod/ragops-final-unchanged-cq4kt           0/1     Completed   0             38m
+pod/ragops-gate-normal-pzxwf               0/1     Completed   0             59m
+pod/ragops-gate-tight-wqd4b                0/1     Error       0             60m
+pod/ragops-ingest-drift-vbwrg              0/1     Completed   0             54m
+pod/ragops-ingest-vhq99                    0/1     Completed   0             81m
+pod/ragops-supersession-regression-rd7zn   0/1     Completed   0             24m
+pod/ragops-unchanged-pvx8r                 0/1     Completed   0             79m
+pod/redis-5694859fd7-nxgtp                 1/1     Running     2 (94m ago)   18d
+pod/reindex-29911860-qh99w                 0/1     Completed   0             7d5h
+pod/reindex-29921940-xswln                 0/1     Completed   0             93m
+pod/replay-20261126-a-rws8l                0/1     Completed   0             17m
+pod/replay-20261126-b-7q4k5                0/1     Completed   0             17m
+pod/replay-20261126-changed-z5rcj          0/1     Completed   0             17m
+pod/replay-20261126-deleted-rbm7f          0/1     Completed   0             17m
+pod/replay-20261126-restore-mmvch          0/1     Completed   0             17m
+pod/replay-20261126-unchanged-9gck5        0/1     Completed   0             17m
+pod/ui-8498ddc5c6-88kn6                    1/1     Running     0             68m
+pod/ui-8498ddc5c6-przrv                    1/1     Running     0             68m
+
+NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/api              ClusterIP   10.96.43.202     <none>        8000/TCP   18d
+service/api-candidate    ClusterIP   10.97.238.81     <none>        8000/TCP   81m
+service/chroma           ClusterIP   10.101.7.92      <none>        8000/TCP   18d
+service/chroma-service   ClusterIP   10.100.126.248   <none>        8000/TCP   18d
+service/redis            ClusterIP   10.108.110.167   <none>        6379/TCP   18d
+service/ui               ClusterIP   10.100.151.46    <none>        8080/TCP   18d
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api             1/1     1            1           18d
+deployment.apps/api-candidate   1/1     1            1           81m
+deployment.apps/data-shell      1/1     1            1           81m
+deployment.apps/redis           1/1     1            1           18d
+deployment.apps/ui              2/2     2            2           18d
+
+NAME                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/api-585c474d88             1         1         1       36m
+replicaset.apps/api-5b45b775db             0         0         0       60m
+replicaset.apps/api-6fbd44cdcb             0         0         0       57m
+replicaset.apps/api-767597887              0         0         0       36m
+replicaset.apps/api-77657c6875             0         0         0       57m
+replicaset.apps/api-7d85f87989             0         0         0       54m
+replicaset.apps/api-candidate-57cb577844   0         0         0       47m
+replicaset.apps/api-candidate-59f64b6b94   1         1         1       36m
+replicaset.apps/api-candidate-6479d7558    0         0         0       57m
+replicaset.apps/api-candidate-6dc55597fc   0         0         0       57m
+replicaset.apps/api-candidate-77c7b45889   0         0         0       36m
+replicaset.apps/api-candidate-855598ffd8   0         0         0       68m
+replicaset.apps/data-shell-5fb49f564       1         1         1       35m
+replicaset.apps/data-shell-644dfff886      0         0         0       68m
+replicaset.apps/data-shell-bb87897d9       0         0         0       81m
+replicaset.apps/redis-5694859fd7           1         1         1       18d
+replicaset.apps/ui-64557f7b8               0         0         0       15d
+replicaset.apps/ui-645854bdf               0         0         0       15d
+replicaset.apps/ui-664c95c5cf              0         0         0       15d
+replicaset.apps/ui-67c898c6c9              0         0         0       18d
+replicaset.apps/ui-8498ddc5c6              2         2         2       68m
+
+NAME                      READY   AGE
+statefulset.apps/chroma   1/1     18d
+
+NAME                                      REFERENCE        TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/api   Deployment/api   cpu: 3%/70%   1         1         1          18d
+
+NAME                           SCHEDULE    TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/ragops-reindex   0 3 * * 0   <none>     False     0        <none>          80m
+cronjob.batch/reindex          0 3 * * 0   <none>     True      0        4d11h           18d
+
+NAME                                       STATUS     COMPLETIONS   DURATION   AGE
+job.batch/indexer                          Complete   1/1           3m58s      16d
+job.batch/ragops-candidate-index           Failed     0/1           79m        79m
+job.batch/ragops-candidate-index-retry     Complete   1/1           76s        77m
+job.batch/ragops-coverage-after            Complete   1/1           6s         77m
+job.batch/ragops-coverage-before           Failed     0/1           77m        77m
+job.batch/ragops-demo-a                    Complete   1/1           5s         75m
+job.batch/ragops-demo-b                    Complete   1/1           5s         75m
+job.batch/ragops-demo-change               Complete   1/1           5s         65m
+job.batch/ragops-demo-delete               Complete   1/1           5s         65m
+job.batch/ragops-demo-refinal              Complete   1/1           5s         66m
+job.batch/ragops-demo-restore              Complete   1/1           4s         65m
+job.batch/ragops-demo-unchanged            Complete   1/1           5s         72m
+job.batch/ragops-eval                      Complete   1/1           3m10s      79m
+job.batch/ragops-eval-bad-k1               Failed     0/1           62m        62m
+job.batch/ragops-eval-bounded-baseline     Complete   1/1           107s       68m
+job.batch/ragops-eval-bounded-k3           Complete   1/1           104s       66m
+job.batch/ragops-eval-candidate            Complete   1/1           116s       75m
+job.batch/ragops-eval-drift                Complete   1/1           108s       52m
+job.batch/ragops-eval-expanded             Complete   1/1           2m         30m
+job.batch/ragops-eval-final-candidate      Complete   1/1           104s       57m
+job.batch/ragops-eval-final-verification   Complete   1/1           108s       36m
+job.batch/ragops-final-drift-repeat        Complete   1/1           71s        12m
+job.batch/ragops-final-unchanged           Complete   1/1           70s        38m
+job.batch/ragops-gate-normal               Complete   1/1           3s         59m
+job.batch/ragops-gate-tight                Failed     0/1           60m        60m
+job.batch/ragops-ingest                    Complete   1/1           119s       81m
+job.batch/ragops-ingest-drift              Complete   1/1           77s        54m
+job.batch/ragops-supersession-regression   Complete   1/1           5s         24m
+job.batch/ragops-unchanged                 Complete   1/1           75s        79m
+job.batch/reindex-29911860                 Complete   1/1           6m22s      7d5h
+job.batch/reindex-29921940                 Complete   1/1           3m14s      93m
+job.batch/replay-20261126-a                Complete   1/1           6s         17m
+job.batch/replay-20261126-b                Complete   1/1           5s         17m
+job.batch/replay-20261126-changed          Complete   1/1           4s         17m
+job.batch/replay-20261126-deleted          Complete   1/1           4s         17m
+job.batch/replay-20261126-restore          Complete   1/1           5s         17m
+job.batch/replay-20261126-unchanged        Complete   1/1           4s         17m
+
+NAME                                         STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/cache-data             Bound    pvc-381e7106-3349-4895-b67b-af99a16f6514   1Gi        RWO            standard       <unset>                 18d
+persistentvolumeclaim/chroma-data-chroma-0   Bound    pvc-01e758e8-10b6-49e1-aaa8-2e52a46cd90c   2Gi        RWO            standard       <unset>                 18d
+persistentvolumeclaim/ragops-data            Bound    pvc-3d9c5ce0-b04b-4914-983d-e546a39f3ae0   4Gi        RWO            standard       <unset>                 81m
+
+NAME                          DATA   AGE
+configmap/kube-root-ca.crt    1      18d
+configmap/ragops-thresholds   1      81m
+configmap/rahbar-config       19     18d

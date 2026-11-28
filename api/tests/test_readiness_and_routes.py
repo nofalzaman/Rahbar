@@ -94,6 +94,11 @@ def test_a_retrieval_failure_is_a_503_with_a_plain_message_not_a_500(
     r = client.post("/api/ask", json={"question": "What is the attendance rule?"})
     assert r.status_code == 503
     assert "unavailable" in r.json()["detail"]
+    from app import ragops
+    trace = ragops.read_trace(r.headers['X-Request-ID'])
+    assert trace['response'] == r.json()
+    assert trace['status_code'] == 503
+    assert trace['citations'] == []
 
 
 def test_the_cache_header_and_the_follow_up_flag_reach_the_pipeline(

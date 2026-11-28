@@ -1,0 +1,53 @@
+{
+  "pass": true,
+  "checks": {
+    "recall@5": {
+      "pass": true,
+      "candidate": 0.6577380952380952,
+      "baseline": 0.6717687074829932,
+      "rule": {
+        "max_drop": 0.02
+      }
+    },
+    "faithfulness_proxy": {
+      "pass": true,
+      "candidate": 0.9644484056248762,
+      "baseline": 0.9755291005291005,
+      "rule": {
+        "min": 0.8
+      }
+    },
+    "latency_p95_seconds": {
+      "pass": true,
+      "candidate": 2.079140630296752,
+      "baseline": 2.282370338994952,
+      "rule": {
+        "max": 15
+      }
+    },
+    "abstention_correctness": {
+      "pass": true,
+      "candidate": 1,
+      "baseline": 1,
+      "rule": {
+        "max_drop": 0
+      }
+    },
+    "citation_validity": {
+      "pass": true,
+      "candidate": 1.0,
+      "baseline": 1.0,
+      "rule": {
+        "min": 0.95
+      }
+    },
+    "answerable_answer_rate": {
+      "pass": true,
+      "candidate": 0.6071428571428571,
+      "baseline": 0.5,
+      "rule": {
+        "max_drop": 0
+      }
+    }
+  }
+}
