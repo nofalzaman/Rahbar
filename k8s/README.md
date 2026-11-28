@@ -100,4 +100,4 @@ kubectl top pods -n rahbar
 
 Only sampling is claimed; samples do not prove an instantaneous peak. API requests/limits retain headroom over observed resident memory. Job limits include OCR/extraction bursts; Ollama GPU/host memory is outside Kubernetes and is not included in pod numbers.
 
-See `docs/report/SCREENSHOTS.md` for required manual screenshots and `docs/report/CROSSCHECK.md` for the PDF checklist. Both students must review the implementation, supply the actual human-written/reviewed questions, and attend the demo.
+The final report and completed question worksheet are in `docs/report/`; evaluation artifacts are in `eval/results/`.

@@ -1,20 +1,10 @@
 {
-  "technical_failures": 0,
+  "technical_failures": 1,
   "needs_human": [
-    {
-      "item": "B human-written questions",
-      "status": "NEEDS HUMAN",
-      "detail": "0/8 actually labelled human"
-    },
-    {
-      "item": "B hand-reviewed synthetic questions",
-      "status": "NEEDS HUMAN",
-      "detail": "0/8 recorded"
-    },
     {
       "item": "G manual screenshot appendix",
       "status": "NEEDS HUMAN",
-      "detail": "0 supplied images; follow SCREENSHOTS.md"
+      "detail": "16 supplied images; combined coverage image accepted, cluster overview F1 still missing"
     },
     {
       "item": "G actual student review/demo",
@@ -26,17 +16,17 @@
     {
       "item": "B golden counts",
       "status": "PASS",
-      "detail": "31 total / 20 answerable / 11 unanswerable"
+      "detail": "39 total / 28 answerable / 11 unanswerable"
     },
     {
       "item": "B human-written questions",
-      "status": "NEEDS HUMAN",
-      "detail": "0/8 actually labelled human"
+      "status": "PASS",
+      "detail": "8/8 actually labelled human"
     },
     {
       "item": "B hand-reviewed synthetic questions",
-      "status": "NEEDS HUMAN",
-      "detail": "0/8 recorded"
+      "status": "PASS",
+      "detail": "8/8 recorded"
     },
     {
       "item": "A four checks and counts",
@@ -114,9 +104,19 @@
       "detail": "Expanded questions are active in eval/golden.jsonl"
     },
     {
+      "item": "B reviewed suite",
+      "status": "PASS",
+      "detail": "Updated 39-question suite completed twice plus typo noise"
+    },
+    {
+      "item": "C reviewed candidate",
+      "status": "PASS",
+      "detail": "Same reviewed input and unchanged thresholds"
+    },
+    {
       "item": "E active suite identity",
       "status": "PASS",
-      "detail": "Full suite rerun on the active expanded set; rerun after human edits"
+      "detail": "Exact evaluated input snapshot hash and active question content agree; Git newline conversion does not change questions"
     },
     {
       "item": "F versioned rollback",
@@ -140,13 +140,13 @@
     },
     {
       "item": "G report main-page limit",
-      "status": "PASS",
-      "detail": "7 main pages; 8 total including appendix"
+      "status": "FAIL",
+      "detail": "9 main pages; 25 total including appendix"
     },
     {
       "item": "G manual screenshot appendix",
       "status": "NEEDS HUMAN",
-      "detail": "0 supplied images; follow SCREENSHOTS.md"
+      "detail": "16 supplied images; combined coverage image accepted, cluster overview F1 still missing"
     },
     {
       "item": "G actual student review/demo",

@@ -1,0 +1,437 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "batch/v1",
+            "kind": "Job",
+            "metadata": {
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"batch/v1\",\"kind\":\"Job\",\"metadata\":{\"annotations\":{},\"name\":\"ragops-reviewed-baseline-v2-20261128\",\"namespace\":\"rahbar\"},\"spec\":{\"backoffLimit\":0,\"template\":{\"metadata\":{\"labels\":{\"app\":\"ragops-eval\"}},\"spec\":{\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"--api\",\"http://api-candidate:8000\",\"--golden\",\"/data/input/reviewed-20261128/golden.jsonl\",\"--output\",\"/data/results/reviewed-20261128\",\"--label\",\"reviewed-baseline-k5\"],\"image\":\"rahbar-eval:a3-r3\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"eval\",\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"50m\",\"memory\":\"64Mi\"}},\"volumeMounts\":[{\"mountPath\":\"/data\",\"name\":\"data\"},{\"mountPath\":\"/thresholds\",\"name\":\"thresholds\",\"readOnly\":true}]}],\"restartPolicy\":\"Never\",\"securityContext\":{\"fsGroup\":10001,\"runAsGroup\":10001,\"runAsNonRoot\":true,\"runAsUser\":10001},\"volumes\":[{\"name\":\"data\",\"persistentVolumeClaim\":{\"claimName\":\"ragops-data\"}},{\"configMap\":{\"name\":\"ragops-thresholds\"},\"name\":\"thresholds\"}]}}}}\n"
+                },
+                "creationTimestamp": "2026-11-28T13:28:43Z",
+                "generation": 1,
+                "labels": {
+                    "app": "ragops-eval",
+                    "batch.kubernetes.io/controller-uid": "08caae14-daf7-4fdd-a57a-647b716d8e12",
+                    "batch.kubernetes.io/job-name": "ragops-reviewed-baseline-v2-20261128",
+                    "controller-uid": "08caae14-daf7-4fdd-a57a-647b716d8e12",
+                    "job-name": "ragops-reviewed-baseline-v2-20261128"
+                },
+                "name": "ragops-reviewed-baseline-v2-20261128",
+                "namespace": "rahbar",
+                "resourceVersion": "89269",
+                "uid": "08caae14-daf7-4fdd-a57a-647b716d8e12"
+            },
+            "spec": {
+                "backoffLimit": 0,
+                "completionMode": "NonIndexed",
+                "completions": 1,
+                "manualSelector": false,
+                "parallelism": 1,
+                "podReplacementPolicy": "TerminatingOrFailed",
+                "selector": {
+                    "matchLabels": {
+                        "batch.kubernetes.io/controller-uid": "08caae14-daf7-4fdd-a57a-647b716d8e12"
+                    }
+                },
+                "suspend": false,
+                "template": {
+                    "metadata": {
+                        "labels": {
+                            "app": "ragops-eval",
+                            "batch.kubernetes.io/controller-uid": "08caae14-daf7-4fdd-a57a-647b716d8e12",
+                            "batch.kubernetes.io/job-name": "ragops-reviewed-baseline-v2-20261128",
+                            "controller-uid": "08caae14-daf7-4fdd-a57a-647b716d8e12",
+                            "job-name": "ragops-reviewed-baseline-v2-20261128"
+                        }
+                    },
+                    "spec": {
+                        "automountServiceAccountToken": false,
+                        "containers": [
+                            {
+                                "args": [
+                                    "--api",
+                                    "http://api-candidate:8000",
+                                    "--golden",
+                                    "/data/input/reviewed-20261128/golden.jsonl",
+                                    "--output",
+                                    "/data/results/reviewed-20261128",
+                                    "--label",
+                                    "reviewed-baseline-k5"
+                                ],
+                                "image": "rahbar-eval:a3-r3",
+                                "imagePullPolicy": "IfNotPresent",
+                                "name": "eval",
+                                "resources": {
+                                    "limits": {
+                                        "cpu": "500m",
+                                        "memory": "256Mi"
+                                    },
+                                    "requests": {
+                                        "cpu": "50m",
+                                        "memory": "64Mi"
+                                    }
+                                },
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/data",
+                                        "name": "data"
+                                    },
+                                    {
+                                        "mountPath": "/thresholds",
+                                        "name": "thresholds",
+                                        "readOnly": true
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Never",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {
+                            "fsGroup": 10001,
+                            "runAsGroup": 10001,
+                            "runAsNonRoot": true,
+                            "runAsUser": 10001
+                        },
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "ragops-data"
+                                }
+                            },
+                            {
+                                "configMap": {
+                                    "defaultMode": 420,
+                                    "name": "ragops-thresholds"
+                                },
+                                "name": "thresholds"
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "completionTime": "2026-11-28T13:31:25Z",
+                "conditions": [
+                    {
+                        "lastProbeTime": "2026-11-28T13:31:25Z",
+                        "lastTransitionTime": "2026-11-28T13:31:25Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "reason": "CompletionsReached",
+                        "status": "True",
+                        "type": "SuccessCriteriaMet"
+                    },
+                    {
+                        "lastProbeTime": "2026-11-28T13:31:25Z",
+                        "lastTransitionTime": "2026-11-28T13:31:25Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "reason": "CompletionsReached",
+                        "status": "True",
+                        "type": "Complete"
+                    }
+                ],
+                "ready": 0,
+                "startTime": "2026-11-28T13:28:43Z",
+                "succeeded": 1,
+                "terminating": 0,
+                "uncountedTerminatedPods": {}
+            }
+        },
+        {
+            "apiVersion": "batch/v1",
+            "kind": "Job",
+            "metadata": {
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"batch/v1\",\"kind\":\"Job\",\"metadata\":{\"annotations\":{},\"name\":\"ragops-reviewed-candidate-20261128\",\"namespace\":\"rahbar\"},\"spec\":{\"backoffLimit\":0,\"template\":{\"metadata\":{\"labels\":{\"app\":\"ragops-eval\"}},\"spec\":{\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"--api\",\"http://api:8000\",\"--golden\",\"/data/input/reviewed-20261128/golden.jsonl\",\"--output\",\"/data/results/reviewed-20261128\",\"--label\",\"reviewed-candidate-k3\",\"--baseline\",\"/data/results/reviewed-20261128/20261128T132845-reviewed-baseline-k5.json\",\"--gate\",\"/thresholds/thresholds.json\"],\"image\":\"rahbar-eval:a3-r3\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"eval\",\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"50m\",\"memory\":\"64Mi\"}},\"volumeMounts\":[{\"mountPath\":\"/data\",\"name\":\"data\"},{\"mountPath\":\"/thresholds\",\"name\":\"thresholds\",\"readOnly\":true}]}],\"restartPolicy\":\"Never\",\"securityContext\":{\"fsGroup\":10001,\"runAsGroup\":10001,\"runAsNonRoot\":true,\"runAsUser\":10001},\"volumes\":[{\"name\":\"data\",\"persistentVolumeClaim\":{\"claimName\":\"ragops-data\"}},{\"configMap\":{\"name\":\"ragops-thresholds\"},\"name\":\"thresholds\"}]}}}}\n"
+                },
+                "creationTimestamp": "2026-11-28T13:31:47Z",
+                "generation": 1,
+                "labels": {
+                    "app": "ragops-eval",
+                    "batch.kubernetes.io/controller-uid": "6ce23a85-f57f-4799-a435-46d66e56793d",
+                    "batch.kubernetes.io/job-name": "ragops-reviewed-candidate-20261128",
+                    "controller-uid": "6ce23a85-f57f-4799-a435-46d66e56793d",
+                    "job-name": "ragops-reviewed-candidate-20261128"
+                },
+                "name": "ragops-reviewed-candidate-20261128",
+                "namespace": "rahbar",
+                "resourceVersion": "89565",
+                "uid": "6ce23a85-f57f-4799-a435-46d66e56793d"
+            },
+            "spec": {
+                "backoffLimit": 0,
+                "completionMode": "NonIndexed",
+                "completions": 1,
+                "manualSelector": false,
+                "parallelism": 1,
+                "podReplacementPolicy": "TerminatingOrFailed",
+                "selector": {
+                    "matchLabels": {
+                        "batch.kubernetes.io/controller-uid": "6ce23a85-f57f-4799-a435-46d66e56793d"
+                    }
+                },
+                "suspend": false,
+                "template": {
+                    "metadata": {
+                        "labels": {
+                            "app": "ragops-eval",
+                            "batch.kubernetes.io/controller-uid": "6ce23a85-f57f-4799-a435-46d66e56793d",
+                            "batch.kubernetes.io/job-name": "ragops-reviewed-candidate-20261128",
+                            "controller-uid": "6ce23a85-f57f-4799-a435-46d66e56793d",
+                            "job-name": "ragops-reviewed-candidate-20261128"
+                        }
+                    },
+                    "spec": {
+                        "automountServiceAccountToken": false,
+                        "containers": [
+                            {
+                                "args": [
+                                    "--api",
+                                    "http://api:8000",
+                                    "--golden",
+                                    "/data/input/reviewed-20261128/golden.jsonl",
+                                    "--output",
+                                    "/data/results/reviewed-20261128",
+                                    "--label",
+                                    "reviewed-candidate-k3",
+                                    "--baseline",
+                                    "/data/results/reviewed-20261128/20261128T132845-reviewed-baseline-k5.json",
+                                    "--gate",
+                                    "/thresholds/thresholds.json"
+                                ],
+                                "image": "rahbar-eval:a3-r3",
+                                "imagePullPolicy": "IfNotPresent",
+                                "name": "eval",
+                                "resources": {
+                                    "limits": {
+                                        "cpu": "500m",
+                                        "memory": "256Mi"
+                                    },
+                                    "requests": {
+                                        "cpu": "50m",
+                                        "memory": "64Mi"
+                                    }
+                                },
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/data",
+                                        "name": "data"
+                                    },
+                                    {
+                                        "mountPath": "/thresholds",
+                                        "name": "thresholds",
+                                        "readOnly": true
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Never",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {
+                            "fsGroup": 10001,
+                            "runAsGroup": 10001,
+                            "runAsNonRoot": true,
+                            "runAsUser": 10001
+                        },
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "ragops-data"
+                                }
+                            },
+                            {
+                                "configMap": {
+                                    "defaultMode": 420,
+                                    "name": "ragops-thresholds"
+                                },
+                                "name": "thresholds"
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "completionTime": "2026-11-28T13:34:24Z",
+                "conditions": [
+                    {
+                        "lastProbeTime": "2026-11-28T13:34:24Z",
+                        "lastTransitionTime": "2026-11-28T13:34:24Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "reason": "CompletionsReached",
+                        "status": "True",
+                        "type": "SuccessCriteriaMet"
+                    },
+                    {
+                        "lastProbeTime": "2026-11-28T13:34:24Z",
+                        "lastTransitionTime": "2026-11-28T13:34:24Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "reason": "CompletionsReached",
+                        "status": "True",
+                        "type": "Complete"
+                    }
+                ],
+                "ready": 0,
+                "startTime": "2026-11-28T13:31:47Z",
+                "succeeded": 1,
+                "terminating": 0,
+                "uncountedTerminatedPods": {}
+            }
+        },
+        {
+            "apiVersion": "batch/v1",
+            "kind": "Job",
+            "metadata": {
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"batch/v1\",\"kind\":\"Job\",\"metadata\":{\"annotations\":{},\"name\":\"ragops-reviewed-coverage-20261128\",\"namespace\":\"rahbar\"},\"spec\":{\"backoffLimit\":0,\"template\":{\"metadata\":{\"labels\":{\"app\":\"ragops-eval\"}},\"spec\":{\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"--golden\",\"/data/input/reviewed-20261128/golden.jsonl\",\"--output\",\"/data/results/reviewed-20261128/coverage.json\"],\"command\":[\"python\",\"-m\",\"ragops.coverage\"],\"image\":\"rahbar-eval:a3-r3\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"eval\",\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"50m\",\"memory\":\"64Mi\"}},\"volumeMounts\":[{\"mountPath\":\"/data\",\"name\":\"data\"},{\"mountPath\":\"/thresholds\",\"name\":\"thresholds\",\"readOnly\":true}]}],\"restartPolicy\":\"Never\",\"securityContext\":{\"fsGroup\":10001,\"runAsGroup\":10001,\"runAsNonRoot\":true,\"runAsUser\":10001},\"volumes\":[{\"name\":\"data\",\"persistentVolumeClaim\":{\"claimName\":\"ragops-data\"}},{\"configMap\":{\"name\":\"ragops-thresholds\"},\"name\":\"thresholds\"}]}}}}\n"
+                },
+                "creationTimestamp": "2026-11-28T13:34:08Z",
+                "generation": 1,
+                "labels": {
+                    "app": "ragops-eval",
+                    "batch.kubernetes.io/controller-uid": "4bdfc931-7d74-4813-8534-7399be3d93a0",
+                    "batch.kubernetes.io/job-name": "ragops-reviewed-coverage-20261128",
+                    "controller-uid": "4bdfc931-7d74-4813-8534-7399be3d93a0",
+                    "job-name": "ragops-reviewed-coverage-20261128"
+                },
+                "name": "ragops-reviewed-coverage-20261128",
+                "namespace": "rahbar",
+                "resourceVersion": "89543",
+                "uid": "4bdfc931-7d74-4813-8534-7399be3d93a0"
+            },
+            "spec": {
+                "backoffLimit": 0,
+                "completionMode": "NonIndexed",
+                "completions": 1,
+                "manualSelector": false,
+                "parallelism": 1,
+                "podReplacementPolicy": "TerminatingOrFailed",
+                "selector": {
+                    "matchLabels": {
+                        "batch.kubernetes.io/controller-uid": "4bdfc931-7d74-4813-8534-7399be3d93a0"
+                    }
+                },
+                "suspend": false,
+                "template": {
+                    "metadata": {
+                        "labels": {
+                            "app": "ragops-eval",
+                            "batch.kubernetes.io/controller-uid": "4bdfc931-7d74-4813-8534-7399be3d93a0",
+                            "batch.kubernetes.io/job-name": "ragops-reviewed-coverage-20261128",
+                            "controller-uid": "4bdfc931-7d74-4813-8534-7399be3d93a0",
+                            "job-name": "ragops-reviewed-coverage-20261128"
+                        }
+                    },
+                    "spec": {
+                        "automountServiceAccountToken": false,
+                        "containers": [
+                            {
+                                "args": [
+                                    "--golden",
+                                    "/data/input/reviewed-20261128/golden.jsonl",
+                                    "--output",
+                                    "/data/results/reviewed-20261128/coverage.json"
+                                ],
+                                "command": [
+                                    "python",
+                                    "-m",
+                                    "ragops.coverage"
+                                ],
+                                "image": "rahbar-eval:a3-r3",
+                                "imagePullPolicy": "IfNotPresent",
+                                "name": "eval",
+                                "resources": {
+                                    "limits": {
+                                        "cpu": "500m",
+                                        "memory": "256Mi"
+                                    },
+                                    "requests": {
+                                        "cpu": "50m",
+                                        "memory": "64Mi"
+                                    }
+                                },
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/data",
+                                        "name": "data"
+                                    },
+                                    {
+                                        "mountPath": "/thresholds",
+                                        "name": "thresholds",
+                                        "readOnly": true
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Never",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {
+                            "fsGroup": 10001,
+                            "runAsGroup": 10001,
+                            "runAsNonRoot": true,
+                            "runAsUser": 10001
+                        },
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "ragops-data"
+                                }
+                            },
+                            {
+                                "configMap": {
+                                    "defaultMode": 420,
+                                    "name": "ragops-thresholds"
+                                },
+                                "name": "thresholds"
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "completionTime": "2026-11-28T13:34:14Z",
+                "conditions": [
+                    {
+                        "lastProbeTime": "2026-11-28T13:34:14Z",
+                        "lastTransitionTime": "2026-11-28T13:34:14Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "reason": "CompletionsReached",
+                        "status": "True",
+                        "type": "SuccessCriteriaMet"
+                    },
+                    {
+                        "lastProbeTime": "2026-11-28T13:34:14Z",
+                        "lastTransitionTime": "2026-11-28T13:34:14Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "reason": "CompletionsReached",
+                        "status": "True",
+                        "type": "Complete"
+                    }
+                ],
+                "ready": 0,
+                "startTime": "2026-11-28T13:34:08Z",
+                "succeeded": 1,
+                "terminating": 0,
+                "uncountedTerminatedPods": {}
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

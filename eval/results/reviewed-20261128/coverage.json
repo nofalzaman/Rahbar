@@ -1,0 +1,341 @@
+{
+  "coverage": 0.875,
+  "similarity_threshold": 0.85,
+  "minimum_coverage": 0.85,
+  "pass": true,
+  "queries": [
+    {
+      "id": "l01",
+      "question": "What CGPA does an undergraduate need to stay off academic warning?",
+      "topic": "university",
+      "nearest_golden": "q01",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l02",
+      "question": "What happens to a student whose attendance falls below the required minimum in a course?",
+      "topic": "university",
+      "nearest_golden": "q02",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l03",
+      "question": "How is a student's CGPA calculated?",
+      "topic": "university",
+      "nearest_golden": "q03",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l04",
+      "question": "How many grade points does a B+ carry?",
+      "topic": "university",
+      "nearest_golden": "q04",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l05",
+      "question": "What is the refund timeline when a student withdraws from the university?",
+      "topic": "university",
+      "nearest_golden": "q05",
+      "similarity": 0.9618059297390636,
+      "covered": true
+    },
+    {
+      "id": "l06",
+      "question": "What does the Student Handbook say about using generative AI in assignments?",
+      "topic": "university",
+      "nearest_golden": "q06",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l07",
+      "question": "How many applications did the university receive in 2023-24, by discipline?",
+      "topic": "university",
+      "nearest_golden": "q07",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l08",
+      "question": "What is the purpose of the Faculty Entrepreneurship and Technical Start-ups Policy?",
+      "topic": "university",
+      "nearest_golden": "q08",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l09",
+      "question": "What was the course withdrawal deadline under the 2023 undergraduate academic rules?",
+      "topic": "university",
+      "nearest_golden": "q09",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l10",
+      "question": "What is the course withdrawal deadline under the current academic rules?",
+      "topic": "university",
+      "nearest_golden": "q10",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l11",
+      "question": "What attendance percentage did the 2023 academic rules require?",
+      "topic": "university",
+      "nearest_golden": "q11",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l12",
+      "question": "What attendance percentage do the current academic rules require?",
+      "topic": "university",
+      "nearest_golden": "q12",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l13",
+      "question": "What does clause 1.21 of the academic rules handbook require?",
+      "topic": "university",
+      "nearest_golden": "q13",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l14",
+      "question": "What is the tuition fee per credit hour for BS programmes?",
+      "topic": "university",
+      "nearest_golden": "q14",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l15",
+      "question": "What are the visiting hours at the university hostel?",
+      "topic": "university",
+      "nearest_golden": "q15",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l16",
+      "question": "Could you explain what cgpa does an undergraduate need to stay off academic warning?",
+      "topic": "university",
+      "nearest_golden": "q01",
+      "similarity": 0.987038712108615,
+      "covered": true
+    },
+    {
+      "id": "l17",
+      "question": "Could you explain what happens to a student whose attendance falls below the required minimum in a course?",
+      "topic": "university",
+      "nearest_golden": "q02",
+      "similarity": 0.9911995879109483,
+      "covered": true
+    },
+    {
+      "id": "l18",
+      "question": "Could you explain how is a student's cgpa calculated?",
+      "topic": "university",
+      "nearest_golden": "q03",
+      "similarity": 0.9864343539994961,
+      "covered": true
+    },
+    {
+      "id": "l19",
+      "question": "Could you explain how many grade points does a b+ carry?",
+      "topic": "university",
+      "nearest_golden": "q04",
+      "similarity": 0.9853579506448935,
+      "covered": true
+    },
+    {
+      "id": "l20",
+      "question": "Could you explain what is the refund timeline when a student withdraws from the university?",
+      "topic": "university",
+      "nearest_golden": "q05",
+      "similarity": 0.9516755617411454,
+      "covered": true
+    },
+    {
+      "id": "l21",
+      "question": "Could you explain what does the student handbook say about using generative ai in assignments?",
+      "topic": "university",
+      "nearest_golden": "q06",
+      "similarity": 0.9946411328015855,
+      "covered": true
+    },
+    {
+      "id": "l22",
+      "question": "Could you explain how many applications did the university receive in 2023-24, by discipline?",
+      "topic": "university",
+      "nearest_golden": "q07",
+      "similarity": 0.9878134802197471,
+      "covered": true
+    },
+    {
+      "id": "l23",
+      "question": "Could you explain what is the purpose of the faculty entrepreneurship and technical start-ups policy?",
+      "topic": "university",
+      "nearest_golden": "q08",
+      "similarity": 0.9943588026079082,
+      "covered": true
+    },
+    {
+      "id": "l24",
+      "question": "Could you explain what was the course withdrawal deadline under the 2023 undergraduate academic rules?",
+      "topic": "university",
+      "nearest_golden": "q09",
+      "similarity": 0.9933342747916015,
+      "covered": true
+    },
+    {
+      "id": "l25",
+      "question": "Could you explain what is the course withdrawal deadline under the current academic rules?",
+      "topic": "university",
+      "nearest_golden": "q10",
+      "similarity": 0.9911701299036375,
+      "covered": true
+    },
+    {
+      "id": "l26",
+      "question": "Could you explain what attendance percentage did the 2023 academic rules require?",
+      "topic": "university",
+      "nearest_golden": "q11",
+      "similarity": 0.993413136508002,
+      "covered": true
+    },
+    {
+      "id": "l27",
+      "question": "Could you explain what attendance percentage do the current academic rules require?",
+      "topic": "university",
+      "nearest_golden": "q12",
+      "similarity": 0.9907063677645728,
+      "covered": true
+    },
+    {
+      "id": "l28",
+      "question": "Could you explain what does clause 1.21 of the academic rules handbook require?",
+      "topic": "university",
+      "nearest_golden": "q13",
+      "similarity": 0.9942338409314925,
+      "covered": true
+    },
+    {
+      "id": "l29",
+      "question": "When is the campus shuttle departure?",
+      "topic": "transport",
+      "nearest_golden": "gap-l29",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l30",
+      "question": "Where is the university bus stop?",
+      "topic": "transport",
+      "nearest_golden": "gap-l30",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l31",
+      "question": "How do I buy a campus bus pass?",
+      "topic": "transport",
+      "nearest_golden": "gap-l31",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l32",
+      "question": "Does the campus shuttle run on Sundays?",
+      "topic": "transport",
+      "nearest_golden": "gap-l32",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l33",
+      "question": "What are hostel visiting hours?",
+      "topic": "housing",
+      "nearest_golden": "gap-l33",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l34",
+      "question": "How much is a hostel room?",
+      "topic": "housing",
+      "nearest_golden": "gap-l34",
+      "similarity": 1.0,
+      "covered": true
+    },
+    {
+      "id": "l35",
+      "question": "Can a guest stay in the hostel?",
+      "topic": "housing",
+      "nearest_golden": "gap-l34",
+      "similarity": 0.7303224398637124,
+      "covered": false
+    },
+    {
+      "id": "l36",
+      "question": "Where can I apply for hostel accommodation?",
+      "topic": "housing",
+      "nearest_golden": "gap-l34",
+      "similarity": 0.7019907100628304,
+      "covered": false
+    },
+    {
+      "id": "l37",
+      "question": "What is today\u2019s cafeteria menu?",
+      "topic": "food",
+      "nearest_golden": "q18",
+      "similarity": 0.922122969248549,
+      "covered": true
+    },
+    {
+      "id": "l38",
+      "question": "Is vegetarian food available on campus?",
+      "topic": "food",
+      "nearest_golden": "gap-l32",
+      "similarity": 0.6370032321314976,
+      "covered": false
+    },
+    {
+      "id": "l39",
+      "question": "When does the cafeteria open?",
+      "topic": "food",
+      "nearest_golden": "q18",
+      "similarity": 0.7752808408126902,
+      "covered": false
+    },
+    {
+      "id": "l40",
+      "question": "What is the price of a cafeteria lunch?",
+      "topic": "food",
+      "nearest_golden": "q18",
+      "similarity": 0.7500866467213925,
+      "covered": false
+    }
+  ],
+  "uncovered_by_topic": {
+    "university": [],
+    "transport": [],
+    "food": [
+      "Is vegetarian food available on campus?",
+      "When does the cafeteria open?",
+      "What is the price of a cafeteria lunch?"
+    ],
+    "housing": [
+      "Can a guest stay in the hostel?",
+      "Where can I apply for hostel accommodation?"
+    ]
+  }
+}
